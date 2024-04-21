@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjouterQuestion">
+   <children>
+      <Text layoutX="58.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choice 3" />
+      <Text layoutX="57.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="quiz_id" />
+      <Text layoutX="58.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="question" />
+      <Text layoutX="57.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choice 2" />
+      <Text layoutX="57.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choice 1" />
+      <Text layoutX="58.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="correct answer" />
+      <TextField fx:id="tfQuizId" layoutX="162.0" layoutY="42.0" />
+      <TextField fx:id="tfReponse" layoutX="144.0" layoutY="214.0" />
+      <TextField fx:id="tfChoix3" layoutX="162.0" layoutY="179.0" />
+      <TextField fx:id="tfChoix2" layoutX="162.0" layoutY="146.0" />
+      <TextField fx:id="tfChoix1" layoutX="162.0" layoutY="108.0" />
+      <TextField fx:id="tfQuestion" layoutX="151.0" layoutY="74.0" />
+      <Button fx:id="tfAddQuestion" layoutX="40.0" layoutY="285.0" mnemonicParsing="false" onAction="#AddQuestion" text="add" />
+   </children>
+</AnchorPane>
