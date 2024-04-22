@@ -1,1 +1,0 @@
-# Magic-Minds-JavaFX

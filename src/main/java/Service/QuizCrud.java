@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entities.Questions;
 import Entities.Quiz;
 import Utile.Database;
 
@@ -55,7 +56,7 @@ public class QuizCrud implements CrudInterface<Quiz> {
 
 
 
-    @Override
+   /* @Override
     public void supprimer(int id) throws SQLException {
         try {
             String req = "DELETE FROM `quiz` WHERE `id`=?";
@@ -63,10 +64,32 @@ public class QuizCrud implements CrudInterface<Quiz> {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Quiz with id " + id + " deleted successfully");
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
+   public void supprimer(int id) throws SQLException {
+       QuestionsCrud qc=new QuestionsCrud();
+       try {
+           // Supprimer d'abord toutes les questions associées à ce quiz
+           List<Questions> questions = qc.recupererParQuizId(id);
+           for (Questions question : questions) {
+               qc.supprimer(question.getId());
+           }
+
+           // Ensuite, supprimer le quiz lui-même
+           String req = "DELETE FROM `quiz` WHERE `id`=?";
+           PreparedStatement ps = connection.prepareStatement(req);
+           ps.setInt(1, id);
+           ps.executeUpdate();
+
+           System.out.println("Quiz with id " + id + " deleted successfully");
+       } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+       }
+   }
+
 
 
     public List<Quiz> recuperer() throws SQLException {
@@ -94,6 +117,21 @@ public class QuizCrud implements CrudInterface<Quiz> {
     }
 
 
+    public boolean titreExisteDeja(String titre) {
+        try {
+            String query = "SELECT COUNT(*) FROM quiz WHERE titre = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, titre);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // Si count est supérieur à 0, cela signifie que le titre existe déjà
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 

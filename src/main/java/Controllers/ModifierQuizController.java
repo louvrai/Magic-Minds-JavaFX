@@ -54,7 +54,7 @@ public class ModifierQuizController {
             // Afficher les détails de la borne à modifier dans les champs de texte
             nvTitre.setText(quiz.getTitre());
             nvNbquestion.setText(String.valueOf(quiz.getNb_question()));
-            nvTime.setText(String.valueOf(quiz. getTemp()));
+            nvTime.setText(String.valueOf(quiz.getTemp()));
 
 
         }

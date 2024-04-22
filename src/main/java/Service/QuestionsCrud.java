@@ -90,4 +90,47 @@ public class QuestionsCrud implements CrudInterface<Questions>{
         }
         return q;
     }
+
+
+    public List<Questions> recupererParQuizId(int idQuiz) throws SQLException {
+        List<Questions> questions = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM `question` WHERE `quiz_id`=?";
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, idQuiz);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String question = resultSet.getString("question");
+                String choix1 = resultSet.getString("choix1");
+                String choix2 = resultSet.getString("choix2");
+                String choix3 = resultSet.getString("choix3");
+                String reponse = resultSet.getString("reponse");
+
+                Questions q = new Questions(question, choix1, choix2, choix3, reponse, id, idQuiz);
+                questions.add(q);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return questions;
+    }
+
+    public boolean questionExisteDeja(String question) {
+        try {
+            String query = "SELECT COUNT(*) FROM question WHERE question = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, question);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // Si count est supérieur à 0, cela signifie que la question existe déjà
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

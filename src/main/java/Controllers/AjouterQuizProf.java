@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import Service.QuizCrud;
 import Entities.Quiz;
 import javafx.fxml.FXMLLoader;
@@ -10,73 +11,68 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
-
-public class AjouterQuiz {
+public class AjouterQuizProf {
     QuizCrud qc=new QuizCrud();
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
-    private Button fxAdd;
+    private Button fxAddQuiz;
 
     @FXML
-    private TextField tfNbbu;
+    private TextField fxNbquestion;
 
     @FXML
-    private TextField tfTemps;
+    private TextField fxTime;
 
     @FXML
-    private TextField tfTitre;
+    private TextField fxTitle;
 
     @FXML
-    void addQuiz(ActionEvent event) throws SQLException{
+    void AddQuiz(ActionEvent event)throws SQLException {
+
+        if (isInputValid()) {
+            String titre = fxTitle.getText();
+            int temp = Integer.parseInt(fxTime.getText());
+            int nbquestion = Integer.parseInt(fxNbquestion.getText());
 
 
-            if (isInputValid()) {
-                String titre = tfTitre.getText();
-                int temp = Integer.parseInt(tfTemps.getText());
-                int nbquestion = Integer.parseInt(tfNbbu.getText());
-
-
-                QuizCrud quiz = new QuizCrud();
-                QuizCrud ps = new QuizCrud();
+            QuizCrud quiz = new QuizCrud();
+            QuizCrud ps = new QuizCrud();
 
 
 
-                Quiz q = new Quiz(titre,temp,nbquestion);
-                ps.ajouter(q);
-                System.out.println("ajouter avec succés");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Afficher.fxml"));
-                try {
-                    Parent root = loader.load();
-                    tfTitre.getScene().setRoot(root);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
+            Quiz q = new Quiz(titre,temp,nbquestion);
+            ps.ajouter(q);
+            System.out.println("ajouter avec succés");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuestionProf.fxml"));
+            try {
+                Parent root = loader.load();
+                fxTitle.getScene().setRoot(root);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-            }
-
-
+        }
+    }
 
     private boolean isInputValid() {
         // Vérification des champs vides
-        if (tfTitre.getText().isEmpty() || tfTemps.getText().isEmpty() || tfNbbu.getText().isEmpty()) {
+        if (fxTitle.getText().isEmpty() || fxTime.getText().isEmpty() || fxNbquestion.getText().isEmpty()) {
             showAlert("Error", "Enter a valid content !");
             return false;
         }
 
         // Vérification si le titre est un nombre
-        if (tfTitre.getText().matches("[0-9]+")) {
+        if (fxTitle.getText().matches("[0-9]+")) {
             showAlert("Error", "Title must be a string, not a number !");
             return false;
         }
 
         // Vérification si le temps est numérique et compris entre 20 et 30
         try {
-            int temps = Integer.parseInt(tfTemps.getText());
+            int temps = Integer.parseInt(fxTime.getText());
             if (temps < 20 || temps > 30) {
                 showAlert("Error", "Time must be between 20 and 30 !");
                 return false;
@@ -88,7 +84,7 @@ public class AjouterQuiz {
 
         // Vérification si le nombre de questions est numérique et compris entre 10 et 15
         try {
-            int nbQuestions = Integer.parseInt(tfNbbu.getText());
+            int nbQuestions = Integer.parseInt(fxNbquestion.getText());
             if (nbQuestions < 10 || nbQuestions > 15) {
                 showAlert("Error", "Number of questions must be between 10 and 15 !");
                 return false;
@@ -99,7 +95,7 @@ public class AjouterQuiz {
         }
 
         //  vérifier si le titre est unique
-        String titre = tfTitre.getText();
+        String titre = fxTitle.getText();
         if (qc.titreExisteDeja(titre)) {
             showAlert("Error", "Title already exists! Please choose a different one.");
             return false;
@@ -108,24 +104,25 @@ public class AjouterQuiz {
     }
 
     void showAlert(String title, String contentText) {
-            Alert alertType = new Alert(Alert.AlertType.ERROR);
-            alertType.setTitle(title);
-            alertType.setHeaderText(contentText);
-            alertType.show();
-            }
+        Alert alertType = new Alert(Alert.AlertType.ERROR);
+        alertType.setTitle(title);
+        alertType.setHeaderText(contentText);
+        alertType.show();
+    }
+
+
     @FXML
     void afficher(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/AfficherQuiz.fxml"));
+                .getResource("/AfficherQuestionProf.fxml"));
         try {
             Parent root = loader.load();
 
-            tfTitre.getScene().setRoot(root);
+            fxTitle.getScene().setRoot(root);
 
         } catch (IOException e) {
 
             System.out.println(e.getMessage());
         }
     }
-
 }

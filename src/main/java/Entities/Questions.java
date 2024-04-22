@@ -30,6 +30,18 @@ public class Questions {
         this.idQuiz = idQuiz;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Questions questions)) return false;
+        return id == questions.id && idQuiz == questions.idQuiz && Objects.equals(question, questions.question) && Objects.equals(choix1, questions.choix1) && Objects.equals(choix2, questions.choix2) && Objects.equals(choix3, questions.choix3) && Objects.equals(reponse, questions.reponse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(question, choix1, choix2, choix3, reponse, id, idQuiz);
+    }
+
     public String getQuestion() {
         return question;
     }

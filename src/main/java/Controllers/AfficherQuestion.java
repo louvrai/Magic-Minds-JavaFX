@@ -70,11 +70,14 @@ public class AfficherQuestion {
         configureModifyColumn();
         loadQuestionData();
     }
+
     private void loadQuestionData()throws SQLException {
         List<Questions> q =qc.recuperer();
         fxTable.getItems().addAll(q);
 
     }
+
+
     public void afficherQuestion() throws SQLException {
         QuestionsCrud qc=new QuestionsCrud();
         List<Questions> q=new ArrayList<>();

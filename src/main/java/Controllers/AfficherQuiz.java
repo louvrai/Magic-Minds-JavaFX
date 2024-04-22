@@ -23,6 +23,8 @@ public class AfficherQuiz {
     private Scene scene;
     private Parent root;
     @FXML
+    private Button fxShowquestions;
+    @FXML
     private TableColumn<Quiz,Void> QuestionsTc;
 
     @FXML
@@ -49,7 +51,7 @@ public class AfficherQuiz {
     public void initialize() throws SQLException {
         // Initialize TableView columns
         cTime.setCellValueFactory(new PropertyValueFactory<>("temp"));
-        cNb.setCellValueFactory(new PropertyValueFactory<>("nbquestion"));
+        cNb.setCellValueFactory(new PropertyValueFactory<>("nb_question"));
         cTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
 
 
@@ -74,7 +76,7 @@ public class AfficherQuiz {
         tableId.setItems(list);
         cTitre.setCellValueFactory(new PropertyValueFactory<Quiz,String>("titre"));
 
-        cNb.setCellValueFactory(new PropertyValueFactory<Quiz,Integer>("nbquestion"));
+        cNb.setCellValueFactory(new PropertyValueFactory<Quiz,Integer>("nb_question"));
         cTime.setCellValueFactory(new PropertyValueFactory<Quiz,Integer>("temp"));
 
 
@@ -170,6 +172,17 @@ public class AfficherQuiz {
             stage.setScene(scene);
             stage.show();
         }
+
+
+
+    @FXML
+    void Showquestions(ActionEvent event)throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/AfficherQuestion.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     }
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="16efb27c-bbb0-4519-ac7f-78501e638bc9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Questions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Questions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Afficher.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Afficher.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Ajouter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Ajouter.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterQuestion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterQuestion.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierQuestion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierQuestion.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierQuiz.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierQuiz.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2fQX8sUBOxwsLJarrqaa35ExM0D" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mariem&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mariem/Desktop/projet/Magic-Minds-JavaFX/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mariem\Desktop\projet\Magic-Minds-JavaFX\src\main\resources" />
+      <recent name="C:\Users\mariem\Desktop\projet\Magic-Minds-JavaFX\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="test.Mainfx" />
+      <module name="Magic-Minds-JavaFX" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\javafx-sdk-22.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="16efb27c-bbb0-4519-ac7f-78501e638bc9" name="Changes" comment="" />
+      <created>1713734120401</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713734120401</updated>
+      <workItem from="1713734121563" duration="1140000" />
+      <workItem from="1713735412636" duration="9193000" />
+      <workItem from="1713774792228" duration="21039000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

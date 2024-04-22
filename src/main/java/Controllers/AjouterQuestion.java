@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class AjouterQuestion {
-
+QuestionsCrud qc=new QuestionsCrud();
     @FXML
     private Button tfAddQuestion;
 
@@ -78,6 +78,13 @@ public class AjouterQuestion {
             showAlert("Error", "Question must be string not number !");
             return false;
         }
+
+        String question = tfQuestion.getText();
+        if (qc.questionExisteDeja(question)) {
+            showAlert("Error", "Question already exists! Please choose a different one.");
+            return false;
+        }
+
         if (tfChoix1.getText().matches("[0-9]+")) {
             showAlert("Error", "Choice 1 must be string not number !");
             return false;
@@ -90,11 +97,27 @@ public class AjouterQuestion {
             showAlert("Error", "Choice 3 must be string not number !");
             return false;
         }
+
+        String choix1 = tfChoix1.getText();
+        String choix2 = tfChoix2.getText();
+        String choix3 = tfChoix3.getText();
+
+        // Vérification que les choix sont différents les uns des autres
+        if (choix1.equals(choix2) || choix1.equals(choix3) || choix2.equals(choix3)) {
+            showAlert("Error", "Choices must be different from each other!");
+            return false;
+        }
+
+        String reponse = tfReponse.getText();
+
         if (tfReponse.getText().matches("[0-9]+")) {
             showAlert("Error", "Correct answer must be string not number !");
             return false;
         }
-
+        if (!reponse.equals(choix1) && !reponse.equals(choix2) && !reponse.equals(choix3)) {
+            showAlert("Error", "Answer must be one of the choices!");
+            return false;
+        }
 
 
 
