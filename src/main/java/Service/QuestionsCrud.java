@@ -44,6 +44,7 @@ public class QuestionsCrud implements CrudInterface<Questions>{
             ps.setString(4, questions.getChoix2());
             ps.setString(5, questions.getChoix3());
             ps.setString(6, questions.getReponse());
+            ps.setInt(7, questions.getId());
 
             ps.executeUpdate();
             System.out.println("Question updated successfully");

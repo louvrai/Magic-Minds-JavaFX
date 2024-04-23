@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import test.Mainfx;
 
 public class ModifierQuizController {
 
@@ -38,10 +39,12 @@ public class ModifierQuizController {
             qc.modifier(QuizToModify );
             Stage stage = (Stage) nvTitre.getScene().getWindow();
             stage.close();
+
             // Afficher une alerte pour confirmer la modification
-            showAlert("Modification réussie", "La borne a été modifiée avec succès.");
+            showAlert("update succeeded", "The quiz is successfully updated.");
+
         } catch (Exception e) {
-            showAlert("Erreur", "Une erreur s'est produite lors de la modification de la borne.");
+            showAlert("Error", "Error.");
         }
 
     }

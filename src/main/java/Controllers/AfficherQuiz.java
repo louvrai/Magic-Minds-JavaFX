@@ -24,8 +24,7 @@ public class AfficherQuiz {
     private Parent root;
     @FXML
     private Button fxShowquestions;
-    @FXML
-    private TableColumn<Quiz,Void> QuestionsTc;
+
 
     @FXML
     private Button fxAdd;
@@ -164,6 +163,8 @@ public class AfficherQuiz {
             }
         });
     }
+
+
     @FXML
     void addQuiz(ActionEvent event) throws IOException {
             root = FXMLLoader.load(getClass().getResource("/Ajouter.fxml"));

@@ -44,6 +44,8 @@ public class QuizCrud implements CrudInterface<Quiz> {
 
             ps.setInt(2, quiz.getTemp());
             ps.setInt(3, quiz.getNb_question());
+            ps.setInt(4, quiz.getId());
+
 
             ps.executeUpdate();
             System.out.println("Quiz updated successfully");

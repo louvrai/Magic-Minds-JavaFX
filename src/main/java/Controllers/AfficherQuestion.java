@@ -26,6 +26,8 @@ public class AfficherQuestion {
     private Scene scene;
     private Parent root;
     @FXML
+    private Button fxBacktoquizzes;
+    @FXML
     private Button fxAddQuestion;
 
     @FXML
@@ -187,5 +189,12 @@ public class AfficherQuestion {
         stage.setScene(scene);
         stage.show();
     }
-
+    @FXML
+    void Backtoquizzes(ActionEvent event)throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Afficher.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

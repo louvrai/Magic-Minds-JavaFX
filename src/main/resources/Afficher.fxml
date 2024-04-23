@@ -122,14 +122,13 @@
             </AnchorPane>
          </children>
       </VBox>
-      <TableView fx:id="tableId" layoutX="270.0" layoutY="147.0" prefHeight="420.0" prefWidth="925.0" stylesheets="@DashbordDesign.css">
+      <TableView fx:id="tableId" layoutX="270.0" layoutY="154.0" prefHeight="413.0" prefWidth="839.0" stylesheets="@DashbordDesign.css">
         <columns>
           <TableColumn fx:id="cTitre" prefWidth="234.0" text="Title" />
-          <TableColumn fx:id="cTime" prefWidth="93.0" text="Time" />
-            <TableColumn fx:id="cNb" prefWidth="116.0" text="Nb_questions" />
-            <TableColumn fx:id="updateTc" minWidth="0.0" prefWidth="158.0" text="Update" />
-            <TableColumn fx:id="deleteTc" prefWidth="160.0" text="Delete" />
-            <TableColumn fx:id="QuestionsTc" prefWidth="163.0" text="Questions" />
+          <TableColumn fx:id="cTime" prefWidth="78.0" text="Time" />
+            <TableColumn fx:id="cNb" prefWidth="189.0" text="Nb_questions" />
+            <TableColumn fx:id="updateTc" minWidth="0.0" prefWidth="161.0" text="Update" />
+            <TableColumn fx:id="deleteTc" prefWidth="176.0" text="Delete" />
         </columns>
       </TableView>
       <Text fill="#c34e2e" layoutX="287.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of quizzes:">
@@ -141,6 +140,10 @@
             <URL value="@style.css" />
             <URL value="@DashbordDesign.css" />
          </stylesheets></Button>
-      <Button fx:id="fxShowquestions" layoutX="448.0" layoutY="596.0" mnemonicParsing="false" onAction="#Showquestions" text="Show questions" />
+      <Button fx:id="fxShowquestions" layoutX="446.0" layoutY="594.0" mnemonicParsing="false" onAction="#Showquestions" styleClass="btn_home" text="Show questions">
+         <stylesheets>
+            <URL value="@DashbordDesign.css" />
+            <URL value="@style.css" />
+         </stylesheets></Button>
    </children>
 </AnchorPane>
