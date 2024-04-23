@@ -1,4 +1,8 @@
+
 package tn.esprit.controllers.Etudiant;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -52,6 +56,22 @@ public class AfficherEventController {
         VBox card = new VBox(10); // Espacement vertical entre les éléments de la carte
         card.getStyleClass().add("event-card");
         // Ajouter les détails de l'événement à la carte
+        ImageView imageView = new ImageView();
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/images/kids-event.jpg");
+            if (inputStream != null) {
+                Image image = new Image(inputStream);
+                imageView.setImage(image);
+                imageView.setFitWidth(100); // Réglez la largeur de l'image selon vos besoins
+                imageView.setFitHeight(100); // Réglez la hauteur de l'image selon vos besoins
+            } else {
+                System.err.println("L'image n'a pas pu être chargée. Assurez-vous que le chemin de l'image est correct.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         Label nomLabel = new Label("Nom: " + evenement.getNom());
         Label descriptionLabel = new Label("Description: " + evenement.getDescription());
         Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());

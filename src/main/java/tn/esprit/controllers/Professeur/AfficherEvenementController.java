@@ -41,6 +41,7 @@ public class AfficherEvenementController {
         card.getStyleClass().add("event-card");
         // Ajouter les détails de l'événement à la carte
         Label nomLabel = new Label("Nom: " + evenement.getNom());
+        nomLabel.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold; -fx-text-fill: #FE5D37;");
         Label descriptionLabel = new Label("Description: " + evenement.getDescription());
         Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());
         Label categorieLabel = new Label("Catégorie: " + evenement.getCategorie());

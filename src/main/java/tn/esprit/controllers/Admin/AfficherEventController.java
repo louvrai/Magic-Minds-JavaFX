@@ -14,6 +14,10 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
 
 public class AfficherEventController {
 
@@ -53,7 +57,7 @@ public class AfficherEventController {
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private AfficherEventController afficherEvenementController;
 
-    // Setter method for afficherEvenementController
+
     public void setAfficherEvenementController(AfficherEventController controller) {
         this.afficherEvenementController = controller;
     }
@@ -128,10 +132,9 @@ public class AfficherEventController {
             EditEvenementController editController = loader.getController();
             editController.setEvenementToEdit(evenement);
 
-            // Pass the AfficherEvenementController instance
+
             editController.setAfficherEvenementController(this);
 
-            // Affichez la fenêtre de modification sur la scène actuelle
             eventTable.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,4 +151,9 @@ public class AfficherEventController {
         serviceEvenement.delete(evenement);
         loadEvents();
     }
+
+
+
+
+
 }

@@ -65,11 +65,13 @@
                                 <Image url="@images/video-lesson.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btn_events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events">
+                        <Button fx:id="btn_events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events" >
                             <font>
                                 <Font name="Century Gothic Bold" size="18.0" />
                             </font>
                         </Button>
+
+
                         <ImageView fitHeight="34.0" fitWidth="53.0" layoutX="30.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@images/calendar.png" />

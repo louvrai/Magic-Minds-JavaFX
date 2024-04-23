@@ -3,10 +3,12 @@ package tn.esprit.controllers.Admin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceParticipation;
 import javafx.scene.control.TableCell;
@@ -101,4 +103,5 @@ public class AfficherParticipation {
             }
         }
     }
+
 }

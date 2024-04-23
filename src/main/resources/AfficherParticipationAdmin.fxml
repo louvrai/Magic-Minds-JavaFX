@@ -65,7 +65,8 @@
                                 <Image url="@images/video-lesson.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btn_events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events">
+
+                        <Button fx:id="btn_Events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events">
                             <font>
                                 <Font name="Century Gothic Bold" size="18.0" />
                             </font>
