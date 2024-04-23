@@ -253,9 +253,9 @@
                                     <TableView fx:id="showCours" layoutX="14.0" layoutY="51.0" prefHeight="215.0" prefWidth="663.0" AnchorPane.bottomAnchor="214.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0">
                                        <columns>
                                           <TableColumn fx:id="coursTitleCol" prefWidth="139.0" text="Title" />
-                                          <TableColumn fx:id="coursDescCol" prefWidth="254.0" text="Description" />
-                                          <TableColumn fx:id="coursStatusCol" minWidth="0.0" prefWidth="117.0" text="Status" />
-                                          <TableColumn fx:id="CoursAction" prefWidth="152.0" text="Actions" />
+                                          <TableColumn fx:id="coursDescCol" prefWidth="302.0" text="Description" />
+                                          <TableColumn fx:id="coursStatusCol" minWidth="0.0" prefWidth="96.0" text="Status" />
+                                          <TableColumn fx:id="CoursAction" prefWidth="125.0" text="Actions" />
                                        </columns>
                                     </TableView>
                                     <Pane layoutX="14.0" layoutY="266.0" prefHeight="188.0" prefWidth="663.0" style="-fx-border-color: #272b3f; -fx-border-radius: 10;" stylesheets="@DashbordDesign.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="278.0">

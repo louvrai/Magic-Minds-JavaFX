@@ -2,6 +2,7 @@ package Service;
 
 import Entity.Cours;
 import Entity.Ressource;
+import Utili.MyDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RessourceService implements CRUDInterface<Ressource> {
-    Connection connection ;
+    private Connection connection ;
+    public RessourceService(){
+        connection = MyDB.getInstance().getCnx();
+    }
     @Override
     public void insert(Ressource ressource) throws SQLException {
         PreparedStatement ste = null;
@@ -55,9 +59,9 @@ public class RessourceService implements CRUDInterface<Ressource> {
             while (resultSet.next()) {
                 Ressource r = new Ressource();
                 r.setId(resultSet.getInt("id"));
-                r.setTitre(resultSet.getString("title"));
-                r.setType(resultSet.getString("Type"));
-                r.setUrl(resultSet.getString("File"));
+                r.setTitre(resultSet.getString("titre"));
+                r.setType(resultSet.getString("type"));
+                r.setUrl(resultSet.getString("url"));
                 chapters.add(r);
             }
         }catch (SQLException e) {

@@ -3,25 +3,29 @@ package Entity;
 public class Cours {
     private int id , duree , nb_chapitre ;
     private String titre, description , status ;
+    private int categorie_id ;
 
     public Cours(){
 
     }
-    public Cours(int id, int duree, int nb_chapitre, String titre, String description, String status) {
+
+    public Cours(int id, int duree, int nb_chapitre, String titre, String description, String status, int categorie_id) {
         this.id = id;
         this.duree = duree;
         this.nb_chapitre = nb_chapitre;
         this.titre = titre;
         this.description = description;
         this.status = status;
+        this.categorie_id = categorie_id;
     }
 
-    public Cours(int duree, int nb_chapitre, String titre, String description, String status) {
+    public Cours(int duree, int nb_chapitre, String titre, String description, String status, int categorie_id) {
         this.duree = duree;
         this.nb_chapitre = nb_chapitre;
         this.titre = titre;
         this.description = description;
         this.status = status;
+        this.categorie_id = categorie_id;
     }
 
     public int getId() {
@@ -40,11 +44,11 @@ public class Cours {
         this.duree = duree;
     }
 
-    public int getNbrchapitre() {
+    public int getNb_chapitre() {
         return nb_chapitre;
     }
 
-    public void setNbrchapitre(int nb_chapitre) {
+    public void setNb_chapitre(int nb_chapitre) {
         this.nb_chapitre = nb_chapitre;
     }
 
@@ -72,6 +76,14 @@ public class Cours {
         this.status = status;
     }
 
+    public int getCategorie_id() {
+        return categorie_id;
+    }
+
+    public void setCategorie_id(int categorie_id) {
+        this.categorie_id = categorie_id;
+    }
+
     @Override
     public String toString() {
         return "Cours{" +
@@ -81,6 +93,7 @@ public class Cours {
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
+                ", categorie='" + categorie_id + '\'' +
                 '}';
     }
 }

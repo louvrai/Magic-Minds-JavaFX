@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
 public class GestionCours implements Initializable {
     //------------------------
     @FXML
+    private HBox afficherCategrie;
+    @FXML
     private Button btn_corses;
     @FXML
     private Button btn_events;
@@ -79,7 +81,7 @@ public class GestionCours implements Initializable {
             Parent addPageRoot = FXMLLoader.load(getClass().getResource("/AddCategory.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(addPageRoot,650,350);
+            Scene newPageScene = new Scene(addPageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("New Category");
             stage.show();
@@ -146,7 +148,7 @@ public class GestionCours implements Initializable {
             updateCategory.fetchData(category);
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(updatePageRoot,650,350);
+            Scene newPageScene = new Scene(updatePageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("Update Category");
             stage.show();
@@ -187,16 +189,19 @@ public class GestionCours implements Initializable {
     private Label DCdescrip;
     @FXML
     private Label DCNbchap;
+    CoursService coursService=new CoursService();
 
     @FXML
     void refreshCTab(ActionEvent event){refreshCoursTab();}
+
+
     @FXML
     void OpenAddCours(MouseEvent event) {
         try {
             Parent addCPageRoot = FXMLLoader.load(getClass().getResource("/AddCours.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(addCPageRoot,650,350);
+            Scene newPageScene = new Scene(addCPageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("New Course");
             stage.show();
@@ -214,6 +219,7 @@ public class GestionCours implements Initializable {
             ObservableList<Cours> cours =new CoursService().getAll();
             showCours.setItems(cours);
             defaultCours = cours.get(0) ;
+            System.out.println(defaultCours);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -221,6 +227,8 @@ public class GestionCours implements Initializable {
         CoursAction.setCellFactory(param -> new TableCell() {
             FontAwesomeIconView Cdel_btn = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
             FontAwesomeIconView Cup_btn = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+            FontAwesomeIconView CInValid_btn = new FontAwesomeIconView(FontAwesomeIcon.MINUS_CIRCLE);
+            FontAwesomeIconView CValid_btn = new FontAwesomeIconView(FontAwesomeIcon.CHECK_CIRCLE);
             {
                 Cdel_btn.setOnMouseClicked(event -> {
                     Cours cours1 = (Cours) getTableRow().getItem();
@@ -228,8 +236,22 @@ public class GestionCours implements Initializable {
                 });
                 Cup_btn.setOnMouseClicked(event -> {
                     Cours cours1 = (Cours) getTableRow().getItem();
+                    System.out.println(cours1);
                     updateCours(cours1);
                 });
+                CInValid_btn.setOnMouseClicked(event -> {
+                    Cours cours1 = (Cours) getTableRow().getItem();
+                    InValidCours(cours1);
+                    System.out.println("invalid");
+                    refreshCoursTab();
+                });
+                CValid_btn.setOnMouseClicked(event -> {
+                    Cours cours1 = (Cours) getTableRow().getItem();
+                    ValidCours(cours1);
+                    System.out.println("valid");
+                    refreshCoursTab();
+                });
+
             }
             @Override
             protected void updateItem(Object item, boolean empty) {
@@ -237,11 +259,13 @@ public class GestionCours implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox buttonsContainer = new HBox(15);
+                    HBox buttonsContainer = new HBox(10);
                     buttonsContainer.setPadding(new Insets(5, 8, 3, 8));
-                    buttonsContainer.getChildren().addAll(Cdel_btn, Cup_btn);
-                    Cdel_btn.setSize("25px");
-                    Cup_btn.setSize("25px");
+                    buttonsContainer.getChildren().addAll(Cdel_btn, Cup_btn,CInValid_btn,CValid_btn);
+                    Cdel_btn.setSize("22px");
+                    Cup_btn.setSize("22px");
+                    CInValid_btn.setSize("22px");
+                    CValid_btn.setSize("22px");
                     setGraphic(buttonsContainer);
                 }
             }
@@ -249,7 +273,7 @@ public class GestionCours implements Initializable {
         if (defaultCours != null) {
             DCtitle.setText(defaultCours.getTitre());
             DCdescrip.setText(defaultCours.getDescription());
-            DCNbchap.setText(String.valueOf(defaultCours.getNbrchapitre()));
+            DCNbchap.setText(String.valueOf(defaultCours.getNb_chapitre()));
             Dperiode.setText(String.valueOf(defaultCours.getDuree()));
         }
     }
@@ -261,7 +285,7 @@ public class GestionCours implements Initializable {
             updateCours.fetchCData(cours);
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(updatePageRoot,650,350);
+            Scene newPageScene = new Scene(updatePageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("Update Course");
             stage.show();
@@ -271,13 +295,20 @@ public class GestionCours implements Initializable {
     }
     private void deleteCours(Cours cours) {
         try {
-            int coursId = cours.getId();
-            CoursService coursService = new CoursService();
-            coursService.delete(coursId);
+            coursService.delete(cours.getId());
             showCours.getItems().remove(cours);
+            coursService.update(cours.getId(),cours);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private  void ValidCours(Cours cours){
+        cours.setStatus("Valid");
+        coursService.update(cours.getId(),cours);
+    }
+    private void InValidCours(Cours cours){
+        cours.setStatus("Invalid");
+        coursService.update(cours.getId(),cours);
     }
     //*************************************************CHAPTER********************************************************
     @FXML
@@ -302,7 +333,7 @@ public class GestionCours implements Initializable {
             Parent addChapPageRoot = FXMLLoader.load(getClass().getResource("/AddChapter.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(addChapPageRoot,650,350);
+            Scene newPageScene = new Scene(addChapPageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("New Chapter");
             stage.show();
@@ -320,8 +351,9 @@ public class GestionCours implements Initializable {
         chapType.setCellValueFactory(new PropertyValueFactory<>("type"));
         try {
             ObservableList<Ressource> chapters =new RessourceService().getAll();
+            System.out.println(chapters);
             showChap.setItems(chapters);
-            defaultChap = chapters.get(0) ;
+            defaultChap = chapters.get(0);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -329,6 +361,7 @@ public class GestionCours implements Initializable {
         ChapAction.setCellFactory(param -> new TableCell() {
             FontAwesomeIconView Chapdel_btn = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
             FontAwesomeIconView Chapup_btn = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+
             {
                 Chapdel_btn.setOnMouseClicked(event -> {
                     Ressource ressource = (Ressource) getTableRow().getItem();
@@ -367,7 +400,7 @@ public class GestionCours implements Initializable {
             updateChapter.fetchChapData(ressource);
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(updatePageRoot,650,350);
+            Scene newPageScene = new Scene(updatePageRoot,650,500);
             stage.setScene(newPageScene);
             stage.setTitle("Update Chapter");
             stage.show();
@@ -389,10 +422,10 @@ public class GestionCours implements Initializable {
 
 //________________________________________________________________________________________________________________________
     public void initialize (URL url, ResourceBundle resourceBundle) {
+        FontAwesomeIconView refreshBtn = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
 
         //-----------------------------------CATEGORY-----------------------------------------------------------
-        FontAwesomeIconView refreshButton = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
-        refresh_btn.setGraphic(refreshButton);
+        refresh_btn.setGraphic(refreshBtn);
         updateCatTable();
         showCat.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -410,14 +443,14 @@ public class GestionCours implements Initializable {
             }
         });
         //---------------------------------------COURS----------------------------------------------------------
-        FontAwesomeIconView refreshCBtn = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
-        refreshC_btn.setGraphic(refreshButton);
+        FontAwesomeIconView refreshBtnvours = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
+        refreshC_btn.setGraphic(refreshBtnvours);
         refreshCoursTab();
         showCours.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 DCtitle.setText(newSelection.getTitre());
                 DCdescrip.setText(newSelection.getDescription());
-                DCNbchap.setText(String.valueOf(newSelection.getNbrchapitre()));
+                DCNbchap.setText(String.valueOf(newSelection.getNb_chapitre()));
                 Dperiode.setText(String.valueOf(newSelection.getDuree()));
             } else {
                 DCtitle.setText(" ");
@@ -427,8 +460,8 @@ public class GestionCours implements Initializable {
             }
         });
         //-------------------------------------------CHAPTERS------------------------------------------------------
-        FontAwesomeIconView refreshchap = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
-        refreshChaop_btn.setGraphic(refreshchap);
+        FontAwesomeIconView refreshBtnchap = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
+        refreshChaop_btn.setGraphic(refreshBtnchap);
         updateChapTab();
         showChap.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -438,6 +471,7 @@ public class GestionCours implements Initializable {
                 DChaptitle.setText(" ");
             }
         });
+
     }
 
 

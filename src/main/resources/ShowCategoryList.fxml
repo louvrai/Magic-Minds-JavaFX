@@ -342,7 +342,7 @@
                                           </VBox>
                                        </children>
                                     </Pane>
-                                    <Button fx:id="addCours" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAddCours" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Course">
+                                    <Button fx:id="addCours" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onAction="#OpenAddCours" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Course">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
