@@ -28,6 +28,7 @@
 }
 #txt_search{
     -fx-background-color:#141313;
+
     -fx-border-width: 2px 2px 2px 2px;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
