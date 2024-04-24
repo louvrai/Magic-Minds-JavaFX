@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="667.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Conrtoller.UserManagementController">
+   <children>
+      <VBox layoutY="-3.0" prefHeight="670.0" prefWidth="302.0" style="-fx-background-color: #DD5746;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="209.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Dashboard" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffbfb" glyphName="HOME" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="User Management" textFill="#dfd1d1">
+               <graphic>
+                  <FontAwesomeIconView fill="#eae6e6" glyphName="GROUP" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Products Management" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#fcfcfc" glyphName="CART_PLUS" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="111.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Courses Management" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#f4f4f4" glyphName="GRADUATION_CAP" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="161.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Quizz" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#e7e2e2" glyphName="QUESTION_CIRCLE" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="212.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Events" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR_ALT" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="262.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Forum" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FORUMBEE" size="20" />
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="312.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="302.0" stylesheets="@fullpackstyling.css" text="Logout" textFill="#dfd1d1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#fcfcfc" glyphName="CHEVRON_CIRCLE_LEFT" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="351.0" layoutY="217.0" prefHeight="374.0" prefWidth="760.0">
+         <children>
+            <GridPane prefHeight="379.0" prefWidth="760.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.8" minWidth="10.0" prefWidth="760.8" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="372.79998779296875" minWidth="0.0" prefWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="248.60001220703126" minHeight="10.0" prefHeight="45.400000000000006" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="339.2000091552734" minHeight="0.0" prefHeight="328.79999999999995" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@fullpackstyling.css" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn prefWidth="102.39999389648438" text="First Name" />
+                      <TableColumn minWidth="8.0" prefWidth="168.79998779296875" text="Last Name " />
+                        <TableColumn minWidth="8.0" prefWidth="168.79998779296875" text="Age" />
+                        <TableColumn minWidth="8.0" prefWidth="168.79998779296875" text="Role" />
+                        <TableColumn minWidth="8.0" prefWidth="168.79998779296875" text="Action" />
+                    </columns>
+                  </TableView>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="150.0">
+                     <children>
+                        <FontAwesomeIconView fill="#dd5746" glyphName="SEARCH" wrappingWidth="11.142857551574707" />
+                        <TextField prefHeight="26.0" prefWidth="418.0" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="306.0" style="-fx-background-color: -fx-background-color :  #DD5746;" stylesheets="@fullpackstyling.css" text="Add User">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <Pane layoutX="302.0" layoutY="108.0" prefHeight="84.0" prefWidth="846.0" style="-fx-background-color: #ff640a;" AnchorPane.leftAnchor="301.19999999999993" AnchorPane.rightAnchor="-2.0" />
+   </children>
+</AnchorPane>
