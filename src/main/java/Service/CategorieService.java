@@ -1,6 +1,7 @@
 package Service;
 
 import Entity.Categorie;
+import Entity.Cours;
 import Utili.MyDB;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 
 import java.sql.*;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class CategorieService implements CRUDInterface <Categorie> {
@@ -51,10 +53,14 @@ public class CategorieService implements CRUDInterface <Categorie> {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql ="DELETE FROM categorie WHERE id = ?";
+        CoursService coursService=new CoursService();
         try {
+            List<Cours> CL=coursService.getCoursesByCat(id);
+            for (Cours c : CL){
+                coursService.delete(c.getId());
+            }
+            String sql ="DELETE FROM categorie WHERE id = ?";
             PreparedStatement ste =connection.prepareStatement(sql);
-            ste= connection.prepareStatement(sql);
             ste.setInt(1,id);
             ste.executeUpdate();
         }catch (SQLException e) {
@@ -130,4 +136,5 @@ public class CategorieService implements CRUDInterface <Categorie> {
         }
         return c;
     }
+
 }

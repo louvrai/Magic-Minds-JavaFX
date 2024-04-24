@@ -293,7 +293,7 @@
                                                 </HBox>
                                                 <HBox prefHeight="39.0" prefWidth="470.0">
                                                    <children>
-                                                      <Label prefHeight="19.0" prefWidth="65.0" text="Periode :">
+                                                      <Label prefHeight="19.0" prefWidth="65.0" text="Period :">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>

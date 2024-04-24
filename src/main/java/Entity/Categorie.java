@@ -1,10 +1,14 @@
 package Entity;
 
-import javafx.scene.image.Image;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Categorie {
     private int id , nbr_chapitre ,nbr_cours;
     private String titre ,description,image;
+    private List<Cours> coursList = new ArrayList<>();
     public Categorie(){
 
     }
@@ -58,6 +62,14 @@ public class Categorie {
 
     public int getNbr_cours() {
         return nbr_cours;
+    }
+
+    public List<Cours> getCoursList() {
+        return coursList;
+    }
+
+    public void setCoursList(List<Cours> coursList) {
+        this.coursList = coursList;
     }
 
     @Override

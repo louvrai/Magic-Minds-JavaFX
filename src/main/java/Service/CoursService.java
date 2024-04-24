@@ -79,5 +79,28 @@ public class CoursService implements CRUDInterface<Cours> {
         }
         return cours;
     }
+    public List<Cours> getCoursesByCat(int catId) {
+        String sql = "SELECT * FROM cours WHERE categorie_id = ?";
+        Cours c = new Cours();
+        List<Cours> coursesByCat = new ArrayList<>();
+        try {
+            PreparedStatement ste = connection.prepareStatement(sql);
+            ste.setInt(1, catId);
+            ResultSet resultSet = ste.executeQuery();
+            while (resultSet.next()) {
+                c.setId(resultSet.getInt("id"));
+                c.setDuree(resultSet.getInt("duree"));
+                c.setNb_chapitre(resultSet.getInt("nb_chapitre"));
+                c.setTitre(resultSet.getString("titre"));
+                c.setDescription(resultSet.getString("Description"));
+                c.setStatus(resultSet.getString("Status"));
+                c.setCategorie_id(resultSet.getInt("categorie_id"));
+                coursesByCat.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return coursesByCat;
+    }
 
 }

@@ -4,7 +4,7 @@ import Entity.*;
 import Service.*;
 import controllers.Cours.UpdateCours;
 import controllers.Ressource.UpdateChapter;
-import controllers.UpdateCategory;
+import controllers.Categorie.UpdateCategory;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
@@ -297,7 +297,6 @@ public class GestionCours implements Initializable {
         try {
             coursService.delete(cours.getId());
             showCours.getItems().remove(cours);
-            coursService.update(cours.getId(),cours);
         } catch (SQLException e) {
             e.printStackTrace();
         }

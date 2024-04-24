@@ -1,4 +1,4 @@
-package controllers;
+package controllers.Categorie;
 
 import Entity.Categorie;
 import Service.CategorieService;

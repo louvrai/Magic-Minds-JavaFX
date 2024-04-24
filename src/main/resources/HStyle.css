@@ -1,1 +1,44 @@
+.pane {
+    -fx-background-color: rgba(36, 76, 91, 0.5);
+    -fx-background-radius: 20px;
+    -fx-border-color:#103641;
+    -fx-border-width:.3px .3px .3px .3px;
+    -fx-border-radius: 20px;
+    -fx-pref-width: 360px;
+    -fx-pref-height: 200px;
+}
+
+.pane:hover {
+    -fx-background-color: #f1aa85;
+}
+.pane_det{
+    -fx-background-color: rgba(36, 76, 91, 0.5);
+    -fx-background-radius: 20px;
+    -fx-border-color:#103641;
+    -fx-border-width:.3px .3px .3px .3px;
+    -fx-border-radius: 20px;
+    -fx-pref-width: 500px;
+    -fx-pref-height: 140px;
+}
+.label_Title {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 25px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+.label_Desc {
+    -fx-pref-width: 170px;
+    -fx-pref-height: 120px;
+    -fx-font-size: 13px;
+}
+.label_Desc1 {
+    -fx-pref-width: 380px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 13px;
+}
+.label_DescC{
+    -fx-pref-width: 170px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 13px;
+}
 
