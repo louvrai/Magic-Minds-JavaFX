@@ -4,8 +4,11 @@ import Entity.User;
 import Service.UserService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,10 +19,12 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 
 import javafx.stage.FileChooser;
+import javafx.stage.StageStyle;
 import org.mindrot.jbcrypt.BCrypt;
 
 
@@ -196,8 +201,29 @@ public class SaveUserController implements Initializable {
     void Close(MouseEvent event) {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
-    }
 
+        try {
+            affichage();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+     void affichage() throws IOException {
+        Stage stage= new Stage();
+         Parent parent   = FXMLLoader.load(getClass().getResource("/UserManagementController.fxml"));
+
+
+         Scene scene = new Scene(parent);
+
+         stage.setTitle("Dashboard");
+
+         stage.initStyle(StageStyle.UTILITY);
+         stage.setScene(scene);
+
+         stage.show();
+     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genderInput.setItems(FXCollections.observableArrayList("male","female"));
@@ -295,20 +321,50 @@ public class SaveUserController implements Initializable {
            roleInput.setStyle("-fx-border-color: red ;");
 
         }else{
-       String newhashedPassword = BCrypt.hashpw(PASSWORD, BCrypt.gensalt());
-       User user = new User(Integer.parseInt(age),FIRSTNAME,lastNAME,EMAIL,TEL,GENDER,newhashedPassword,url,ROLE);
-       try{
-         service.insert(user);
-           Alert alertType = new Alert(Alert.AlertType.INFORMATION);
-          alertType.setTitle("Sucess");
-         alertType.setHeaderText("add success ");
-          alertType.show();
-       }catch (SQLException e){
-           Alert alertType = new Alert(Alert.AlertType.ERROR);
-           alertType.setTitle("Error");
-           alertType.setHeaderText("wrong");
-           alertType.show();
-           System.out.println(e.getMessage());
+       if(update == true){
+           String newhashedPassword = BCrypt.hashpw(PASSWORD, BCrypt.gensalt());
+           User user = new User(userId,Integer.parseInt(age), FIRSTNAME, lastNAME, EMAIL, TEL, GENDER, newhashedPassword, url, ROLE);
+           System.out.println(userId);
+           try{
+               service.update(user,userId);
+               try {
+                   Files.copy(selectedFile.toPath(),destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+               }catch (IOException e){
+                   e.printStackTrace();
+               }
+               Alert alertType = new Alert(Alert.AlertType.INFORMATION);
+               alertType.setTitle("Sucess");
+               alertType.setHeaderText("update success ");
+               alertType.show();
+           }catch (SQLException ex){
+               Alert alertType = new Alert(Alert.AlertType.ERROR);
+               alertType.setTitle("Error");
+               alertType.setHeaderText("echec");
+               alertType.show();
+               System.out.println(ex.getMessage());
+           }
+
+       }else {
+           String newhashedPassword = BCrypt.hashpw(PASSWORD, BCrypt.gensalt());
+           User user = new User(Integer.parseInt(age), FIRSTNAME, lastNAME, EMAIL, TEL, GENDER, newhashedPassword, url, ROLE);
+           try {
+               service.insert(user);
+               try {
+                   Files.copy(selectedFile.toPath(),destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+               }catch (IOException e){
+                   e.printStackTrace();
+               }
+               Alert alertType = new Alert(Alert.AlertType.INFORMATION);
+               alertType.setTitle("Sucess");
+               alertType.setHeaderText("add success ");
+               alertType.show();
+           } catch (SQLException e) {
+               Alert alertType = new Alert(Alert.AlertType.ERROR);
+               alertType.setTitle("Error");
+               alertType.setHeaderText("echec");
+               alertType.show();
+               System.out.println(e.getMessage());
+           }
        }
    }
 
@@ -316,6 +372,23 @@ public class SaveUserController implements Initializable {
 
     public void setUpdate(boolean update) {
         this.update = update;
+    }
+    void setTextField(int userId ,String firstname,String lastname,String email,String tel,String gender,int age,String role,String url){
+        this.userId =userId ;
+       firstnameInput.setText(firstname);
+       lastNameInput.setText(lastname);
+       emailInput.setText(email);
+       telInput.setText(tel);
+       ageInput.setText(String.valueOf(age));
+        String roleName = role.replaceAll("\\[\"ROLE_(.*?)\"\\]", "$1").toLowerCase();
+       roleInput.setValue(roleName);
+       genderInput.setValue(gender);
+       urlText.setText(url);
+      this.url =url;
+      Image image = new Image("file:/" +url);
+    imageView.setImage(image);
+
+
     }
 }
 

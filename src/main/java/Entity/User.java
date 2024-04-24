@@ -19,12 +19,14 @@ public class User {
         this.picture = picture;
         this.active= true;
         this.isVerified = false;
-        this.roles = roles;
+        this.createdAt = new Date();
+
+        this.roles = "[\"ROLE_"+roles.toUpperCase()+"\"]";
     }
 
 
 
-    public User(int id, int age, String firstName, String lastName, String email, String tel, String gender, String password, String picture) {
+    public User(int id, int age, String firstName, String lastName, String email, String tel, String gender, String password, String picture,String roles) {
         this.id = id;
         this.age = age;
         this.firstName = firstName;
@@ -36,6 +38,11 @@ public class User {
         this.picture = picture;
         this.active= true;
         this.isVerified = false;
+        this.roles = "[\"ROLE_"+roles.toUpperCase()+"\"]";
+        this.createdAt = new Date();
+    }
+
+    public User() {
     }
 
     public int getId() {
