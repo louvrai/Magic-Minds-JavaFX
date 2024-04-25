@@ -27,6 +27,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -261,6 +263,13 @@ public class UserManagementController implements Initializable {
         actionsCol.setCellFactory(cellFoctory);
         tableUser.setItems(UserList);
     }
+
+    @FXML
+    void search(MouseEvent event) {
+
+    }
+
+ 
 
 
 }

@@ -114,7 +114,7 @@
                         <Font name="Century Gothic" size="13.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="395.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="395.0" layoutY="9.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/search.png" />
                      </image>

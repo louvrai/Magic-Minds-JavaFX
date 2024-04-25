@@ -18,7 +18,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1027.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StoreController">
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1024.0" spacing="14.0" styleClass="white-background" stylesheets="@style.css" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1024.0" spacing="14.0" styleClass="white-background" stylesheets="@style1.css" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="78.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -92,7 +92,7 @@
                                         <Image url="@images/house.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="157.0" text="Home" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="157.0" styleClass="fron_btn" stylesheets="@style1.css" text="Home" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
@@ -126,10 +126,14 @@
                                         <Image url="@images/store.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="products" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" stylesheets="@style1.css" text="products" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
+                           <styleClass>
+                              <String fx:value="fron_btn" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
                                 </Label>
                             </children>
                             <styleClass>
@@ -137,23 +141,19 @@
                                 <String fx:value="fron_btn" />
                             </styleClass>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="44.0" prefHeight="50.0" prefWidth="231.0" spacing="15.0" stylesheets="@style.css">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="44.0" prefHeight="50.0" prefWidth="231.0" spacing="15.0" styleClass="fron_btn" stylesheets="@style.css">
                             <children>
                                 <ImageView fitHeight="33.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@images/shopping-bag.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="commands" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" styleClass="fron_btn" stylesheets="@style1.css" text="commands" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
                                 </Label>
                             </children>
-                            <styleClass>
-                                <String fx:value="mouse-moved" />
-                                <String fx:value="fron_btn" />
-                            </styleClass>
                         </HBox>
                         <Separator prefWidth="200.0" />
                     </children>
@@ -168,7 +168,7 @@
                                 <Insets left="10.0" />
                             </VBox.margin>
                         </Label>
-                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="224.0" spacing="15.0" stylesheets="@style.css">
+                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="224.0" spacing="15.0" stylesheets="@style1.css">
                             <children>
                                 <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -193,10 +193,14 @@
                                         <Image url="@images/quiz.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="Quizzes" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" stylesheets="@style1.css" text="Quizzes" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
+                           <styleClass>
+                              <String fx:value="fron_btn" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
                                 </Label>
                             </children>
                             <styleClass>
@@ -224,10 +228,14 @@
                                         <Image url="@images/calendar.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="Events" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" stylesheets="@style1.css" text="Events" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
+                           <styleClass>
+                              <String fx:value="fron_btn" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
                                 </Label>
                             </children>
                             <styleClass>
@@ -242,10 +250,14 @@
                                         <Image url="@images/chat.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="Forum" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" stylesheets="@style1.css" text="Forum" textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
+                           <styleClass>
+                              <String fx:value="fron_btn" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
                                 </Label>
                             </children>
                             <styleClass>
@@ -274,7 +286,7 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="trasparent" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+                <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="trasparent" stylesheets="@style1.css" VBox.vgrow="ALWAYS">
                     <content>
                         <GridPane fx:id="produitcontainer" prefHeight="0.0" prefWidth="2.0">
                             <rowConstraints>
