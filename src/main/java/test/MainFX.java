@@ -16,14 +16,14 @@ public class MainFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent parent   = FXMLLoader.load(getClass().getResource("/UserManagementController.fxml"));
+        Parent parent   = FXMLLoader.load(getClass().getResource("/registrationController.fxml"));
 
 
         Scene scene = new Scene(parent);
 
         stage.setTitle("Dashboard");
 
-        stage.initStyle(StageStyle.UTILITY);
+       // stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
 
         stage.show();

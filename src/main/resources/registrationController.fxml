@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="525.0" prefWidth="757.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegistrationController">
    <children>
@@ -31,21 +31,30 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Text>
-      <TextField layoutX="362.0" layoutY="146.0" style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
-      <TextField layoutX="557.0" layoutY="146.0" style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
-      <TextField layoutX="362.0" layoutY="212.0" prefHeight="25.0" prefWidth="344.0" style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
-      <TextField layoutX="362.0" layoutY="324.0" style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
-      <TextField layoutX="557.0" layoutY="324.0" style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
-      <ComboBox layoutX="362.0" layoutY="271.0" prefWidth="150.0" style="-fx-border-color: #fe5d37;" stylesheets="@comboBox.css" />
-      <ComboBox layoutX="557.0" layoutY="271.0" prefWidth="150.0" style="-fx-border-color: #fe5d37;" stylesheets="@comboBox.css" />
-      <Button layoutX="426.0" layoutY="395.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="234.0" style="-fx-background-color: #fe5d37;" stylesheets="@btnSave.css" text="Sign Up" textFill="WHITE">
+      <TextField fx:id="firstnameId" layoutX="362.0" layoutY="146.0" promptText="Your first name ..." style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
+      <TextField fx:id="lastnameId" layoutX="557.0" layoutY="146.0" promptText="Your last name ..." style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
+      <TextField fx:id="emailId" layoutX="362.0" layoutY="212.0" prefHeight="25.0" prefWidth="344.0" promptText="Your mail ..." style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
+      <TextField fx:id="passwordId" layoutX="362.0" layoutY="324.0" promptText="Your password ..." style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
+      <TextField fx:id="ageId" layoutX="557.0" layoutY="324.0" promptText="Your age ..." style="-fx-border-color: #fe5d37;" stylesheets="@TEXTFIELD.css" />
+      <ComboBox fx:id="roleId" layoutX="362.0" layoutY="271.0" prefWidth="150.0" promptText="Your role ..." style="-fx-border-color: #fe5d37;" stylesheets="@comboBox.css" />
+      <ComboBox fx:id="genderId" layoutX="557.0" layoutY="271.0" prefWidth="150.0" promptText="Your gender ..." style="-fx-border-color: #fe5d37;" stylesheets="@comboBox.css" />
+      <Button layoutX="426.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#signUpBtn" prefHeight="29.0" prefWidth="234.0" style="-fx-background-color: #fe5d37;" stylesheets="@btnSave.css" text="Sign Up" textFill="WHITE">
          <styleClass>
             <String fx:value="btn_home" />
             <String fx:value="shadow" />
          </styleClass>
       </Button>
-      <Hyperlink layoutX="505.0" layoutY="449.0" text="Hyperlink" />
-      <Hyperlink layoutX="505.0" layoutY="488.0" text="Hyperlink" />
+      <Hyperlink layoutX="492.0" layoutY="449.0" onMouseClicked="#forgetPasswordPage" text="Forgot Password?" />
+      <Hyperlink layoutX="455.0" layoutY="488.0" onMouseClicked="#loginPage" text="Already have an account? Login!" />
       <FontAwesomeIconView fill="#fe5d37" glyphName="CLOSE" layoutX="724.0" layoutY="35.0" size="25" />
+      <CheckBox fx:id="agreeId" layoutX="370.0" layoutY="377.0" mnemonicParsing="false" text="Agree Items" />
+      <Text fx:id="firstnameControl" layoutX="380.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="lastnameControl" layoutX="575.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="roleControl" layoutX="380.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="genderControl" layoutX="575.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="passwordControl" layoutX="380.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="ageControl" layoutX="575.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
+      <Text fx:id="emailControl" layoutX="378.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="329.13671875" />
+      <Text fx:id="agreeControl" layoutX="466.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="234.0" />
    </children>
 </AnchorPane>

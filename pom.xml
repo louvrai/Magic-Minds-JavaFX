@@ -66,9 +66,34 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.4</version> <!-- Utilisez la dernière version disponible -->
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.6</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.mailjet</groupId>
+            <artifactId>mailjet-client</artifactId>
+            <version>5.2.5</version>
+        </dependency>
+
 
 
     </dependencies>
+    <repositories>
+        <repository>
+            <id>AsposeJavaAPI</id>
+            <name>API Java Aspose</name>
+            <url>https://repository.aspose.com/repo/</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

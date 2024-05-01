@@ -97,4 +97,28 @@ public class UserService implements ServiceUserInterface<User> {
         }
         return users;
     }
+    public boolean checkUserUnique(String email){
+        return false;
+    }
+    public void registerUser(User user) throws SQLException {
+        PreparedStatement ste = null;
+        String sql = "INSERT INTO user "
+                + "( `first_name`, `last_name`, `age`, `gender`, `password`, `tel`, `email`, `picture`,`roles`, `is_verified`, `active`) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        ste = connection.prepareStatement(sql);
+        ste.setString(1,user.getFirstName());
+        ste.setString(2,user.getLastName());
+        ste.setInt(3,user.getAge());
+        ste.setString(4,user.getGender());
+        ste.setString(5,user.getPassword());
+        ste.setString(6,"");
+        ste.setString(7,user.getEmail());
+        ste.setString(8,"");
+
+        ste.setString(9,user.getRoles());
+        ste.setBoolean(10,false);
+        ste.setBoolean(11,true);
+
+        ste.executeUpdate();
+    }
 }
