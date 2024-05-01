@@ -1,20 +1,16 @@
 package controllers.Categorie;
 
 import Entity.Categorie;
-import Entity.Cours;
 import Service.CategorieService;
 import controllers.AlertClass;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
+import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -26,29 +22,25 @@ public class AddCategory {
 
     @FXML
     private TextArea addCatDescrip;
-
     @FXML
     private ImageView addCatImg;
-
     @FXML
     private TextField addCatTitle;
     @FXML
     private Label ECDesc;
-
     @FXML
     private Label ECattitre;
-
     @FXML
-    private Button addcat;
-    @FXML
-
-    private AnchorPane addWind;
-
+    private Label Eimage;
     @FXML
     private Button upload;
+
+    @FXML
+    private Button backCat;
+
     CategorieService categorieService = new CategorieService();
     AlertClass alertClass=new AlertClass();
-    String url ;
+    String url="Please choose an image";
     File selectedFile = new File("C:\\");
     File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadImage");
     File destinationFile = new File("C:\\");
@@ -64,54 +56,76 @@ public class AddCategory {
         selectedFile = fileChooser.showOpenDialog(upload.getScene().getWindow());
         if (selectedFile != null){
                 String pathName =selectedFile.getAbsolutePath().replace("\\","/");
-                System.out.println(pathName);
                 Image image = new Image("file:/" +pathName);
                 addCatImg.setImage(image);
                 destinationFile=new File(UploadDirectory,selectedFile.getName());
                 url = UploadDirectory.getAbsolutePath().replace("\\", "/");
                 url += "/" + selectedFile.getName();
-                System.out.println(url);
+
         }
+
     }
     @FXML
     void addCat(MouseEvent event) {
         Categorie cat = new Categorie();
-        try {
-            Files.copy(selectedFile.toPath(),destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        if (isValid()==true){
+        if (isValid()){
+            try {
+                Files.copy(selectedFile.toPath(),destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
             cat.setTitre(addCatTitle.getText());
             cat.setDescription(addCatDescrip.getText());
             cat.setImage(url);
             categorieService.insert(cat);
             alertClass.showSAlert("Addition Success", "The category "+cat.getTitre()+" was successfully added");
-            ECattitre.setText("");
-        }else {
-        alertClass.showSAlert("Error","An error occurred");
-         }
-        Stage closestage = (Stage) addcat.getScene().getWindow();
-        closestage.close();
+            Stage stage = (Stage) upload.getScene().getWindow();
+            stage.close();
+        }
     }
     public boolean isValid(){
         try {
-            ObservableList<Categorie> categories=categorieService.getAll();
+            ObservableList<Categorie> categories = categorieService.getAll();
+            String title = addCatTitle.getText();
+            String descrip = addCatDescrip.getText();
+            ECattitre.setText("");
+            ECDesc.setText("");
+
+            if (title == null || title.isEmpty()) {
+                ECattitre.setText("The title can't be empty");
+                return false;
+            }
+            if (title.length() < 3 || title.length() > 20) {
+                ECattitre.setText("The title is either too long or too short");
+                return false;
+            }
             for (Categorie cat : categories) {
-                if (addCatTitle.getText().equals(cat.getTitre())){
+                if (title.equals(cat.getTitre())) {
                     ECattitre.setText("This title already exist");
-                    return false ;
-                }
-                else {
-                    ECattitre.setText("");
+                    return false;
                 }
             }
+            if (descrip == null || descrip.isEmpty()) {
+                ECDesc.setText("The description can't be empty");
+                return false;
+            }
+            if (descrip.length() < 10 || descrip.length() > 150) {
+                ECDesc.setText("The description is either too long or too short");
+                return false;
+            }
+            if (url.equals("Please choose an image")) {
+                Eimage.setText(url);
+                return false;
+            }
+
+            return true ;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return true ;
     }
-
-
-
+    @FXML
+    void goBack(MouseEvent event) {
+        Stage closestage = (Stage) backCat.getScene().getWindow();
+        closestage.close();
+    }
 }

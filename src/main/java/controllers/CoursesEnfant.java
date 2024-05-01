@@ -1,4 +1,4 @@
-package controllers.Cours;
+package controllers;
 
 import Entity.Categorie;
 import Entity.Cours;

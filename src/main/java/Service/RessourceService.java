@@ -19,25 +19,30 @@ public class RessourceService implements CRUDInterface<Ressource> {
     public void insert(Ressource ressource) throws SQLException {
         PreparedStatement ste = null;
         String sql = "INSERT INTO ressource"
-                + "(titre,type,url) "
-                + "VALUES(?,?,?)";
+                + "(titre,type,url,id_cours_id) "
+                + "VALUES(?,?,?,?)";
         ste = connection.prepareStatement(sql);
         ste.setString(1,ressource.getTitre());
         ste.setString(2,ressource.getType());
         ste.setString(3,ressource.getUrl());
+        ste.setInt(4,ressource.getId_cours_id());
         ste.executeUpdate();
     }
 
     @Override
-    public void update(int id, Ressource ressource) throws SQLException {
-        PreparedStatement ste = null ;
-        String sql = "UPDATE ressource SET titre= ?, type = ?,url = ? WHERE id = ?";
-        ste = connection.prepareStatement(sql);
-        ste.setString(1,ressource.getTitre());
-        ste.setString(2,ressource.getType());
-        ste.setString(3,ressource.getUrl());
-        ste.setInt(4,id);
-        ste.executeUpdate();
+    public void update(int id, Ressource ressource)  {
+        String sql = "UPDATE ressource SET titre= ?, type = ?,url = ?,id_cours_id = ? WHERE id = ?";
+        try {
+            PreparedStatement ste = connection.prepareStatement(sql);
+            ste.setString(1,ressource.getTitre());
+            ste.setString(2,ressource.getType());
+            ste.setString(3,ressource.getUrl());
+            ste.setInt(4,ressource.getId_cours_id());
+            ste.setInt(5,id);
+            ste.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -62,10 +67,32 @@ public class RessourceService implements CRUDInterface<Ressource> {
                 r.setTitre(resultSet.getString("titre"));
                 r.setType(resultSet.getString("type"));
                 r.setUrl(resultSet.getString("url"));
+                r.setId_cours_id(resultSet.getInt("id_cours_id"));
                 chapters.add(r);
             }
         }catch (SQLException e) {
                 System.out.println(e.getMessage());}
         return chapters;
+    }
+    public List<Ressource> getChaptersByCat(int coursId) {
+        String sql = "SELECT * FROM ressource WHERE id_cours_id = ?";
+        Ressource r = new Ressource();
+        List<Ressource> chaptersByCat = new ArrayList<>();
+        try {
+            PreparedStatement ste = connection.prepareStatement(sql);
+            ste.setInt(1, coursId);
+            ResultSet resultSet = ste.executeQuery();
+            while (resultSet.next()) {
+                r.setId(resultSet.getInt("id"));
+                r.setTitre(resultSet.getString("titre"));
+                r.setType(resultSet.getString("type"));
+                r.setUrl(resultSet.getString("url"));
+                r.setId_cours_id(resultSet.getInt("id_cours_id"));
+                chaptersByCat.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return chaptersByCat;
     }
 }

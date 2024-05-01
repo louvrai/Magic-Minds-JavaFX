@@ -72,41 +72,61 @@ public class UpdateCours implements Initializable {
                 cat = categorieService.getbyId(categorieService.getCatId(catName));
                 c.setCategorie_id(cat.getId());
             }
-            c.setCategorie_id(course.getCategorie_id());
+            else {
+                c.setCategorie_id(course.getCategorie_id());
+            }
             System.out.println(c);
             coursService.update(course.getId(),c);
             alertClass.showEAlert("Update Success", "The course "+c.getTitre()+" was successfully updated");
             ECUPtitre.setText("");
             ECUPChap.setText("");
-        }else {
-            alertClass.showSAlert("Error","An error occurred");
         }
-        System.out.println(course);
 
     }
     public boolean isValid(){
-        Cours c = new Cours();
-        Categorie cat = new Categorie();
         try {
+            String title = upCTiltle.getText();
+            String descrip =upCDescrip.getText();
+            int chap=upCChap.getValue();
+            int per=upCPer.getValue();
+            ECUPtitre.setText("");
+            ECUPDesc.setText("");
+            ECUPChap.setText("");
+
+            if (title == null || title.isEmpty()) {
+                ECUPtitre.setText("The title can't be empty");
+                return false;
+            }
+            if (title.length() < 3 || title.length() > 20) {
+                ECUPtitre.setText("The title is either too long or too short");
+                return false;
+            }
             for (Cours cours : courses = coursService.getAll()) {
                 if (upCTiltle.getText().equals(cours.getTitre()) && !upCTiltle.getText().equals(course.getTitre())){
                     ECUPtitre.setText("This title already exist");
                     return false ;
                 }
-                else {
-                    ECUPtitre.setText("");
-                }
             }
+            if (chap==0 || per==0) {
+                ECUPChap.setText("The number of chapters or periode can't be zero");
+                return false;
+            }
+            if (descrip == null || descrip.isEmpty()) {
+                ECUPDesc.setText("The description can't be empty");
+                return false;
+            }
+            if (descrip.length() < 10 || descrip.length() > 150) {
+                ECUPDesc.setText("The description is either too long or too short");
+                return false;
+            }
+            if (chap > per){
+                ECUPChap.setText(" the number of chapters can't be more then the period");
+                return false;
+            }
+            return true ;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (upCChap.getValue()<= upCPer.getValue()){
-            ECUPChap.setText("");
-        }else {
-            ECUPChap.setText("The number of chapters can't be more then the period");
-            return false;
-        }
-        return true ;
     }
     @FXML
     void upgoBack(MouseEvent event) {

@@ -89,7 +89,7 @@
                   </Label>
                   <HBox prefHeight="40.0" prefWidth="582.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="95.0" text="Title : ">
+                        <Label prefHeight="30.0" prefWidth="95.0" text="Category : ">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -113,7 +113,7 @@
                         <Insets top="5.0" />
                      </padding>
                   </HBox>
-                  <Label fx:id="ECDesc" prefHeight="52.0" prefWidth="410.0" textFill="#b50000" wrapText="true">
+                  <Label fx:id="ECDesc" prefHeight="31.0" prefWidth="410.0" textFill="#b50000" wrapText="true">
                      <font>
                         <Font size="11.0" />
                      </font>

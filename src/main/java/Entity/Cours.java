@@ -1,9 +1,13 @@
 package Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cours {
     private int id , duree , nb_chapitre ;
     private String titre, description , status ;
     private int categorie_id ;
+    private List<Ressource> chapterList = new ArrayList<>();
 
     public Cours(){
 
@@ -82,6 +86,14 @@ public class Cours {
 
     public void setCategorie_id(int categorie_id) {
         this.categorie_id = categorie_id;
+    }
+
+    public List<Ressource> getChapterList() {
+        return chapterList;
+    }
+
+    public void setChapterList(List<Ressource> chapterList) {
+        this.chapterList = chapterList;
     }
 
     @Override

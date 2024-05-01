@@ -159,9 +159,9 @@
                                                 <Image url="@images/logo.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="32.0" layoutY="8.0" prefHeight="28.0" prefWidth="170.0" styleClass="white-bg" stylesheets="@DashbordDesign.css" text="Category Details" textFill="#262a3d">
+                                          <Label layoutX="26.0" layoutY="7.0" prefHeight="28.0" prefWidth="170.0" styleClass="white-bg" stylesheets="@DashbordDesign.css" text="Category Details" textFill="#0e6531">
                                              <font>
-                                                <Font name="Verdana" size="14.0" />
+                                                <Font name="Verdana" size="16.0" />
                                              </font>
                                           </Label>
                                           <VBox layoutX="26.0" layoutY="28.0" prefHeight="151.0" prefWidth="480.0" spacing="10.0">
@@ -171,12 +171,12 @@
                                              <children>
                                                 <HBox prefHeight="35.0" prefWidth="441.0">
                                                    <children>
-                                                      <Label prefHeight="23.0" prefWidth="37.0" text="Title :">
+                                                      <Label prefHeight="19.0" prefWidth="51.0" text="Title :">
                                                          <font>
-                                                            <Font size="13.0" />
+                                                            <Font name="Arial Rounded MT Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="Dtitle" prefHeight="23.0" prefWidth="429.0">
+                                                      <Label fx:id="Dtitle" prefHeight="19.0" prefWidth="202.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -190,7 +190,7 @@
                                                    <children>
                                                       <Label prefHeight="19.0" prefWidth="65.0" text="Courses :">
                                                          <font>
-                                                            <Font size="13.0" />
+                                                            <Font name="Arial Rounded MT Bold" size="13.0" />
                                                          </font>
                                                       </Label>
                                                       <Label fx:id="DNbCours" prefHeight="24.0" prefWidth="85.0">
@@ -200,10 +200,10 @@
                                                       </Label>
                                                       <Label prefHeight="24.0" prefWidth="71.0" text="Chapters :">
                                                          <font>
-                                                            <Font size="13.0" />
+                                                            <Font name="Arial Rounded MT Bold" size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="DNbchap" prefHeight="24.0" prefWidth="117.0">
+                                                      <Label fx:id="DNbchap" prefHeight="19.0" prefWidth="72.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -225,7 +225,7 @@
                                                                   <Insets bottom="2.0" />
                                                                </VBox.margin>
                                                                <font>
-                                                                  <Font size="13.0" />
+                                                                  <Font name="Arial Rounded MT Bold" size="13.0" />
                                                                </font>
                                                             </Label>
                                                             <Label fx:id="Ddescrip" alignment="TOP_LEFT" maxHeight="48.0" maxWidth="463.0" minHeight="48.0" minWidth="463.0" prefHeight="48.0" prefWidth="463.0" wrapText="true" />
@@ -264,9 +264,9 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <Label layoutX="32.0" layoutY="8.0" prefHeight="28.0" prefWidth="170.0" styleClass="white-bg" stylesheets="@DashbordDesign.css" text="Course Details" textFill="#262a3d">
+                                          <Label layoutX="26.0" layoutY="8.0" prefHeight="28.0" prefWidth="170.0" styleClass="white-bg" stylesheets="@DashbordDesign.css" text="Course Details" textFill="#0e6531">
                                              <font>
-                                                <Font name="Verdana" size="14.0" />
+                                                <Font name="Verdana" size="16.0" />
                                              </font>
                                           </Label>
                                           <VBox layoutX="26.0" layoutY="28.0" prefHeight="151.0" prefWidth="613.0" spacing="10.0">
@@ -276,12 +276,22 @@
                                              <children>
                                                 <HBox prefHeight="35.0" prefWidth="441.0">
                                                    <children>
-                                                      <Label prefHeight="23.0" prefWidth="37.0" text="Title :">
+                                                      <Label prefHeight="19.0" prefWidth="53.0" text="Title :">
+                                                         <font>
+                                                            <Font name="Arial Rounded MT Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="DCtitle" prefHeight="19.0" prefWidth="209.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="DCtitle" prefHeight="23.0" prefWidth="429.0">
+                                                      <Label prefHeight="19.0" prefWidth="84.0" text="Category :">
+                                                         <font>
+                                                            <Font name="Arial Rounded MT Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="Dcat" prefHeight="19.0" prefWidth="209.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -295,17 +305,17 @@
                                                    <children>
                                                       <Label prefHeight="19.0" prefWidth="65.0" text="Period :">
                                                          <font>
-                                                            <Font size="13.0" />
+                                                            <Font name="Arial Rounded MT Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="Dperiode" prefHeight="24.0" prefWidth="85.0">
+                                                      <Label fx:id="Dperiode" prefHeight="19.0" prefWidth="198.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label prefHeight="19.0" prefWidth="132.0" text="Number of chapters :">
+                                                      <Label prefHeight="19.0" prefWidth="156.0" text="Number of chapters :">
                                                          <font>
-                                                            <Font size="13.0" />
+                                                            <Font name="Arial Rounded MT Bold" size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <Label fx:id="DCNbchap" prefHeight="24.0" prefWidth="117.0">
@@ -330,7 +340,7 @@
                                                                   <Insets bottom="2.0" />
                                                                </VBox.margin>
                                                                <font>
-                                                                  <Font size="13.0" />
+                                                                  <Font name="Arial Rounded MT Bold" size="14.0" />
                                                                </font>
                                                             </Label>
                                                             <Label fx:id="DCdescrip" alignment="TOP_LEFT" maxHeight="48.0" maxWidth="593.0" minHeight="48.0" minWidth="463.0" prefHeight="48.0" prefWidth="593.0" wrapText="true" />
@@ -356,7 +366,7 @@
                            <content>
                               <AnchorPane fx:id="CourseList1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@DashbordDesign.css">
                                  <children>
-                                    <TableView fx:id="showChap" layoutX="14.0" layoutY="51.0" prefHeight="192.0" prefWidth="663.0" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0">
+                                    <TableView fx:id="showChap" layoutX="14.0" layoutY="51.0" prefHeight="416.0" prefWidth="663.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0">
                                        <columns>
                                           <TableColumn fx:id="chapTitleCol" prefWidth="205.0" text="Title" />
                                           <TableColumn fx:id="chapFile" prefWidth="262.0" text="File" />
@@ -364,45 +374,7 @@
                                           <TableColumn fx:id="ChapAction" prefWidth="104.0" text="Actions" />
                                        </columns>
                                     </TableView>
-                                    <Pane layoutX="14.0" layoutY="250.0" prefHeight="222.0" prefWidth="663.0" style="-fx-border-color: #272b3f; -fx-border-radius: 10;" stylesheets="@DashbordDesign.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="250.0">
-                                       <styleClass>
-                                          <String fx:value="white-bg" />
-                                          <String fx:value="shadow" />
-                                       </styleClass>
-                                       <children>
-                                          <Label layoutX="26.0" layoutY="8.0" prefHeight="28.0" prefWidth="170.0" styleClass="white-bg" stylesheets="@DashbordDesign.css" text="Chapter preview" textFill="#262a3d">
-                                             <font>
-                                                <Font name="Verdana" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <VBox layoutX="22.0" layoutY="30.0" prefHeight="132.0" prefWidth="220.0" spacing="10.0">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                             <children>
-                                                <HBox prefHeight="120.0" prefWidth="210.0">
-                                                   <children>
-                                                      <Label prefHeight="23.0" prefWidth="37.0" text="Title :">
-                                                         <font>
-                                                            <Font size="13.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="DChaptitle" prefHeight="111.0" prefWidth="170.0" wrapText="true">
-                                                         <font>
-                                                            <Font size="13.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets right="5.0" top="3.0" />
-                                                   </padding>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <Pane fx:id="Chap_contenu" layoutX="256.0" layoutY="11.0" prefHeight="200.0" prefWidth="392.0" />
-                                       </children>
-                                    </Pane>
-                                    <Button fx:id="addChap" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAddCours" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Chapter">
+                                    <Button fx:id="addChap" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAddChap" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Chapter">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

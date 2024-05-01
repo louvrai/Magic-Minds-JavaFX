@@ -73,34 +73,55 @@ public class AddCours implements Initializable {
             alertClass.showEAlert("Addition Success", "The course "+c.getTitre()+" was successfully added");
             ECtitre.setText("");
             ECChap.setText("");
-        }else {
-            alertClass.showSAlert("Error","An error occurred");
         }
 
     }
     public boolean isValid(){
-        Cours c = new Cours();
-        Categorie cat = new Categorie();
         try {
+            Cours c = new Cours();
+            Categorie cat = new Categorie();
+            String title = addCTiltle.getText();
+            String descrip = addCDescrip.getText();
+            int chap=addCChap.getValue();
+            int per=addCPer.getValue();
+            ECtitre.setText("");
+            ECDesc.setText("");
+            ECChap.setText("");
+
+            if (title == null || title.isEmpty()) {
+                ECtitre.setText("The title can't be empty");
+                return false;
+            }
+            if (title.length() < 3 || title.length() > 20) {
+                ECtitre.setText("The title is either too long or too short");
+                return false;
+            }
             for (Cours cours : courses = coursService.getAll()) {
-                if (addCTiltle.getText().equals(cours.getTitre())){
+                if (addCTiltle.getText().equals(cours.getTitre())) {
                     ECtitre.setText("This title already exist");
-                    return false ;
-                }
-                else {
-                    ECtitre.setText("");
+                    return false;
                 }
             }
+            if (chap==0 || per==0) {
+                ECChap.setText("The number of chapters or periode can't be zero");
+                return false;
+            }
+            if (descrip == null || descrip.isEmpty()) {
+                ECDesc.setText("The description can't be empty");
+                return false;
+            }
+            if (descrip.length() < 10 || descrip.length() > 150) {
+                ECDesc.setText("The description is either too long or too short");
+                return false;
+            }
+            if (chap > per){
+                ECChap.setText(" the number of chapters can't be more then the period");
+                return false;
+            }
+            return true ;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (addCChap.getValue()<= addCPer.getValue()){
-            ECChap.setText("");
-        }else {
-            ECChap.setText(" the number of chapters can't be more then the period");
-            return false;
-        }
-        return true ;
     }
     @FXML
     void goBack(MouseEvent event) {

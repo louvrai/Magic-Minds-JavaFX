@@ -70,6 +70,7 @@ public class GestionCours implements Initializable {
     private Button refresh_btn;
     @FXML
     private TableView<Categorie> showCat;
+    CategorieService categorieService =new CategorieService();
 
     @FXML
     void refreshTab(ActionEvent event) {
@@ -189,6 +190,8 @@ public class GestionCours implements Initializable {
     private Label DCdescrip;
     @FXML
     private Label DCNbchap;
+    @FXML
+    private Label Dcat;
     CoursService coursService=new CoursService();
 
     @FXML
@@ -219,7 +222,6 @@ public class GestionCours implements Initializable {
             ObservableList<Cours> cours =new CoursService().getAll();
             showCours.setItems(cours);
             defaultCours = cours.get(0) ;
-            System.out.println(defaultCours);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -236,19 +238,16 @@ public class GestionCours implements Initializable {
                 });
                 Cup_btn.setOnMouseClicked(event -> {
                     Cours cours1 = (Cours) getTableRow().getItem();
-                    System.out.println(cours1);
                     updateCours(cours1);
                 });
                 CInValid_btn.setOnMouseClicked(event -> {
                     Cours cours1 = (Cours) getTableRow().getItem();
                     InValidCours(cours1);
-                    System.out.println("invalid");
                     refreshCoursTab();
                 });
                 CValid_btn.setOnMouseClicked(event -> {
                     Cours cours1 = (Cours) getTableRow().getItem();
                     ValidCours(cours1);
-                    System.out.println("valid");
                     refreshCoursTab();
                 });
 
@@ -275,6 +274,8 @@ public class GestionCours implements Initializable {
             DCdescrip.setText(defaultCours.getDescription());
             DCNbchap.setText(String.valueOf(defaultCours.getNb_chapitre()));
             Dperiode.setText(String.valueOf(defaultCours.getDuree()));
+            Categorie cat=categorieService.getbyId(defaultCours.getCategorie_id());
+            Dcat.setText(cat.getTitre());
         }
     }
     private void updateCours(Cours cours) {
@@ -321,10 +322,6 @@ public class GestionCours implements Initializable {
     @FXML
     private TableColumn<Ressource, String> ChapAction;
     @FXML
-    private Pane Chap_contenu;
-    @FXML
-    private Label DChaptitle;
-    @FXML
     private TableView<Ressource> showChap;
     @FXML
     void OpenAddChap(MouseEvent event) {
@@ -332,7 +329,7 @@ public class GestionCours implements Initializable {
             Parent addChapPageRoot = FXMLLoader.load(getClass().getResource("/AddChapter.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(addChapPageRoot,650,500);
+            Scene newPageScene = new Scene(addChapPageRoot,650,355);
             stage.setScene(newPageScene);
             stage.setTitle("New Chapter");
             stage.show();
@@ -344,15 +341,12 @@ public class GestionCours implements Initializable {
     void refreshChapTab(ActionEvent event) {updateChapTab();}
     public void updateChapTab(){
         showChap.setFixedCellSize(40);
-        Ressource defaultChap = new Ressource();
         chapTitleCol.setCellValueFactory(new PropertyValueFactory<>("titre"));
         chapFile.setCellValueFactory(new PropertyValueFactory<>("url"));
         chapType.setCellValueFactory(new PropertyValueFactory<>("type"));
         try {
             ObservableList<Ressource> chapters =new RessourceService().getAll();
-            System.out.println(chapters);
             showChap.setItems(chapters);
-            defaultChap = chapters.get(0);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -386,10 +380,7 @@ public class GestionCours implements Initializable {
                 }
             }
         });
-        if (defaultChap != null) {
-            DChaptitle.setText(defaultChap.getTitre());
-            // tansech fazet preview
-        }
+
     }
     private void updateChap(Ressource ressource) {
         try {
@@ -451,25 +442,20 @@ public class GestionCours implements Initializable {
                 DCdescrip.setText(newSelection.getDescription());
                 DCNbchap.setText(String.valueOf(newSelection.getNb_chapitre()));
                 Dperiode.setText(String.valueOf(newSelection.getDuree()));
+                Categorie cat=categorieService.getbyId(newSelection.getCategorie_id());
+                Dcat.setText(cat.getTitre());
             } else {
                 DCtitle.setText(" ");
                 DCdescrip.setText(" ");
                 DCNbchap.setText(" ");
                 Dperiode.setText(" ");
+                Dcat.setText(" ");
             }
         });
         //-------------------------------------------CHAPTERS------------------------------------------------------
         FontAwesomeIconView refreshBtnchap = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
         refreshChaop_btn.setGraphic(refreshBtnchap);
         updateChapTab();
-        showChap.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                DChaptitle.setText(newSelection.getTitre());
-               //tansech 5idma
-            } else {
-                DChaptitle.setText(" ");
-            }
-        });
 
     }
 
