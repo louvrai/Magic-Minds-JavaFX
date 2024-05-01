@@ -14,7 +14,7 @@
             <Image url="@images/man.png" />
          </image>
       </ImageView>
-      <Label fx:id="name" prefHeight="26.0" prefWidth="82.0" text="Name">
+      <Label fx:id="name" prefHeight="26.0" prefWidth="82.0" text="Mohamed">
          <HBox.margin>
             <Insets />
          </HBox.margin>

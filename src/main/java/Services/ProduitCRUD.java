@@ -91,4 +91,26 @@ public class ProduitCRUD implements PService<Produit> {
         }
         return produits;
     }
+    public Produit getById(int id) throws SQLException {
+        String query = "SELECT * FROM produit WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Produit(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("quantite"),
+                        resultSet.getDouble("prix"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("description"),
+                        resultSet.getString("img1"),
+                        resultSet.getString("img2"),
+                        resultSet.getString("img3"),
+                        resultSet.getString("categorie")
+                );
+            }
+        }
+        return null; // Return null if product with given ID is not found
+    }
+
 }

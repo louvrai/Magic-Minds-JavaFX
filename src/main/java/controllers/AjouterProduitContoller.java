@@ -1,14 +1,17 @@
 package controllers;
 
 import Entities.Produit;
+import Services.CommentCRUD;
 import Services.ProduitCRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -27,6 +30,7 @@ import javafx.stage.Stage;
 
 public class AjouterProduitContoller {
     private final ProduitCRUD ps=new ProduitCRUD();
+    private final CommentCRUD commentCRUD=new CommentCRUD();
     @FXML
     private Button btn_corses;
 
@@ -107,8 +111,49 @@ public class AjouterProduitContoller {
 
     @FXML
     private TextField txt_search;
+
+    @FXML
+    void gostorefront(MouseEvent event) {
+        try {
+            // Load the FXML file for the store view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Store.fxml"));
+            Parent storeRoot = loader.load();
+
+            // Get the current stage (window) using the event source
+            Stage stage;
+            if (event.getSource() instanceof Node) {
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            } else {
+                // Alternatively, if not triggered by a Node, use a default method to get the Stage
+                stage = new Stage(); // This line should be adjusted according to your context
+            }
+
+            // Set the store scene in the current stage
+            Scene scene = new Scene(storeRoot);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exceptions possibly thrown by the FXML loading
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the store view.");
+            alert.showAndWait();
+        }  
+    }
+
     @FXML
     void showcommant(ActionEvent event) {
+        Produit selectedItem = productTable.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Product Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a product to view comments.");
+            alert.showAndWait();
+            return; // Exit the method if no product is selected
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowCommantBack.fxml"));
             Parent root = loader.load();
@@ -128,7 +173,52 @@ public class AjouterProduitContoller {
     }
 
     @FXML
-    void addPro(ActionEvent event) {
+    void addPro(ActionEvent event) throws SQLException {
+        ArrayList<Produit>produits=ps.afficherAll();
+        for (Produit p:produits){
+            if(p.getNom().equals(namepro.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Input Error");
+                alert.setContentText("Product Exist with the same name");
+                alert.showAndWait();
+               return;
+            }
+        }
+        if (namepro.getText().isEmpty()) {
+            showError(namepro, "Please check your Product name input.");
+            return;
+        }
+        if (img1pro.getText().isEmpty()) {
+            showError(img1pro, "Please provide the link for the first image.");
+            return;
+        }
+        if (img2pro.getText().isEmpty()) {
+            showError(img2pro, "Please provide the link for the second image.");
+            return;
+        }
+        if (img3pro.getText().isEmpty()) {
+            showError(img3pro, "Please provide the link for the third image.");
+            return;
+        }
+        if (!isValidDouble(pricepro.getText())) {
+            showError(pricepro, "Price should be a valid number.");
+            return;
+        }
+        if (categorypro.getText().isEmpty()) {
+            showError(categorypro, "Please provide a product category.");
+            return;
+        }
+
+        if (!isValidInteger(quantitypro.getText())) {
+            showError(quantitypro, "Quantity should be a valid integer.");
+            return;
+        }
+        if (descpro.getText().isEmpty()) {
+            showError(descpro, "Please provide a product description.");
+            return;
+        }
+
+
         try {
             ps.ajouter(new Produit(
                     Integer.parseInt(quantitypro.getText()),
@@ -158,6 +248,42 @@ public class AjouterProduitContoller {
         }
     }
 
+
+    private void showError(TextField field, String message) {
+        field.setStyle("-fx-text-fill: red; -fx-border-color: red;");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+        field.setStyle(""); // Reset style after showing alert if needed
+    }
+
+    private boolean isValidInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidDouble(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
+    private void showValidationError(String message) {
+        // Display an alert with the provided error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validation Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
     private void clearFields() {
         quantitypro.clear();
         pricepro.clear();
@@ -207,8 +333,46 @@ public class AjouterProduitContoller {
             }
 
         });
+        loadTableData();  // Load initial table data
+
+        // Add a listener to the search text field to update the table based on the search query
+        txt_search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterTableData(newValue); // This method will be responsible for filtering table data
+        });
 
     }
+    private void filterTableData(String filter) {
+        if (filter == null || filter.isEmpty()) {
+            loadTableData();  // Reload all data if filter is cleared
+            return;
+        }
+
+        try {
+            ArrayList<Produit> allProducts = ps.afficherAll();
+            ArrayList<Produit> filteredProducts = new ArrayList<>();
+
+            String lowerCaseFilter = filter.toLowerCase();
+
+            for (Produit produit : allProducts) {
+                // Check if any property contains the search string
+                if (produit.getNom().toLowerCase().contains(lowerCaseFilter) ||
+                        produit.getDescription().toLowerCase().contains(lowerCaseFilter) ||
+                        produit.getCategorie().toLowerCase().contains(lowerCaseFilter) ||
+                        String.valueOf(produit.getPrix()).contains(lowerCaseFilter) ||
+                        String.valueOf(produit.getQuantity()).contains(lowerCaseFilter)) {
+                    filteredProducts.add(produit);
+                }
+            }
+
+            productTable.setItems(FXCollections.observableArrayList(filteredProducts)); // Update table view
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Error");
+            alert.setContentText("Error accessing the database for filtering: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
 
     private void loadTableData() {
         try {
@@ -230,6 +394,10 @@ public class AjouterProduitContoller {
         if (selectedItem != null) {
             try {
                 // Remove selected item from the TableView and the underlying data source
+                ArrayList<Produit>produits=ps.afficherAll();
+                for (Produit p:produits){
+                commentCRUD.supprimerwithproduit(selectedItem.getId());
+                }
                 ps.supprimer(selectedItem); // Pass the selected product object
                 loadTableData(); // Reload the table data after deletion
             } catch (SQLException e) {

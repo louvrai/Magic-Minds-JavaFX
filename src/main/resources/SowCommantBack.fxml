@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ShowCommantBackController">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SowCommantBackController">
     <children>
         <VBox prefHeight="612.0" prefWidth="226.0">
             <children>
@@ -129,28 +129,25 @@
                 </Pane>
                 <AnchorPane layoutX="25.0" layoutY="87.0" prefHeight="509.0" prefWidth="691.0" stylesheets="@DashbordDesign.css">
                     <children>
-                        <AnchorPane prefHeight="408.0" prefWidth="691.0" stylesheets="@DashbordDesign.css">
+                        <AnchorPane prefHeight="393.0" prefWidth="691.0" stylesheets="@DashbordDesign.css">
                             <styleClass>
                                 <String fx:value="white-bg" />
                                 <String fx:value="shadow" />
                             </styleClass>
                             <children>
-                                <TableView fx:id="commanttable" layoutX="14.0" layoutY="60.0" prefHeight="311.0" prefWidth="390.0">
+                                <TableView fx:id="commanttable" layoutX="22.0" layoutY="27.0" prefHeight="346.0" prefWidth="388.0">
                                     <columns>
                                         <TableColumn fx:id="nameuser" prefWidth="91.20001983642578" text="Name user" />
-                                        <TableColumn fx:id="usercommant" prefWidth="200.80007934570312" text="commant" />
-                                        <TableColumn fx:id="datecommant" prefWidth="95.99994506835935" text="date" />
+                                        <TableColumn fx:id="usercommant" prefWidth="191.2000732421875" text="commant" />
+                                        <TableColumn fx:id="datecommant" minWidth="4.00006103515625" prefWidth="103.19998168945312" text="date" />
                                     </columns>
                                 </TableView>
-                        <VBox alignment="TOP_CENTER" layoutX="418.0" layoutY="52.0" prefHeight="318.0" prefWidth="258.0" styleClass="productback" stylesheets="@style.css">
+                        <VBox alignment="TOP_CENTER" layoutX="420.0" layoutY="10.0" prefHeight="318.0" prefWidth="258.0" styleClass="productback" stylesheets="@style.css">
                            <children>
                               <ImageView fx:id="productimg" fitHeight="134.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/house.png" />
                                  </image>
-                                 <VBox.margin>
-                                    <Insets top="16.0" />
-                                 </VBox.margin>
                               </ImageView>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="169.0" spacing="49.0">
                                  <children>
@@ -210,19 +207,14 @@
                         </VBox>
                             </children>
                         </AnchorPane>
-                        <Button layoutX="232.0" layoutY="414.0" mnemonicParsing="false" onAction="#deletepro" prefHeight="51.0" prefWidth="85.0" styleClass="delete-btn" stylesheets="@DashbordDesign.css" text="Delete" />
-                        <Button layoutX="346.0" layoutY="414.0" mnemonicParsing="false" onAction="#clearspace" prefHeight="51.0" prefWidth="85.0" styleClass="clear-btn" stylesheets="@DashbordDesign.css" text="Clear" />
+                        <Button layoutX="232.0" layoutY="415.0" mnemonicParsing="false" onAction="#deletepro" prefHeight="51.0" prefWidth="85.0" styleClass="delete-btn" stylesheets="@DashbordDesign.css" text="Delete" />
+                        <Button layoutX="346.0" layoutY="415.0" mnemonicParsing="false" onAction="#clearspace" prefHeight="51.0" prefWidth="85.0" styleClass="clear-btn" stylesheets="@DashbordDesign.css" text="Clear" />
                     </children>
                     <styleClass>
                         <String fx:value="white-bg" />
                         <String fx:value="shadow" />
                     </styleClass>
                 </AnchorPane>
-            <Label layoutX="38.0" layoutY="26.0" prefHeight="42.0" prefWidth="248.0" text="Commant Mangment">
-               <font>
-                  <Font name="Century Gothic Bold" size="20.0" />
-               </font>
-            </Label>
             </children>
         </Pane>
     </children>

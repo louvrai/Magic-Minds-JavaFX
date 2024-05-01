@@ -11,9 +11,9 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="154.0" style="-fx-background-radius: 15;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Sampleprod2Controller">
    <children>
-      <ImageView fx:id="imageproduit" fitHeight="104.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageproduit" fitHeight="73.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
-            <Insets />
+            <Insets top="16.0" />
          </VBox.margin>
          <image>
             <Image url="@images/store.png" />
@@ -36,7 +36,10 @@
                   <Font name="Berlin Sans FB" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="viewbtn" mnemonicParsing="false" onAction="#viewdetails" text="view" />
+            <Button fx:id="viewbtn" mnemonicParsing="false" onAction="#viewdetails" styleClass="fron_btn" stylesheets="@style.css" text="view" textFill="#fffafa">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font></Button>
             <ImageView fitHeight="55.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/stars.png" />

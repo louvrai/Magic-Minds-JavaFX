@@ -3,11 +3,9 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1027.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductDetailsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1027.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PanierController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1024.0" spacing="14.0" styleClass="white-background" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
@@ -47,7 +45,7 @@
                 </HBox>
                 <Pane prefHeight="65.0" prefWidth="272.0" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                     <children>
-                        <ImageView fitHeight="49.0" fitWidth="86.0" layoutX="231.0" layoutY="8.0" onMouseClicked="#gotocart" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="49.0" fitWidth="86.0" layoutX="231.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@images/empty-cart.png" />
                             </image>
@@ -120,7 +118,7 @@
                                 <Insets left="10.0" />
                             </VBox.margin>
                         </Label>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="231.0" spacing="15.0" stylesheets="@style.css">
+                        <HBox alignment="CENTER" onMouseClicked="#gotostore" prefHeight="50.0" prefWidth="231.0" spacing="15.0" stylesheets="@style.css">
                             <children>
                                 <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -277,161 +275,83 @@
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
-         <children>
-            <Pane prefHeight="664.0" prefWidth="775.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" layoutX="26.0" layoutY="53.0" prefHeight="433.0" prefWidth="300.0" styleClass="prduit_details" stylesheets="@style.css">
-                     <children>
-                        <HBox prefHeight="62.0" prefWidth="300.0">
-                           <children>
-                              <Label fx:id="proName" alignment="CENTER" prefHeight="86.0" prefWidth="185.0" text="ProductName" textFill="WHITE">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="proprice" alignment="CENTER" prefHeight="80.0" prefWidth="122.0" text="\$100" textFill="WHITE">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="22.0" />
-                                 </font>
-                              </Label>
-                           </children>
+            <children>
+                <Pane prefHeight="629.0" prefWidth="775.0">
+                    <children>
+                        <HBox layoutX="139.0" layoutY="151.0" prefHeight="364.0" prefWidth="499.0">
+                            <children>
+                                <ScrollPane prefHeight="455.0" prefWidth="504.0" styleClass="trasparent" stylesheets="@style.css">
+                                    <content>
+                                        <VBox fx:id="commantcontaint" prefHeight="362.0" prefWidth="496.0" styleClass="white-background" stylesheets="@style.css" />
+                                    </content>
+                                </ScrollPane>
+                            </children>
                         </HBox>
-                        <ImageView fx:id="proImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/house.png" />
-                           </image>
-                        </ImageView>
-                        <HBox prefHeight="74.0" prefWidth="287.0">
-                           <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="310.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="61.0" prefWidth="180.0" text="Description" textFill="WHITE">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="prodescription" alignment="CENTER" prefHeight="51.0" prefWidth="301.0" text="s;dvm;sdncsdncsdncoiscoscdinsdocisocdnosicnoni" textFill="WHITE">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
+                        <HBox layoutX="139.0" layoutY="100.0" prefHeight="51.0" prefWidth="497.0" spacing="10.0" styleClass="light-gray-background" stylesheets="@style.css">
+                            <children>
+                                <Label prefHeight="51.0" prefWidth="115.0" text="image" textFill="WHITE">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label prefHeight="55.0" prefWidth="78.0" text="name" textFill="WHITE">
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label prefHeight="51.0" prefWidth="63.0" text="price" textFill="WHITE">
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label prefHeight="66.0" prefWidth="90.0" text="qt" textFill="WHITE">
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                </Label>
+                        <Label layoutX="299.0" layoutY="10.0" prefHeight="51.0" prefWidth="80.0" text="tt" textFill="WHITE">
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                                <Label layoutX="252.0" layoutY="10.0" prefHeight="51.0" prefWidth="70.0" text="Action" textFill="WHITE">
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="82.0" prefWidth="300.0">
-                           <children>
-                              <Label prefHeight="57.0" prefWidth="126.0" text="Quantity" textFill="WHITE">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="26.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox prefWidth="150.0" promptText="1" />
-                           </children>
-                        </HBox>
-                        <Button mnemonicParsing="false" onAction="#addtocart" prefHeight="42.0" prefWidth="275.0" styleClass="add_btn" stylesheets="@style.css" text="Add to Cart">
-                           <font>
-                              <Font name="Berlin Sans FB" size="21.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <HBox layoutX="341.0" layoutY="99.0" prefHeight="389.0" prefWidth="409.0">
-                     <children>
-                        <ScrollPane prefHeight="443.0" prefWidth="409.0" styleClass="trasparent" stylesheets="@style.css">
-                           <content>
-                              <VBox fx:id="commantcontaint" prefHeight="386.0" prefWidth="407.0" styleClass="white-background" stylesheets="@style.css">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="407.0">
-                                       <children>
-                                          <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@images/man.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Label prefHeight="26.0" prefWidth="82.0" text="Name">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <padding>
-                                                <Insets left="6.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label layoutX="53.0" layoutY="27.0" prefHeight="37.0" prefWidth="118.0" text="Desacription" />
-                                          <Label layoutX="115.0" layoutY="14.0" prefHeight="30.0" prefWidth="62.0" text="date" />
-                                          <HBox alignment="CENTER" prefHeight="33.0" prefWidth="88.0" spacing="5.0">
-                                             <children>
-                                                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="80.0" style="-fx-background-color: #fef437; -fx-background-radius: 50;">
-                                                   <graphic>
-                                                      <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/remove.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
-                                                <Button layoutX="33.0" layoutY="18.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: #fef437; -fx-background-radius: 50;">
-                                                   <graphic>
-                                                      <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/updated.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="5.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="341.0" layoutY="53.0" prefHeight="51.0" prefWidth="408.0" spacing="10.0" styleClass="light-gray-background" stylesheets="@style.css">
-                     <children>
-                        <Label prefHeight="51.0" prefWidth="49.0" text="A" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="55.0" prefWidth="78.0" text="NameUser" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="51.0" prefWidth="119.0" text="Description" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="66.0" prefWidth="90.0" text="Date" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="252.0" layoutY="10.0" prefHeight="66.0" prefWidth="90.0" text="Action" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Button fx:id="sendcommant" layoutX="642.0" layoutY="526.0" mnemonicParsing="false" onAction="#addcommant" styleClass="fron_btn" stylesheets="@style.css" text="Add comment" textFill="WHITE">
+                  <Button layoutX="251.0" layoutY="527.0" mnemonicParsing="false" onAction="#toorder" prefHeight="42.0" prefWidth="275.0" styleClass="add_btn" stylesheets="@style.css" text="order">
                      <font>
-                        <Font name="Berlin Sans FB" size="14.0" />
-                     </font></Button>
-                  <TextArea fx:id="newcommant" layoutX="344.0" layoutY="509.0" prefHeight="58.0" prefWidth="249.0" />
-               </children>
-            </Pane>
-         </children>
+                        <Font name="Berlin Sans FB" size="21.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="36.0" layoutY="14.0" text="Cart">
+                     <font>
+                        <Font name="Berlin Sans FB" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="171.0" layoutY="14.0" prefHeight="36.0" prefWidth="118.0" text="Total">
+                     <font>
+                        <Font name="Berlin Sans FB" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="total" layoutX="339.0" layoutY="14.0" prefHeight="36.0" prefWidth="83.0" text="price" textFill="#26813d">
+                     <font>
+                        <Font name="Berlin Sans FB" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="247.0" layoutY="14.0" prefHeight="36.0" prefWidth="83.0" text="\$" textFill="#26813d">
+                     <font>
+                        <Font name="Berlin Sans FB" size="32.0" />
+                     </font>
+                  </Label>
+                    </children>
+                </Pane>
+            </children>
         </VBox>
     </center>
 </BorderPane>

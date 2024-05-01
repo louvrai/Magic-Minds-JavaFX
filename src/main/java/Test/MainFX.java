@@ -18,7 +18,7 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/AjouterProduit.fxml"));
        //FXMLLoader loader=new FXMLLoader(getClass().getResource("/Store.fxml"));
-       //FXMLLoader loader=new FXMLLoader(getClass().getResource("/ProductDetails.fxml"));
+      //FXMLLoader loader=new FXMLLoader(getClass().getResource("/Panier.fxml"));
         Parent root=loader.load();
         Scene scene =new Scene(root);
         primaryStage.setScene(scene);

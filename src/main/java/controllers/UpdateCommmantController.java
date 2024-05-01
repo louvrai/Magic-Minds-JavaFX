@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -24,6 +25,13 @@ public class UpdateCommmantController {
     private int productId;
     @FXML
     void updatecommant(ActionEvent event) throws SQLException {
+        if(updatecontaner.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setContentText("the comment field is Empty !!! ");
+            alert.showAndWait();
+            return;
+        }
         try {
             String newComment = updatecontaner.getText();
             for (Comment cm : cmd.afficherAll()) {

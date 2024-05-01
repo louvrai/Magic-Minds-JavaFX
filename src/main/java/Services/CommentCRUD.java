@@ -61,6 +61,17 @@ public class CommentCRUD implements CService<Comment>{
         }
     }
 
+    public void supprimerwithproduit(int idpr) throws SQLDataException {
+        String req="DELETE FROM commentaire WHERE idproduit_id=?";
+        try {
+            PreparedStatement ps=connection.prepareStatement(req);
+            ps.setInt(1,idpr);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void afficher(Comment comment) throws SQLDataException {
 

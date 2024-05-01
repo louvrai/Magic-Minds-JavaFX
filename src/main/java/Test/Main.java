@@ -1,10 +1,14 @@
 package Test;
 
+import Entities.Command;
 import Entities.Comment;
 import Entities.Produit;
+import Services.CartFileManager;
+import Services.CommandCRUD;
 import Services.CommentCRUD;
 import Services.ProduitCRUD;
 import Utils.MyDB;
+import com.sun.source.tree.NewArrayTree;
 
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -21,8 +25,15 @@ public class Main {
         ProduitCRUD mod=new ProduitCRUD();
        LocalDate currentDate = LocalDate.now();
 
-        Comment c=new Comment(1,32,3,"this my first comment",currentDate);
-        CommentCRUD go=new CommentCRUD();
-          go.ajouter(c);
+        //Comment c=new Comment(1,32,3,"this my first comment",currentDate);
+       // CommentCRUD go=new CommentCRUD();
+         // go.ajouter(c);
+        // Test adding products
+        CartFileManager.addProduct(101, 2);  // Add 2 units of product 101
+        CartFileManager.addProduct(102, 5);  // Add 5 units of product 102
+
+        // Display cart after adding products
+        System.out.println("Cart after additions:");
+
     }
 }

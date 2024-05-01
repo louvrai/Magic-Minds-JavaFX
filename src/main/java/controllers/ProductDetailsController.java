@@ -1,16 +1,22 @@
 package controllers;
 import Entities.Comment;
 import Entities.Produit;
+import Services.CartFileManager;
 import Services.CommentCRUD;
 import Services.ProduitCRUD;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 public class ProductDetailsController implements Initializable {
     private final ProduitCRUD ps=new ProduitCRUD();
@@ -44,6 +51,71 @@ public class ProductDetailsController implements Initializable {
     @FXML
     private Button sendcommant;
     private int curentproductid;
+
+    @FXML
+    void addtocart(ActionEvent event) {
+        CartFileManager.addProduct(curentproductid, 1); // Add the current product to the cart with quantity 1
+        showAlert("Product added to cart successfully!");
+    }
+    @FXML
+    void gotocart(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Panier.fxml"));
+            Parent cartRoot = loader.load();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the scene of the current stage to the cart view
+            Scene scene = new Scene(cartRoot);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the cart view.");
+            alert.showAndWait();
+        }
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    @FXML
+    void gotostore(MouseEvent event) {
+        try {
+            // Load the FXML file for the store view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Store.fxml"));
+            Parent storeRoot = loader.load();
+
+            // Get the current stage (window) using the event source
+            Stage stage;
+            if (event.getSource() instanceof Node) {
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            } else {
+                // Alternatively, if not triggered by a Node, use a default method to get the Stage
+                stage = new Stage(); // This line should be adjusted according to your context
+            }
+
+            // Set the store scene in the current stage
+            Scene scene = new Scene(storeRoot);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exceptions possibly thrown by the FXML loading
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the store view.");
+            alert.showAndWait();
+        }
+    }
     @FXML
     void addcommant(ActionEvent event) {
         // Retrieve the comment text from the TextArea
@@ -66,6 +138,12 @@ public class ProductDetailsController implements Initializable {
                 System.out.println("Error adding comment: " + e.getMessage());
                 e.printStackTrace();
             }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setContentText("the comment section is empty !!!");
+            alert.showAndWait();
         }
     }
     public void receiveData(int productId) {

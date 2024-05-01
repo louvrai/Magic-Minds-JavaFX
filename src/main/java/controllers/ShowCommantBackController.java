@@ -5,11 +5,10 @@ import Services.CommentCRUD;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -61,8 +60,36 @@ public class ShowCommantBackController {
 
     @FXML
     private TableColumn<Comment,String> usercommant;
+
+    @FXML
+    private Label productdesc;
+
+    @FXML
+    private ImageView productimg;
+
+    @FXML
+    private Label productname;
+
+    @FXML
+    private Label productprice;
+
+    @FXML
+    private Label productquantity;
+
     public void initData(Produit product) {
         loadComments(product.getId());
+         productname.setText(product.getNom());
+         productprice.setText(Double.toString(product.getPrix()));
+         productquantity.setText(Integer.toString(product.getQuantity()));
+         productdesc.setText(product.getDescription());
+        try {
+            Image image = new Image(product.getImg1(), true); // Load the image, true to load in background
+            productimg.setImage(image);
+        } catch (Exception e) {
+            System.out.println("Failed to load image: " + e.getMessage());
+            e.printStackTrace();
+
+        }
     }
 
     private void loadComments(int productId) {
@@ -88,7 +115,17 @@ public class ShowCommantBackController {
 
     @FXML
     void deletepro(ActionEvent event) {
-
+        Comment selectedComment = commanttable.getSelectionModel().getSelectedItem();
+        if (selectedComment != null) {
+            try {
+                CommentCRUD commentCRUD = new CommentCRUD();
+                commentCRUD.supprimer(selectedComment);
+                // Remove the selected comment from the table
+                commanttable.getItems().remove(selectedComment);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
