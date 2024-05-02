@@ -78,7 +78,7 @@ public class ServiceParticipation implements IService<Participation> {
         }
     }
     @Override
-    public void update(Participation participation) {
+    public void update(int id ,Participation participation) {
         // Laissez le corps de cette méthode vide ou lancez une UnsupportedOperationException
         // si vous ne souhaitez pas permettre l'update
     }

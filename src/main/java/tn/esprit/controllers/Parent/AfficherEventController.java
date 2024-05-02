@@ -7,21 +7,63 @@ import tn.esprit.models.Evenement;
 import tn.esprit.services.ServiceEvenement;
 import java.util.List;
 import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 
 public class AfficherEventController {
 
     @FXML
     private VBox eventContainer;
+    @FXML
+    private ChoiceBox<String> categoryChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> locationChoiceBox;
+
 
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
+    private List<Evenement> evenements; // Déclarer la variable evenements
 
     @FXML
     void initialize() {
         loadEvents();
+        // Charger les choix pour la catégorie et la localisation
+        loadCategoryChoices();
+        loadLocationChoices();
+
+        // Ajouter des écouteurs de changement pour les ChoiceBox
+        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenements());
+        locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenements());
+    }
+    private void loadCategoryChoices() {
+        List<String> categories = serviceEvenement.getAllCategories();
+        categoryChoiceBox.getItems().addAll(categories);
     }
 
+    private void loadLocationChoices() {
+        List<String> locations = serviceEvenement.getAllLocations();
+        locationChoiceBox.getItems().addAll(locations);
+    }
+
+    private void filtrerEvenements() {
+        String selectedCategory = categoryChoiceBox.getValue();
+        String selectedLocation = locationChoiceBox.getValue();
+        List<Evenement> evenementsFiltres = serviceEvenement.filtrerParCategorieEtLocalisation(evenements, selectedCategory, selectedLocation);
+        afficherEvenements(evenementsFiltres);
+    }
+
+    private void afficherEvenements(List<Evenement> evenements) {
+        eventContainer.getChildren().clear();
+
+        for (Evenement evenement : evenements) {
+            VBox card = createEventCard(evenement);
+            eventContainer.getChildren().add(card);
+        }
+    }
     public void loadEvents() {
-        List<Evenement> evenements = serviceEvenement.getAll();
+        evenements = serviceEvenement.getAll();
         eventContainer.getChildren().clear();
 
         for (Evenement evenement : evenements) {

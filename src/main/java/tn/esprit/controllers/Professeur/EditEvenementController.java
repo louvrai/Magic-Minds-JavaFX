@@ -2,21 +2,21 @@ package tn.esprit.controllers.Professeur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import tn.esprit.models.Evenement;
-import tn.esprit.services.ServiceEvenement;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tn.esprit.models.Evenement;
+import tn.esprit.services.ServiceEvenement;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 
 
 public class EditEvenementController {
@@ -67,15 +67,16 @@ public class EditEvenementController {
         }
     }
 
+
     @FXML
     void modifierEvenement(ActionEvent event) {
-        // Vérifier si les champs de nom, description, localisation et catégorie contiennent uniquement des caractères alphabétiques et des espaces
+
         if (!isValidString(tfNom.getText()) || !isValidString(tfDescription.getText()) || !isValidString(tfLocalisation.getText()) || !isValidString(tfCategorie.getText())) {
             showAlert("Les champs nom, description, localisation et catégorie doivent contenir uniquement des caractères alphabétiques et des espaces.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Vérifier si la date de début est postérieure à la date actuelle
+
         LocalDate dateDebut;
         try {
             dateDebut = parseDate(tfDateDebut.getText());
@@ -88,7 +89,7 @@ public class EditEvenementController {
             return;
         }
 
-        // Vérifier si la date de fin est postérieure à la date de début
+
         LocalDate dateFin;
         try {
             dateFin = parseDate(tfDateFin.getText());
@@ -101,7 +102,7 @@ public class EditEvenementController {
             return;
         }
 
-        // Vérifier si le nombre de participants est supérieur à 20
+
         try {
             int nbParticipants = Integer.parseInt(tfNbParticipant.getText());
             if (nbParticipants <= 20) {
@@ -113,7 +114,7 @@ public class EditEvenementController {
             return;
         }
 
-        // Si toutes les vérifications passent, créer l'objet Evenement et l'ajouter
+
         Evenement evenement = new Evenement();
         evenement.setNom(tfNom.getText());
         evenement.setDescription(tfDescription.getText());
@@ -122,14 +123,13 @@ public class EditEvenementController {
         evenement.setNb_participant(Integer.parseInt(tfNbParticipant.getText()));
         evenement.setDate_debut(Date.valueOf(dateDebut));
         evenement.setDate_fin(Date.valueOf(dateFin));
-        serviceEvenement.add(evenement);
+        serviceEvenement.update(evenementToEdit.getId(),evenement);
 
         System.out.println("Événement modifié avec succès !");
 
-            // Actualiser l'affichage des événements dans le contrôleur AfficherEvenementController
+
             afficherEvenementController.loadEvents();
 
-            // Redirection vers la vue AfficherEvenement.fxml après la modification
             redirectToEventDisplay(event);
         }
 
@@ -142,7 +142,7 @@ public class EditEvenementController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Fermer la fenêtre actuelle
+
             ((Stage) tfNom.getScene().getWindow()).close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,21 +159,20 @@ public class EditEvenementController {
         alert.showAndWait();
     }
 
-    // Méthode pour analyser la date avec un format flexible
+
     private LocalDate parseDate(String dateString) throws ParseException {
         // Modèle de format flexible
         String[] patterns = {"yyyy-MM-dd", "yyyy-M-dd", "yyyy-MM-d", "yyyy-M-d"};
 
-        // Essayer chaque modèle de format
         for (String pattern : patterns) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
                 return LocalDate.parse(dateString, formatter);
             } catch (DateTimeParseException e) {
-                // Ignorer et essayer le prochain modèle
+
             }
         }
-        // Si aucun modèle de format ne correspond
+
         throw new ParseException("Format de date invalide", 0);
     }
 }

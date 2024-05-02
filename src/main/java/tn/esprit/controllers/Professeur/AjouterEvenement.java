@@ -46,13 +46,13 @@ public class AjouterEvenement {
     }
     @FXML
     void ajouterEvenement(ActionEvent event) {
-        // Vérifier si les champs de nom, description, localisation et catégorie contiennent uniquement des caractères alphabétiques et des espaces
+
         if (!isValidString(tfNom.getText()) || !isValidString(tfDescription.getText()) || !isValidString(tfLocalisation.getText()) || !isValidString(tfCategorie.getText())) {
             showAlert("Les champs nom, description, localisation et catégorie doivent contenir uniquement des caractères alphabétiques et des espaces.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Vérifier si la date de début est postérieure à la date actuelle
+
         LocalDate dateDebut;
         try {
             dateDebut = parseDate(tfDateDebut.getText());
@@ -65,7 +65,7 @@ public class AjouterEvenement {
             return;
         }
 
-        // Vérifier si la date de fin est postérieure à la date de début
+
         LocalDate dateFin;
         try {
             dateFin = parseDate(tfDateFin.getText());
@@ -78,7 +78,7 @@ public class AjouterEvenement {
             return;
         }
 
-        // Vérifier si le nombre de participants est supérieur à 20
+
         try {
             int nbParticipants = Integer.parseInt(tfNbParticipant.getText());
             if (nbParticipants <= 20) {
@@ -90,7 +90,7 @@ public class AjouterEvenement {
             return;
         }
 
-        // Si toutes les vérifications passent, créer l'objet Evenement et l'ajouter
+
         Evenement evenement = new Evenement();
         evenement.setNom(tfNom.getText());
         evenement.setDescription(tfDescription.getText());
@@ -102,7 +102,7 @@ public class AjouterEvenement {
         serviceEvenement.add(evenement);
         System.out.println("Événement ajouté avec succès !");
 
-        // Redirection vers la vue AfficherEvenement.fxml après l'ajout
+
         redirectToEventDisplay(event);
     }
 
@@ -114,25 +114,24 @@ public class AjouterEvenement {
         alert.showAndWait();
     }
 
-    // Méthode pour analyser la date avec un format flexible
+
     private LocalDate parseDate(String dateString) throws ParseException {
         // Modèle de format flexible
         String[] patterns = {"yyyy-MM-dd", "yyyy-M-dd", "yyyy-MM-d", "yyyy-M-d"};
 
-        // Essayer chaque modèle de format
+
         for (String pattern : patterns) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
                 return LocalDate.parse(dateString, formatter);
             } catch (DateTimeParseException e) {
-                // Ignorer et essayer le prochain modèle
+
             }
         }
-        // Si aucun modèle de format ne correspond
+
         throw new ParseException("Format de date invalide", 0);
     }
 
-    // Méthode pour rediriger vers la vue AfficherEvenement.fxml
     private void redirectToEventDisplay(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenement.fxml"));
@@ -141,7 +140,7 @@ public class AjouterEvenement {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Fermer la fenêtre actuelle
+
             ((Stage) tfNom.getScene().getWindow()).close();
         } catch (IOException e) {
             e.printStackTrace();

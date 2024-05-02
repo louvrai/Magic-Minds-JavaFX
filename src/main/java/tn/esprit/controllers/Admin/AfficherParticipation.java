@@ -31,17 +31,17 @@ public class AfficherParticipation {
 
     @FXML
     void initialize() {
-        // Configuration des cellules des colonnes
+
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         heureColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
 
-        // Récupérer les participations depuis la base de données
+
         List<Participation> participations = serviceParticipation.getAll();
 
-        // Ajouter les participations à la TableView
+
         participationTable.getItems().addAll(participations);
 
-        // Ajout d'un bouton "Supprimer" dans chaque ligne de la TableView
+
         addButtonToTable();
     }
 
@@ -58,10 +58,8 @@ public class AfficherParticipation {
         TableColumn<Participation, Void> deleteColumn = new TableColumn<>("Supprimer");
         deleteColumn.setMinWidth(80);
 
-        // Création d'un bouton "Supprimer" pour chaque ligne
         deleteColumn.setCellFactory(param -> new ButtonCell());
 
-        // Définition de l'action à effectuer lors du clic sur le bouton "Supprimer"
         deleteColumn.setOnEditCommit(event -> {
             Participation participation = event.getRowValue();
             deleteParticipation(participation);
@@ -82,7 +80,6 @@ public class AfficherParticipation {
     }
 
 
-    // Classe interne pour gérer les cellules de bouton
     private class ButtonCell extends TableCell<Participation, Void> {
         private final Button deleteButton = new Button("Supprimer");
 

@@ -26,31 +26,32 @@ public class AfficherParticipation {
 
     public void loadParticipations() {
         List<Participation> participations = serviceParticipation.getAll();
-        participationContainer.getChildren().clear(); // Nettoyer les anciennes données
+        participationContainer.getChildren().clear();
 
         for (Participation participation : participations) {
-            // Créer une carte pour chaque participation
+
             VBox card = createParticipationCard(participation);
             participationContainer.getChildren().add(card);
         }
     }
 
     private VBox createParticipationCard(Participation participation) {
-        VBox card = new VBox(10); // Espacement vertical entre les éléments de la carte
+        VBox card = new VBox(10);
         card.getStyleClass().add("participation-card");
-        // Ajouter les détails de la participation à la carte
+
         Label dateLabel = new Label("Date: " + participation.getDate());
         Label heureLabel = new Label("Heure: " + participation.getHeure());
 
-        // Ajouter le bouton Supprimer
+
+
         Button deleteButton = new Button("Supprimer");
 
-        // Associer une action au bouton Supprimer
+
         deleteButton.setOnAction(event -> deleteParticipation(participation));
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(deleteButton);
-        // Ajouter les éléments à la carte
+
         card.getChildren().addAll(dateLabel, heureLabel, deleteButton);
 
         return card;
@@ -58,6 +59,6 @@ public class AfficherParticipation {
 
     private void deleteParticipation(Participation participation) {
         serviceParticipation.delete(participation);
-        loadParticipations(); // Rafraîchir la liste des participations après suppression
+        loadParticipations();
     }
 }

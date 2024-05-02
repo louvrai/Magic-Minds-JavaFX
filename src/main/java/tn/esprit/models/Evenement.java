@@ -1,7 +1,11 @@
 package tn.esprit.models;
 import java.util.Date;
+import java.util.ArrayList;
+
+import java.util.List;
 
 public class Evenement {
+
         private int id ,nb_participant ;
         private String nom ,description,localisation,categorie ;
        private Date date_debut, date_fin;
@@ -97,5 +101,14 @@ public class Evenement {
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
                 '}';
+    }
+    public static List<Evenement> rechercherParFiltrage(List<Evenement> evenements, String localisation, String categorie) {
+        List<Evenement> resultats = new ArrayList<>();
+        for (Evenement evenement : evenements) {
+            if (evenement.getLocalisation().equalsIgnoreCase(localisation) && evenement.getCategorie().equalsIgnoreCase(categorie)) {
+                resultats.add(evenement);
+            }
+        }
+        return resultats;
     }
 }

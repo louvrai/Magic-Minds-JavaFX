@@ -27,19 +27,19 @@ public class AfficherEvenementController {
 
     public void loadEvents() {
         List<Evenement> evenements = serviceEvenement.getAll();
-        eventContainer.getChildren().clear(); // Nettoyer les anciennes données
+        eventContainer.getChildren().clear();
 
         for (Evenement evenement : evenements) {
-            // Créer une carte pour chaque événement
+
             VBox card = createEventCard(evenement);
             eventContainer.getChildren().add(card);
         }
     }
 
     private VBox createEventCard(Evenement evenement) {
-        VBox card = new VBox(10); // Espacement vertical entre les éléments de la carte
+        VBox card = new VBox(20);
         card.getStyleClass().add("event-card");
-        // Ajouter les détails de l'événement à la carte
+
         Label nomLabel = new Label("Nom: " + evenement.getNom());
         nomLabel.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold; -fx-text-fill: #FE5D37;");
         Label descriptionLabel = new Label("Description: " + evenement.getDescription());
@@ -49,18 +49,18 @@ public class AfficherEvenementController {
         Label dateFinLabel = new Label("Date fin: " + evenement.getDate_fin());
         Label nbParticipantsLabel = new Label("Nb Participants: " + evenement.getNb_participant());
 
-        // Ajouter les boutons Supprimer et Modifier
+
         Button deleteButton = new Button("Supprimer");
         Button editButton = new Button("Modifier");
 
-        // Associer des actions aux boutons
+
         deleteButton.setOnAction(event -> deleteEvent(evenement));
         editButton.setOnAction(event -> openEditForm(evenement));
-// Créer une HBox pour placer les boutons devant les détails de l'événement
+
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(deleteButton, editButton);
-        // Ajouter les éléments à la carte
+
         card.getChildren().addAll(
                 nomLabel,
                 descriptionLabel,
@@ -72,7 +72,7 @@ public class AfficherEvenementController {
                 buttonBox
         );
 
-        // Centrer la carte
+
         card.setAlignment(Pos.CENTER);
 
         return card;
@@ -86,10 +86,10 @@ public class AfficherEvenementController {
             EditEvenementController editController = loader.getController();
             editController.setEvenementToEdit(evenement);
 
-            // Passer l'instance de AfficherEvenementController
+
             editController.setAfficherEvenementController(this);
 
-            // Afficher la fenêtre de modification sur la scène actuelle
+
             eventContainer.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class AfficherEvenementController {
 
     private void deleteEvent(Evenement evenement) {
         serviceEvenement.delete(evenement);
-        loadEvents(); // Rafraîchir la liste des événements après suppression
+        loadEvents();
     }
 }
 

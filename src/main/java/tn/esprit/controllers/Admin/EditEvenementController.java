@@ -2,21 +2,21 @@ package tn.esprit.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import tn.esprit.models.Evenement;
-import tn.esprit.services.ServiceEvenement;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tn.esprit.models.Evenement;
+import tn.esprit.services.ServiceEvenement;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 
 
 public class EditEvenementController {
@@ -73,7 +73,7 @@ public class EditEvenementController {
     @FXML
     void modifierEvenement(ActionEvent event) {
         if (evenementToEdit != null) {
-            // Vérifier si les champs de nom, description, localisation et catégorie contiennent uniquement des caractères alphabétiques et des espaces
+
             if (!isValidString(tfNom.getText()) || !isValidString(tfDescription.getText()) || !isValidString(tfLocalisation.getText()) || !isValidString(tfCategorie.getText())) {
                 showAlert("Les champs nom, description, localisation et catégorie doivent contenir uniquement des caractères alphabétiques et des espaces.", Alert.AlertType.ERROR);
                 return;
@@ -84,7 +84,7 @@ public class EditEvenementController {
             evenementToEdit.setLocalisation(tfLocalisation.getText());
             evenementToEdit.setCategorie(tfCategorie.getText());
 
-            // Vérifier si le nombre de participants est supérieur à 20
+
             try {
                 int nbParticipants = Integer.parseInt(tfNbParticipant.getText());
                 if (nbParticipants <= 20) {
@@ -97,39 +97,36 @@ public class EditEvenementController {
             }
 
 
-            // Convertir les dates de début et de fin en LocalDate
+
             try {
                 LocalDate dateDebut = parseDate(tfDateDebut.getText());
                 LocalDate dateFin = parseDate(tfDateFin.getText());
 
-                // Vérifier si la date de début est postérieure à la date actuelle
+
                 if (!dateDebut.isAfter(LocalDate.now())) {
                     showAlert("La date de début doit être postérieure à la date actuelle.", Alert.AlertType.ERROR);
                     return;
                 }
 
-                // Vérifier si la date de fin est postérieure à la date de début
+
                 if (!dateFin.isAfter(dateDebut)) {
                     showAlert("La date de fin doit être postérieure à la date de début.", Alert.AlertType.ERROR);
                     return;
                 }
 
-                // Affecter les dates converties à votre objet Evenement
+
                 evenementToEdit.setDate_debut(Date.valueOf(dateDebut));
                 evenementToEdit.setDate_fin(Date.valueOf(dateFin));
             } catch (ParseException e) {
                 showAlert("Format de date invalide", Alert.AlertType.ERROR);
-                return; // Arrêter ici si le format de date n'est pas valide
+                return;
             }
-
-            // Mettre à jour l'événement
-            serviceEvenement.update(evenementToEdit);
+            System.out.println(evenementToEdit.getId());
+            serviceEvenement.update(evenementToEdit.getId(), evenementToEdit);
             System.out.println("Événement modifié avec succès !");
 
-            // Actualiser l'affichage des événements dans le contrôleur AfficherEvenementController
             afficherEvenementController.loadEvents();
 
-            // Redirection vers la vue AfficherEvenement.fxml après la modification
             redirectToEventDisplay(event);
         }
     }
@@ -142,7 +139,7 @@ public class EditEvenementController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Fermer la fenêtre actuelle
+
             ((Stage) tfNom.getScene().getWindow()).close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,21 +154,20 @@ public class EditEvenementController {
         alert.showAndWait();
     }
 
-    // Méthode pour analyser la date avec un format flexible
+
     private LocalDate parseDate(String dateString) throws ParseException {
-        // Modèle de format flexible
+
         String[] patterns = {"yyyy-MM-dd", "yyyy-M-dd", "yyyy-MM-d", "yyyy-M-d"};
 
-        // Essayer chaque modèle de format
         for (String pattern : patterns) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
                 return LocalDate.parse(dateString, formatter);
             } catch (DateTimeParseException e) {
-                // Ignorer et essayer le prochain modèle
+
             }
         }
-        // Si aucun modèle de format ne correspond
+
         throw new ParseException("Format de date invalide", 0);
     }
 }
