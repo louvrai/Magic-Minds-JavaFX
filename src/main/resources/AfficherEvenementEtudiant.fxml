@@ -285,20 +285,21 @@
                             </rowConstraints>
                         </GridPane>
                     </content>
-                    <AnchorPane prefHeight="702.0"  prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #fff5f3;" >
+                    <AnchorPane prefHeight="702.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #fff5f3;">
                         <children>
-                            <ScrollPane >
+                            <ScrollPane>
                                 <content>
-
-
-
                                     <VBox fx:id="eventContainer" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #fff5f3;">
-                                        <!-- Contenu de votre VBox -->
+                                        <!-- Contenu de VBox -->
                                     </VBox>
                                 </content>
                             </ScrollPane>
+                            <!-- Bouton calendarButton -->
+                            <Button fx:id="calendarButton" text="Voir le calendrier" onAction="#voirCalendrier" style="-fx-background-color: #fe5d37;" />
                         </children>
                     </AnchorPane>
+
+
                 </ScrollPane>
             </children>
             <padding>

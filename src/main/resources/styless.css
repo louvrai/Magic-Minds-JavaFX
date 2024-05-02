@@ -1,6 +1,10 @@
-.gradient-background{
-    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #000000 , #416D19);
+.gradient-background {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, orange, white);
 }
+
+
+
+
 .line-color{
     -fx-background-color: #F6F5F5;
 }
@@ -95,14 +99,24 @@
 
 /* Définition de différentes couleurs de fond pour chaque événement */
 .event-color-1 {
-    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #ffffff , #416D19); /* Couleur de fond pour le premier événement */
-}
+
+
+            -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, orange, white);
+        }
+
+
+
+    /* Couleur de fond pour le premier événement */
+
 
 .event-color-2 {
-    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #416D19, #ffffff); /* Couleur de fond pour le deuxième événement */
-}
+
+        -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, orange, white);
+    }
+    /* Couleur de fond pour le deuxième événement */
+
 .default-color0.chart-bar {
-    -fx-bar-fill: green; /* Change the color to green */
+    -fx-bar-fill: orange; /* Change the color to green */
 }
 
 .axis {

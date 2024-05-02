@@ -25,6 +25,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class AfficherEventController {
@@ -34,20 +35,46 @@ public class AfficherEventController {
 
     @FXML
     private VBox eventContainer;
+
     @FXML
-    private VBox participationContainer;
+    private Button calendarButton;
+
 
     @FXML
     void initialize() {
-        participationContainer = new VBox();
+        loadCalendarButton();
         loadEvents();
+        calendarButton.setVisible(true); // Rendre le bouton visible après le chargement des événements
+    }
+    @FXML
+    private void voirCalendrier() {
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.info("Le bouton voirCalendrier() a été déclenché.");
+
+        redirectToFullCalendar();
+    }
+    private void loadCalendarButton() {
+        calendarButton.setOnAction(event -> redirectToFullCalendar());
+    }
+
+    private void redirectToFullCalendar() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FullCalendar.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) eventContainer.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadEvents() {
         List<Evenement> evenements = serviceEvenement.getAll();
         eventContainer.getChildren().clear();
 
-        int eventsPerRow = 3;
+        int eventsPerRow = 5;
         int rowCount = (int) Math.ceil((double) evenements.size() / eventsPerRow);
 
         for (int i = 0; i < rowCount; i++) {
