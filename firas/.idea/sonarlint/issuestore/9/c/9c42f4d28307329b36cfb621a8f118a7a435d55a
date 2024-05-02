@@ -1,0 +1,12 @@
+
+i	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ú›ú8å÷ˆİñ1
+k
+java:S1659 "ODeclare "descriptionevLabel" and all following declarations on a separate line.(×ßƒ%8û÷ˆİñ1
+d
+java:S1659!"GDeclare "likeButton" and all following declarations on a separate line.(Ğ’é8Í‘¥÷ñ1
+a
+java:S1659#"DDeclare "iduserF" and all following declarations on a separate line.(Ô¹¹º8û÷ˆİñ1
+{
+java:S1450'"^Remove the "responseService" field and declare it as a local variable in the relevant methods.(¼û²Ü8•å¹İñ1
+P
+java:S1068'"3Remove this unused "responseService" private field.(¼û²Ü8ãÔĞ÷ñ1

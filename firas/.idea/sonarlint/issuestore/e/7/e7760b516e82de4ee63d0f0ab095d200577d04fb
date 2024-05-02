@@ -1,0 +1,47 @@
+
+s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶öñıÿÿÿÿ8¸±òøñ1
+s	java:S117Ñ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹À™ôûÿÿÿÿ8ÍİŞÛñ1
+u
+java:S2095Ù"RUse try-with-resources or close this "BufferedOutputStream" in a "finally" clause.(¯Àèšüÿÿÿÿ8ŞŞÛñ1
+o
+java:S2095Ø"QUse try-with-resources or close this "BufferedInputStream" in a "finally" clause.(çöÉ¡8ŞŞÛñ1
+p
+java:S2095Ö"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(´¨£™øÿÿÿÿ8ŞŞÛñ1
+
+java:S4165q"bRemove this useless assignment; "test" already holds the assigned value along all execution paths.(ïÈÔ8‚ŞŞÛñ1
+a
+java:S2583Õ"CChange this condition so that it does not always evaluate to "true"(·è€8‚ŞŞÛñ1
+i	java:S116R"MRename this field "Ev" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Åõ8ƒŞŞÛñ1
+t	java:S116S"SRename this field "Pservice" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛÌ¿šûÿÿÿÿ8ƒŞŞÛñ1
+]	java:S125c"<This block of commented-out lines of code should be removed.(ïøÓÊùÿÿÿÿ8ˆŞŞÛñ1
+o	java:S100j"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë×Öùşÿÿÿÿ8ˆŞŞÛñ1
+P
+java:S1135³"2Complete the task associated to this TODO comment.(…ïœ†8ŞŞÛñ1
+X	java:S125¾"<This block of commented-out lines of code should be removed.(ƒÁÓ;8’ŞŞÛñ1
+M	java:S106À"+Replace this use of System.out by a logger.(ä¹Ç‡úÿÿÿÿ8’ŞŞÛñ1
+
+java:S1130‘"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(µ®µšüÿÿÿÿ8£ıõøñ1
+G
+java:S1172ª")Remove this unused method parameter "ev".(£Í‘î8 ŞŞÛñ1
+X	java:S125°"<This block of commented-out lines of code should be removed.(ÜõµB8 ŞŞÛñ1
+M	java:S106¹"+Replace this use of System.out by a logger.(ı™øøÿÿÿÿ8¡ŞŞÛñ1
+M	java:S106Ä"+Replace this use of System.out by a logger.(ı™øøÿÿÿÿ8¢ŞŞÛñ1
+›
+java:S1130É"xRemove the declaration of thrown exception 'java.io.FileNotFoundException' which is a subclass of 'java.io.IOException'.(ı“±şÿÿÿÿ8£ŞŞÛñ1
+A
+java:S2119Ê"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8¤ŞŞÛñ1
+H	java:S106Û"+Replace this use of System.out by a logger.(¤ğÕø8§ŞŞÛñ1
+Y	java:S125è"<This block of commented-out lines of code should be removed.(•ØüÖ8¨ŞŞÛñ1
+H	java:S106ï"+Replace this use of System.out by a logger.(ÇûÄá8¨ŞŞÛñ1
+S
+java:S1854ø"5Remove this useless assignment to local variable "b".(—Ä³’8©ŞŞÛñ1
+D
+java:S1481ø"&Remove this unused "b" local variable.(—Ä³’8©ŞŞÛñ1
+Y
+java:S1128"7Remove this unused import 'javafx.scene.canvas.Canvas'.(á­Š©üÿÿÿÿ8±ıõøñ1
+Z
+java:S1128"8Remove this unused import 'javafx.scene.control.Button'.(Ë Í‹øÿÿÿÿ8±ıõøñ1
+Y
+java:S1128"7Remove this unused import 'javafx.scene.control.Label'.(ö²­ÿÿÿÿÿ8±ıõøñ1
+K
+java:S1144ª"-Remove this unused private "repondre" method.(£Í‘î8«ŞŞÛñ1

@@ -1,0 +1,13 @@
+
+g	java:S116P"MRename this field "Ps" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö«å×úÿÿÿÿ
+b	java:S116T"MRename this field "Ev" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Åõ
+m	java:S116U"SRename this field "Pservice" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛÌ¿šûÿÿÿÿ
+V	java:S125c"<This block of commented-out lines of code should be removed.(ïøÓÊùÿÿÿÿ
+H
+java:S1135k"2Complete the task associated to this TODO comment.(…ïœ†
+P	java:S125x"<This block of commented-out lines of code should be removed.(ƒÁÓ;
+E	java:S106z"+Replace this use of System.out by a logger.(ä¹Ç‡úÿÿÿÿ
+I
+java:S1135¦"2Complete the task associated to this TODO comment.(…ïœ†
+Q	java:S125¯"<This block of commented-out lines of code should be removed.(ƒÁÓ;
+F	java:S106±"+Replace this use of System.out by a logger.(ä¹Ç‡úÿÿÿÿ
