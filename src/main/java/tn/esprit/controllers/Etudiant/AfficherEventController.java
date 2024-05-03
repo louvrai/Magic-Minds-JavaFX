@@ -18,7 +18,8 @@ import tn.esprit.models.Evenement;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
-
+import tn.esprit.services.ServiceUser;
+import tn.esprit.utils.Mail;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
@@ -29,6 +30,7 @@ import java.util.logging.Logger;
 
 
 public class AfficherEventController {
+    private final ServiceUser serviceUser = new ServiceUser();
 
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private final ServiceParticipation serviceParticipation = new ServiceParticipation();
@@ -157,17 +159,28 @@ public class AfficherEventController {
         Date dateParticipation = java.sql.Date.valueOf(now.toLocalDate()); // Convertir la LocalDate en Date
         Time heureParticipation = java.sql.Time.valueOf(now.toLocalTime()); // Convertir la LocalTime en Time
 
-
         Participation participation = new Participation();
         participation.setEvenementId(evenement.getId());
         participation.setId_user_id(id_user_id);
         participation.setDate(dateParticipation);
         participation.setHeure(heureParticipation);
 
+        System.out.println("Evenement ID: " + participation.getEvenementId());
 
         serviceParticipation.add(participation);
 
+        // Récupérer le nom de l'événement
+        String eventName = serviceEvenement.getEventNameById(participation.getEvenementId());
 
+        // Afficher les noms récupérés
+        System.out.println("Nom de l'événement : " + eventName);
+        try {
+            Mail.sendEmail( "hadididouaa65@gmail.com", "Bonjour Professeur,\nUne nouvelle participation a été enregistrée.\nCordialement,\n !! ");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        // Redirection vers une autre vue
         redirectTo("AfficherParticipationEtudiant.fxml");
     }
 

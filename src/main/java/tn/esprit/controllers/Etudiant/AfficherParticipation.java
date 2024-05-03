@@ -7,9 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tn.esprit.models.Participation;
+import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
+import tn.esprit.services.ServiceUser;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AfficherParticipation {
@@ -18,12 +19,14 @@ public class AfficherParticipation {
     private VBox participationContainer;
 
     private final ServiceParticipation serviceParticipation = new ServiceParticipation();
+    private final ServiceEvenement serviceEvenement = new ServiceEvenement();
+
+    private final ServiceUser serviceUser = new ServiceUser();
 
     @FXML
     void initialize() {
         loadParticipations();
     }
-
     public void loadParticipations() {
         List<Participation> participations = serviceParticipation.getAll();
         participationContainer.getChildren().clear();
@@ -56,9 +59,7 @@ public class AfficherParticipation {
 
         return card;
     }
-
     private void deleteParticipation(Participation participation) {
         serviceParticipation.delete(participation);
         loadParticipations();
-    }
-}
+    }}

@@ -151,4 +151,42 @@ public class ServiceEvenement implements IService<Evenement> {
     }
 
 
-}
+    public String getEventNameById(int eventId) {
+        String eventName = null;
+        String query = "SELECT nom FROM evenement WHERE id = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, eventId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    eventName = resultSet.getString("nom");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return eventName;
+    }
+    public Evenement getById(int eventId) {
+        Evenement evenement = null;
+        String query = "SELECT * FROM evenement WHERE id = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, eventId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    evenement = new Evenement();
+                    evenement.setId(resultSet.getInt("id"));
+                    evenement.setNb_participant(resultSet.getInt("nb_participant"));
+                    evenement.setNom(resultSet.getString("nom"));
+                    evenement.setDescription(resultSet.getString("description"));
+                    evenement.setLocalisation(resultSet.getString("localisation"));
+                    evenement.setCategorie(resultSet.getString("categorie"));
+                    evenement.setDate_debut(resultSet.getDate("date_debut"));
+                    evenement.setDate_fin(resultSet.getDate("date_fin"));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return evenement;
+    }}
+

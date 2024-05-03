@@ -56,6 +56,7 @@ public class ServiceParticipation implements IService<Participation> {
                 participation.setId(resultSet.getInt("id"));
                 participation.setDate(resultSet.getDate("date"));
                 participation.setHeure(resultSet.getTime("heure"));
+
                 participations.add(participation);
             }
         } catch (SQLException e) {
