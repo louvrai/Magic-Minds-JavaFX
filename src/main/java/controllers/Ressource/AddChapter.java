@@ -1,16 +1,20 @@
 package controllers.Ressource;
 
-import Entity.Categorie;
 import Entity.Cours;
 import Entity.Ressource;
+import Service.CategorieService;
 import Service.CoursService;
 import Service.RessourceService;
-import controllers.AlertClass;
+import controllers.Outil;
+import controllers.PreviewPDF;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -19,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,37 +64,37 @@ public class AddChapter implements Initializable {
     @FXML
     private Button uploadFile;
     File selectedFile = new File("C:\\");
-    File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadedPDF");
+    File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadedFile");
     File destinationFile = new File("C:\\");
     String url ="Please choose a file";
     Ressource ressource = new Ressource();
     Cours cours=new Cours();
     RessourceService ressourceService=new RessourceService();
-    AlertClass alertClass= new AlertClass();
+    Outil outil = new Outil();
     CoursService coursService=new CoursService();
-
-
+    CategorieService categorieService=new CategorieService();
 
     @FXML
     void addChap(MouseEvent event) throws SQLException {
-    if (isValid()){
-        try {
-            Files.copy(selectedFile.toPath(),destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        }catch (IOException e){
-            e.printStackTrace();
+        if (isValid()){
+            try {
+                Files.copy(selectedFile.toPath(),destinationFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            ressource.setTitre(addChapTiltle.getText());
+            ressource.setType(addChapType.getValue());
+            ressource.setUrl(url);
+            String courseName=addChapCour.getValue();
+            cours=coursService.getbyId(coursService.getCourstId(courseName));
+            ressource.setId_cours_id(cours.getId());
+            ressourceService.insert(ressource);
+            int id =cours.getCategorie_id();
+            categorieService.updateChap(id,outil.NbChap(id));
+            outil.showSAlert("Addition Success", "The chapter "+ressource.getTitre()+" was successfully added");
+            Stage stage = (Stage) uploadFile.getScene().getWindow();
+            stage.close();
         }
-        ressource.setTitre(addChapTiltle.getText());
-        ressource.setType(addChapType.getValue());
-        ressource.setUrl(url);
-        String courseName=addChapCour.getValue();
-        cours=coursService.getbyId(coursService.getCourstId(courseName));
-        ressource.setId_cours_id(cours.getId());
-        ressourceService.insert(ressource);
-        alertClass.showSAlert("Addition Success", "The category "+ressource.getTitre()+" was successfully added");
-        Stage stage = (Stage) uploadFile.getScene().getWindow();
-        stage.close();
-    }
-
     }
 
     @FXML
@@ -98,10 +103,6 @@ public class AddChapter implements Initializable {
         closestage.close();
     }
 
-    @FXML
-    void previewFile(MouseEvent event) {
-
-    }
 
     @FXML
     void uploadFile(ActionEvent event) {
@@ -125,6 +126,7 @@ public class AddChapter implements Initializable {
             url = UploadDirectory.getAbsolutePath().replace("\\", "/");
             url += "/" + selectedFile.getName();
             displayUrl.setText(url);
+
         }
 
     }
@@ -139,7 +141,6 @@ public class AddChapter implements Initializable {
 
     }
     public boolean isValid(){
-        try {
             ObservableList<Ressource> ressources = ressourceService.getAll();
             String title = addChapTiltle.getText();
             ECtitre.setText("");
@@ -152,9 +153,14 @@ public class AddChapter implements Initializable {
                 ECtitre.setText("The title is either too long or too short");
                 return false;
             }
-            for (Ressource cat : ressources) {
-                if (title.equals(cat.getTitre())) {
+            for (Ressource r : ressources) {
+                if (title.equals(r.getTitre())) {
                     ECtitre.setText("This title already exist");
+                    return false;
+                }
+                if (url.equals(r.getUrl())){
+                    displayUrl.setStyle("-fx-font-fill:red");
+                    displayUrl.setText("this chapter already exist");
                     return false;
                 }
             }
@@ -163,8 +169,5 @@ public class AddChapter implements Initializable {
                 return false;
             }
             return true ;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

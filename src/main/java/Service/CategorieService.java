@@ -5,7 +5,6 @@ import Entity.Cours;
 import Utili.MyDB;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.scene.image.Image;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -50,6 +49,30 @@ public class CategorieService implements CRUDInterface <Categorie> {
             System.out.println(e.getMessage());
         }
     }
+    public void updateCourse(int id, int nb) {
+
+        String sql = "UPDATE categorie SET nbr_cours= ? WHERE id = ?";
+        try {
+            PreparedStatement ste =connection.prepareStatement(sql);
+            ste.setInt(1,nb);
+            ste.setInt(2,id);
+            ste.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void updateChap(int id, int nb) {
+
+        String sql = "UPDATE categorie SET nbr_chapitre= ? WHERE id = ?";
+        try {
+            PreparedStatement ste =connection.prepareStatement(sql);
+            ste.setInt(1,nb);
+            ste.setInt(2,id);
+            ste.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     public void delete(int id) throws SQLException {
@@ -69,7 +92,7 @@ public class CategorieService implements CRUDInterface <Categorie> {
     }
 
     @Override
-    public ObservableList<Categorie> getAll() throws SQLException {
+    public ObservableList<Categorie> getAll()  {
         ObservableList<Categorie> categories = FXCollections.observableArrayList();
         String sql = "SELECT * FROM categorie";
         try {
@@ -81,6 +104,8 @@ public class CategorieService implements CRUDInterface <Categorie> {
                 c.setTitre(resultSet.getString("titre"));
                 c.setDescription(resultSet.getString("description"));
                 c.setImage(resultSet.getString("image"));
+                c.setNbr_cours(resultSet.getInt("nbr_cours"));
+                c.setNbr_chapitre(resultSet.getInt("nbr_chapitre"));
                 categories.add(c);
             } } catch (SQLException e) {
             System.out.println(e.getMessage());

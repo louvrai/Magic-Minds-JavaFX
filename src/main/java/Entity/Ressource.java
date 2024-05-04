@@ -1,9 +1,11 @@
 package Entity;
 
+import Service.CategorieService;
+
 public class Ressource {
     private int id, id_cours_id ;
-    private String titre , type , url ;
-
+    private String titre , type , url ,courseName;
+    CategorieService categorieService=new CategorieService();
 
     public Ressource(){
 
@@ -22,6 +24,11 @@ public class Ressource {
         this.titre = titre;
         this.type = type;
         this.url = url;
+    }
+
+    public String getCourseName(Ressource r) {
+        courseName=categorieService.getbyId(r.getId_cours_id()).getTitre();
+        return courseName;
     }
 
     public int getId() {

@@ -50,12 +50,9 @@ public class ShowCategory  implements Initializable {
 
         catTitleCol.setCellValueFactory(new PropertyValueFactory<>("titre"));
         catDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        try {
-            ObservableList<Categorie> categories =new CategorieService().getAll();
-            showCat.setItems(categories);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        ObservableList<Categorie> categories =new CategorieService().getAll();
+        showCat.setItems(categories);
+
     }
 }
 

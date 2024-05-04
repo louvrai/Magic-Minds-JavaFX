@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 public class MainFx extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("/GestionCours.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/Home_back.fxml"));
         Scene scene = new Scene(parent);
-        stage.setTitle("Courses");
+        stage.setTitle("Dashboard");
         stage.setScene(scene);
         stage.show();
     }

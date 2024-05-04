@@ -4,20 +4,16 @@ import Entity.Categorie;
 import Entity.Cours;
 import Service.CategorieService;
 import Service.CoursService;
-import controllers.AlertClass;
+import controllers.Outil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -56,7 +52,7 @@ public class UpdateCours implements Initializable {
     Categorie categorie = new Categorie();
     CategorieService categorieService=new CategorieService();
     ObservableList<Cours> courses = FXCollections.observableArrayList();
-    AlertClass alertClass =new AlertClass();
+    Outil outil =new Outil();
     @FXML
     void updateCours(MouseEvent event) {
         if (isValid()==true) {
@@ -68,23 +64,17 @@ public class UpdateCours implements Initializable {
             c.setNb_chapitre(upCChap.getValue());
             c.setStatus("Valid");
             String catName = upCCat.getValue();
-            if (catName!=null) {
-                cat = categorieService.getbyId(categorieService.getCatId(catName));
-                c.setCategorie_id(cat.getId());
-            }
-            else {
-                c.setCategorie_id(course.getCategorie_id());
-            }
-            System.out.println(c);
+            cat = categorieService.getbyId(categorieService.getCatId(catName));
+            c.setCategorie_id(cat.getId());
             coursService.update(course.getId(),c);
-            alertClass.showEAlert("Update Success", "The course "+c.getTitre()+" was successfully updated");
+            categorieService.updateCourse(cat.getId(),outil.NbCourse(cat.getId()));
+            outil.showSAlert("Update Success", "The course "+c.getTitre()+" was successfully updated");
             ECUPtitre.setText("");
             ECUPChap.setText("");
         }
 
     }
     public boolean isValid(){
-        try {
             String title = upCTiltle.getText();
             String descrip =upCDescrip.getText();
             int chap=upCChap.getValue();
@@ -124,9 +114,6 @@ public class UpdateCours implements Initializable {
                 return false;
             }
             return true ;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
     @FXML
     void upgoBack(MouseEvent event) {

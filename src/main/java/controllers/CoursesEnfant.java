@@ -42,7 +42,7 @@ public class CoursesEnfant implements Initializable {
         Containe.setSpacing(15);
         HBox hBox=new HBox();
         hBox.setSpacing(15);
-        try {
+
             ObservableList<Categorie> CatList = FXCollections.observableArrayList();
             CatList=categorieService.getAll();
             int i=0;
@@ -96,9 +96,7 @@ public class CoursesEnfant implements Initializable {
             if (!hBox.getChildren().isEmpty()){
                 Containe.getChildren().add(hBox);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

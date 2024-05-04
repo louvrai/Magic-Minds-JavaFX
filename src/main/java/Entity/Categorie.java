@@ -60,8 +60,16 @@ public class Categorie {
         return nbr_chapitre;
     }
 
+    public void setNbr_chapitre(int nbr_chapitre) {
+        this.nbr_chapitre = nbr_chapitre;
+    }
+
     public int getNbr_cours() {
         return nbr_cours;
+    }
+
+    public void setNbr_cours(int nbr_cours) {
+        this.nbr_cours = nbr_cours;
     }
 
     public List<Cours> getCoursList() {

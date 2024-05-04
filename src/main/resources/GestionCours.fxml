@@ -24,7 +24,7 @@
             <children>
                 <AnchorPane fx:id="side_bar" prefHeight="612.0" prefWidth="170.0" styleClass="side_bar" stylesheets="@style.css">
                     <children>
-                        <Pane fx:id="inner_pane" layoutX="13.0" layoutY="14.0" prefHeight="67.0" prefWidth="200.0" styleClass="inner_pane" stylesheets="@style.css">
+                        <Pane fx:id="dashboard" layoutX="13.0" layoutY="14.0" onMouseClicked="#GoToDashboard" prefHeight="67.0" prefWidth="200.0" styleClass="inner_pane" stylesheets="@style.css">
                             <children>
                                 <ImageView fitHeight="81.0" fitWidth="79.0" layoutX="-2.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -111,12 +111,12 @@
             <children>
                 <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="739.0">
                     <children>
-                        <TextField fx:id="txt_search" layoutX="439.0" layoutY="14.0" promptText="Seach:" stylesheets="@style.css">
+                        <TextField fx:id="txt_search" layoutX="439.0" layoutY="14.0" onAction="#txtsearch" promptText="Seach:" styleClass="text-field" stylesheets="@style.css">
                             <font>
-                                <Font name="Century Gothic" size="13.0" />
+                                <Font name="Arial Rounded MT Bold" size="14.0" />
                             </font>
                         </TextField>
-                        <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="395.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="395.0" layoutY="9.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@images/search.png" />
                             </image>
@@ -135,7 +135,7 @@
                         <String fx:value="shadow" />
                     </styleClass>
                <children>
-                  <TabPane prefHeight="509.0" prefWidth="691.0" stylesheets="@DashbordDesign.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="tabpane" prefHeight="509.0" prefWidth="691.0" stylesheets="@DashbordDesign.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Categories">
                         <content>
@@ -237,12 +237,17 @@
                                           </VBox>
                                        </children>
                                     </Pane>
-                                    <Button fx:id="addCat" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAdd" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Category">
+                                    <Button fx:id="addCat" layoutX="527.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAdd" prefHeight="34.0" prefWidth="150.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Category">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="refresh_btn" layoutX="438.0" layoutY="11.0" mnemonicParsing="false" onAction="#refreshTab" prefHeight="34.0" prefWidth="34.0" styleClass="btn_home" stylesheets="@style.css" />
+                                    <Button fx:id="refresh_btn" layoutX="329.0" layoutY="11.0" mnemonicParsing="false" onAction="#refreshTab" prefHeight="34.0" prefWidth="34.0" styleClass="btn_home" stylesheets="@style.css" />
+                                    <Button fx:id="downPDF" layoutX="371.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#DownloadPDF" prefHeight="34.0" prefWidth="150.0" styleClass="btn_home" stylesheets="@style.css" text="download PDF">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
                                  </children></AnchorPane>
                         </content>
                       </Tab>
@@ -368,10 +373,10 @@
                                  <children>
                                     <TableView fx:id="showChap" layoutX="14.0" layoutY="51.0" prefHeight="416.0" prefWidth="663.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0">
                                        <columns>
-                                          <TableColumn fx:id="chapTitleCol" prefWidth="205.0" text="Title" />
-                                          <TableColumn fx:id="chapFile" prefWidth="262.0" text="File" />
-                                          <TableColumn fx:id="chapType" minWidth="0.0" prefWidth="91.0" text="Type" />
-                                          <TableColumn fx:id="ChapAction" prefWidth="104.0" text="Actions" />
+                                          <TableColumn fx:id="chapTitleCol" prefWidth="139.0" text="Title" />
+                                          <TableColumn fx:id="chapFile" prefWidth="307.0" text="File" />
+                                          <TableColumn fx:id="chapType" minWidth="0.0" prefWidth="92.0" text="Type" />
+                                          <TableColumn fx:id="ChapAction" prefWidth="124.0" text="Actions" />
                                        </columns>
                                     </TableView>
                                     <Button fx:id="addChap" layoutX="493.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#OpenAddChap" prefHeight="34.0" prefWidth="181.0" styleClass="btn_home" stylesheets="@style.css" text="Add new Chapter">

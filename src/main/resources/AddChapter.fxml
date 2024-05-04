@@ -100,11 +100,6 @@
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="preview" layoutX="325.0" layoutY="342.0" mnemonicParsing="false" onMouseClicked="#previewFile" prefHeight="35.0" prefWidth="78.0" styleClass="btn_home" stylesheets="@style.css" text="Preview">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="13.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
    </children>

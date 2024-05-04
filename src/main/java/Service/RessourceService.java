@@ -47,15 +47,15 @@ public class RessourceService implements CRUDInterface<Ressource> {
 
     @Override
     public void delete(int id) throws SQLException {
-        PreparedStatement ste = null ;
         String sql ="DELETE FROM ressource WHERE id = ?";
-        ste= connection.prepareStatement(sql);
+        PreparedStatement ste = connection.prepareStatement(sql);
         ste.setInt(1,id);
         ste.executeUpdate();
+
     }
 
     @Override
-    public ObservableList<Ressource> getAll() throws SQLException {
+    public ObservableList<Ressource> getAll() {
         ObservableList<Ressource> chapters = FXCollections.observableArrayList();
         String sql = "SELECT * FROM ressource";
         try {
@@ -76,13 +76,13 @@ public class RessourceService implements CRUDInterface<Ressource> {
     }
     public List<Ressource> getChaptersByCat(int coursId) {
         String sql = "SELECT * FROM ressource WHERE id_cours_id = ?";
-        Ressource r = new Ressource();
         List<Ressource> chaptersByCat = new ArrayList<>();
         try {
             PreparedStatement ste = connection.prepareStatement(sql);
             ste.setInt(1, coursId);
             ResultSet resultSet = ste.executeQuery();
             while (resultSet.next()) {
+                Ressource r = new Ressource();
                 r.setId(resultSet.getInt("id"));
                 r.setTitre(resultSet.getString("titre"));
                 r.setType(resultSet.getString("type"));

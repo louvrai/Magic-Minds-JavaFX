@@ -2,7 +2,7 @@ package controllers.Categorie;
 
 import Entity.Categorie;
 import Service.CategorieService;
-import controllers.AlertClass;
+import controllers.Outil;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 
@@ -38,6 +40,7 @@ public class UpdateCategory {
     @FXML
     private Label EimageUP;
 
+
     @FXML
     private Button updatecat;
 
@@ -48,13 +51,14 @@ public class UpdateCategory {
     private Button backCat;
 
     String url="Please choose an image" ;
-    String same_url ;
+    String previousUrl ;
+
     File selectedFile = new File("C:\\");
     File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadImage");
     File destinationFile = new File("C:\\");
     CategorieService categorieService =new CategorieService();
     Categorie categorie;
-    AlertClass alertClass=new AlertClass();
+    Outil outil =new Outil();
 
     public void fetchData(Categorie cat) {
         categorie=cat ;
@@ -62,7 +66,8 @@ public class UpdateCategory {
         updateCatTitle.setText(cat.getTitre());
         Image img=new Image("file:/"+cat.getImage());
         updateCatImg.setImage(img);
-        same_url=cat.getImage();
+        url=cat.getImage();
+        previousUrl=cat.getImage();
 
     }
 
@@ -96,22 +101,26 @@ public class UpdateCategory {
             }
             cat.setTitre(updateCatTitle.getText());
             cat.setDescription(updateCatDescrip.getText());
-            if (!url.equals("Please choose an image")){
-                cat.setImage(url);
+            cat.setImage(url);
+            if (!url.equals(previousUrl)){
+                Path ImgToDelete = Paths.get(previousUrl);
+                try {
+                    Files.delete(ImgToDelete);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
-            cat.setImage(categorie.getImage());
             categorieService.update(categorie.getId(),cat);
-            alertClass.showSAlert("Update Success", "The category "+cat.getTitre()+" was successfully updated");
+            outil.showSAlert("Update Success", "The category "+cat.getTitre()+" was successfully updated");
             Stage stage = (Stage) updateupload.getScene().getWindow();
             stage.close();
         }
     }
     public boolean isValid(){
-        try {
+
             ObservableList<Categorie> categories = categorieService.getAll();
             String title = updateCatTitle.getText();
             String descrip = updateCatDescrip.getText();
-            System.out.println(same_url);
             ECattitreUP.setText("");
             ECDescUP.setText("");
             if (title == null || title.isEmpty()) {
@@ -136,10 +145,14 @@ public class UpdateCategory {
                 ECDescUP.setText("The description is either too long or too short");
                 return false;
             }
+            for (Categorie c : categories){
+                if (url.equals(c.getImage()) && !url.equals(categorie.getImage())){
+                    EimageUP.setText("This image already exist");
+                    return false;
+                }
+            }
             return true ;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
     @FXML
     void goBack(MouseEvent event) {

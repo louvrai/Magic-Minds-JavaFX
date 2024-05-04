@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterProduitContoller">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Admin.Home_back">
    <children>
       <VBox prefHeight="612.0" prefWidth="226.0">
          <children>
@@ -32,7 +34,7 @@
                         </Text>
                      </children>
                   </Pane>
-                  <Button fx:id="btn_user" layoutX="13.0" layoutY="110.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="users">
+                  <Button fx:id="btn_user" layoutX="13.0" layoutY="110.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Users">
                      <font>
                         <Font name="Century Gothic Bold" size="18.0" />
                      </font>
@@ -42,7 +44,7 @@
                         <Image url="@images/user.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btn_store" layoutX="14.0" layoutY="165.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="store">
+                  <Button fx:id="btn_store" layoutX="14.0" layoutY="165.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Store">
                      <font>
                         <Font name="Century Gothic Bold" size="18.0" />
                      </font>
@@ -52,7 +54,7 @@
                         <Image url="@images/store.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btn_corses" layoutX="14.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Corses">
+                  <Button fx:id="btn_corses" layoutX="14.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#goToCourses" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Courses">
                      <font>
                         <Font name="Century Gothic Bold" size="18.0" />
                      </font>
@@ -105,16 +107,6 @@
          <children>
             <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="739.0">
                <children>
-                  <TextField fx:id="txt_search" layoutX="439.0" layoutY="14.0" promptText="Seach:" stylesheets="@style.css">
-                     <font>
-                        <Font name="Century Gothic" size="13.0" />
-                     </font>
-                  </TextField>
-                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="395.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/search.png" />
-                     </image>
-                  </ImageView>
                   <Button alignment="CENTER" contentDisplay="TOP" layoutX="652.0" layoutY="5.0" mnemonicParsing="false" opacity="0.3" prefHeight="49.0" prefWidth="61.0" />
                   <ImageView fitHeight="51.0" fitWidth="49.0" layoutX="657.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,6 +120,39 @@
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
                </styleClass>
+               <children>
+                  <HBox prefHeight="93.0" prefWidth="690.0" spacing="10.0">
+                     <children>
+                        <Pane prefHeight="156.0" prefWidth="220.0" style="-fx-border-radius: 10; -fx-border-color: #272B3FFF;" stylesheets="@DashbordDesign.css">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <ImageView fx:id="CStatImg" fitHeight="60.0" fitWidth="61.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/online-course.png" />
+                                 </image></ImageView>
+                              <Label fx:id="NumC" layoutX="86.0" layoutY="10.0" prefHeight="27.0" prefWidth="85.0" textFill="#328097">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="86.0" layoutY="40.0" prefHeight="5.0" prefWidth="85.0" style="-fx-background-color: #F3F35BFF; -fx-border-color: #F3F35BFF;" />
+                              <Label layoutX="86.0" layoutY="48.0" prefHeight="17.0" prefWidth="67.0" text="Courses">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="155.0" prefWidth="220.0" style="-fx-border-color: #272B3FFF; -fx-border-radius: 10;" stylesheets="@DashbordDesign.css" />
+                        <Pane prefHeight="156.0" prefWidth="220.0" style="-fx-border-color: #272B3FFF; -fx-border-radius: 10;" stylesheets="@DashbordDesign.css" />
+                     </children>
+                     <padding>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </padding>
+                  </HBox>
+               </children>
             </AnchorPane>
          </children>
       </Pane>

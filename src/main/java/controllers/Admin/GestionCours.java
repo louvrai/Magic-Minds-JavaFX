@@ -3,10 +3,15 @@ package controllers.Admin;
 import Entity.*;
 import Service.*;
 import controllers.Cours.UpdateCours;
+import controllers.GeneratePDF;
+import controllers.Outil;
+import controllers.PreviewFile;
+import controllers.PreviewPDF;
 import controllers.Ressource.UpdateChapter;
 import controllers.Categorie.UpdateCategory;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,20 +25,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class GestionCours implements Initializable {
-    //------------------------
+    //------------------------All -------------------------------------------------------------------
     @FXML
     private HBox afficherCategrie;
+    @FXML
+    private TabPane tabpane;
+    @FXML
+    private Pane dashboard;
+
     @FXML
     private Button btn_corses;
     @FXML
@@ -48,6 +63,108 @@ public class GestionCours implements Initializable {
     private Button btn_user;
     @FXML
     private TextField txt_search;
+    Outil outil= new Outil();
+    String tabName="Categories";
+    @FXML
+    void GoToDashboard(MouseEvent event) {
+        try {
+            Parent addChapPageRoot = FXMLLoader.load(getClass().getResource("/Home_back.fxml"));
+            Stage stage = (Stage) btn_corses.getScene().getWindow();
+            Scene newPageScene = new Scene(addChapPageRoot,956,612);
+            stage.setScene(newPageScene);
+            stage.setTitle("Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void searchCat(String Svalue){
+            ObservableList<Categorie> categories =new CategorieService().getAll();
+            if (Svalue.isEmpty()) {
+                showCat.setItems(FXCollections.observableArrayList(categories));
+            } else {
+                ObservableList<Categorie> matchingCat = FXCollections.observableArrayList();
+                for (Categorie category : categories) {
+                    if (category.getTitre().toLowerCase().contains(Svalue)) {
+                        matchingCat.add(category) ;
+                    } else if (String.valueOf(category.getNbr_cours()).toLowerCase().contains(Svalue)) {
+                        matchingCat.add(category);
+                    }
+                }
+                showCat.setItems(matchingCat);
+            }
+    }
+    public void searchC(String Svalue){
+        ObservableList<Cours> courses =new CoursService().getAll();
+        if (Svalue.isEmpty()) {
+            showCours.setItems(FXCollections.observableArrayList(courses));
+        } else {
+            ObservableList<Cours> matchingCat = FXCollections.observableArrayList();
+            for (Cours cours: courses) {
+                Categorie cat =categorieService.getbyId(cours.getCategorie_id());
+                String catName = cat.getTitre();
+                if (cours.getTitre().toLowerCase().contains(Svalue)) {
+                    matchingCat.add(cours);
+                } else if (cours.getStatus().toLowerCase().equals(Svalue)) {
+                    matchingCat.add(cours);
+                } else if (String.valueOf(cours.getNb_chapitre()).toLowerCase().contains(Svalue)) {
+                    matchingCat.add(cours);
+                } else if (String.valueOf(cours.getDuree()).toLowerCase().contains(Svalue)) {
+                    matchingCat.add(cours);
+                }else if (catName.toLowerCase().contains(Svalue)){
+                    matchingCat.add(cours);
+                }
+            }
+            showCours.setItems(matchingCat);
+            }
+    }
+    public void searchChap(String Svalue){
+        ObservableList<Ressource> ressources =new RessourceService().getAll();
+        if (Svalue.isEmpty()) {
+            showChap.setItems(ressources);
+        } else {
+            ObservableList<Ressource> matchingChap = FXCollections.observableArrayList();
+            for (Ressource r: ressources) {
+                Cours c =coursService.getbyId(r.getId_cours_id());
+                String cName = c.getTitre();
+                if (r.getTitre().toLowerCase().contains(Svalue)) {
+                    matchingChap.add(r);
+                } else if (r.getType().toLowerCase().contains(Svalue)) {
+                    matchingChap.add(r);
+
+                }else if (cName.toLowerCase().contains(Svalue)){
+                    matchingChap.add(r);
+                }
+            }
+            showChap.setItems(matchingChap);
+        }
+    }
+    @FXML
+    void search(MouseEvent event) {
+        txt_search.setStyle("-fx-text-fill: white;");
+        String Svalue=txt_search.getText().toLowerCase();
+        if (tabName.equals("Categories")){
+            searchCat(Svalue);
+        }else if (tabName.equals("Courses")){
+            searchC(Svalue);
+        } else if (tabName.equals("Chapters")) {
+            searchChap(Svalue);
+        }
+
+    }
+    @FXML
+    void txtsearch(ActionEvent event) {
+        txt_search.setStyle("-fx-text-fill: white;");
+        String Svalue=txt_search.getText().toLowerCase();
+        if (tabName.equals("Categories")){
+            searchCat(Svalue);
+        }else if (tabName.equals("Courses")){
+            searchC(Svalue);
+        } else if (tabName.equals("Chapters")) {
+            searchChap(Svalue);
+        }
+    }
     //---------------------------
 //***********************************************Categorie*********************************************
     @FXML
@@ -62,6 +179,7 @@ public class GestionCours implements Initializable {
     private Label Ddescrip;
     @FXML
     private Label Dtitle;
+
     @FXML
     private TableColumn<Categorie, String> catDescCol;
     @FXML
@@ -69,8 +187,23 @@ public class GestionCours implements Initializable {
     @FXML
     private Button refresh_btn;
     @FXML
+    private Button downPDF;
+    @FXML
     private TableView<Categorie> showCat;
     CategorieService categorieService =new CategorieService();
+    GeneratePDF generatePDF=new GeneratePDF();
+    @FXML
+    void DownloadPDF(MouseEvent event) {
+        DirectoryChooser directoryChooser=new DirectoryChooser();
+        directoryChooser.setTitle("Choose Directory");
+        File selectedDirectory = directoryChooser.showDialog(downPDF.getScene().getWindow());
+        if (selectedDirectory != null) {
+            generatePDF.pdf(selectedDirectory.getAbsolutePath());
+            System.out.println(selectedDirectory.getAbsolutePath());
+            outil.showSAlert("Download Complete", "Your file has been downloaded in the following directory\n "+ selectedDirectory.getAbsolutePath());
+        }
+
+    }
 
     @FXML
     void refreshTab(ActionEvent event) {
@@ -95,13 +228,9 @@ public class GestionCours implements Initializable {
         Categorie defaultItem = new Categorie();
         catTitleCol.setCellValueFactory(new PropertyValueFactory<>("titre"));
         catDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        try {
-            ObservableList<Categorie> categories =new CategorieService().getAll();
-            showCat.setItems(categories);
-            defaultItem = categories.get(0) ;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        ObservableList<Categorie> categories =new CategorieService().getAll();
+        showCat.setItems(categories);
+        defaultItem = categories.get(0) ;
         CatAction.setCellValueFactory(new PropertyValueFactory<>(""));
         CatAction.setCellFactory(param -> new TableCell() {
             FontAwesomeIconView deleteButton = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
@@ -161,12 +290,24 @@ public class GestionCours implements Initializable {
         try {
             int categoryId = category.getId();
             CategorieService categorieService = new CategorieService();
-            categorieService.delete(categoryId);
-            showCat.getItems().remove(category);
+            boolean confirm =outil.DeleteAlert("Delete","Delete category "+category.getTitre(),true);
+            if (confirm){
+                categorieService.delete(categoryId);
+                showCat.getItems().remove(category);
+                Path ImgToDelete = Paths.get(category.getImage());
+                try {
+                    Files.delete(ImgToDelete);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     //*****************************************************Cours**************************************************
 
@@ -218,13 +359,9 @@ public class GestionCours implements Initializable {
         coursTitleCol.setCellValueFactory(new PropertyValueFactory<>("titre"));
         coursDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         coursStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        try {
-            ObservableList<Cours> cours =new CoursService().getAll();
-            showCours.setItems(cours);
-            defaultCours = cours.get(0) ;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        ObservableList<Cours> cours =new CoursService().getAll();
+        showCours.setItems(cours);
+        defaultCours = cours.get(0) ;
         CoursAction.setCellValueFactory(new PropertyValueFactory<>(""));
         CoursAction.setCellFactory(param -> new TableCell() {
             FontAwesomeIconView Cdel_btn = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
@@ -296,8 +433,13 @@ public class GestionCours implements Initializable {
     }
     private void deleteCours(Cours cours) {
         try {
-            coursService.delete(cours.getId());
-            showCours.getItems().remove(cours);
+            boolean confirm =outil.DeleteAlert("Delete","Delete course "+cours.getTitre(),true);
+            if (confirm){
+                Categorie cat=categorieService.getbyId((cours.getCategorie_id()));
+                categorieService.updateCourse(cat.getId(),outil.NbCourse(cat.getId()));
+                coursService.delete(cours.getId());
+                showCours.getItems().remove(cours);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -317,6 +459,7 @@ public class GestionCours implements Initializable {
     private TableColumn<Ressource,String> chapFile;
     @FXML
     private TableColumn<Ressource, String> chapTitleCol;
+
     @FXML
     private TableColumn<Ressource, String> chapType;
     @FXML
@@ -329,7 +472,7 @@ public class GestionCours implements Initializable {
             Parent addChapPageRoot = FXMLLoader.load(getClass().getResource("/AddChapter.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(addChapPageRoot,650,355);
+            Scene newPageScene = new Scene(addChapPageRoot,650,400);
             stage.setScene(newPageScene);
             stage.setTitle("New Chapter");
             stage.show();
@@ -344,12 +487,8 @@ public class GestionCours implements Initializable {
         chapTitleCol.setCellValueFactory(new PropertyValueFactory<>("titre"));
         chapFile.setCellValueFactory(new PropertyValueFactory<>("url"));
         chapType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        try {
-            ObservableList<Ressource> chapters =new RessourceService().getAll();
-            showChap.setItems(chapters);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        ObservableList<Ressource> chapters =new RessourceService().getAll();
+        showChap.setItems(chapters);
         ChapAction.setCellValueFactory(new PropertyValueFactory<>(""));
         ChapAction.setCellFactory(param -> new TableCell() {
             FontAwesomeIconView Chapdel_btn = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
@@ -390,7 +529,7 @@ public class GestionCours implements Initializable {
             updateChapter.fetchChapData(ressource);
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
-            Scene newPageScene = new Scene(updatePageRoot,650,500);
+            Scene newPageScene = new Scene(updatePageRoot,650,400);
             stage.setScene(newPageScene);
             stage.setTitle("Update Chapter");
             stage.show();
@@ -401,22 +540,85 @@ public class GestionCours implements Initializable {
     private void deleteChap(Ressource ressource) {
         try {
             int chapId = ressource.getId();
-            CoursService coursService = new CoursService();
-            coursService.delete(chapId);
-            showChap.getItems().remove(ressource);
+            RessourceService ressourceService = new RessourceService();
+            boolean confirm =outil.DeleteAlert("Delete","Delete chapter "+ressource.getTitre(),true);
+            if (confirm){
+                ressourceService.delete(chapId);
+                showChap.getItems().remove(ressource);
+                Path FileToDelete = Paths.get(ressource.getUrl());
+                try {
+                    Files.delete(FileToDelete);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                Cours cours=coursService.getbyId(ressource.getId_cours_id());
+                int id =cours.getCategorie_id();
+                categorieService.updateChap(id,outil.NbChap(id));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void showDetails(){
+        showChap.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Ressource selectedRessource = showChap.getSelectionModel().getSelectedItem();
+                if (selectedRessource != null) {
+                    if (selectedRessource.getType().equals("PDF")) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PreviewPDF.fxml"));
+                            Parent updatePageRoot = loader.load();
+                            PreviewPDF previewPDF = loader.getController();
+                            System.out.println(selectedRessource.getUrl());
+                            previewPDF.fetchPDF(selectedRessource.getUrl());
+                            Stage stage = new Stage();
+                            stage.initStyle(StageStyle.UTILITY);
+                            Scene newPageScene = new Scene(updatePageRoot, 956, 612);
+                            stage.setScene(newPageScene);
+                            stage.setTitle("Preview Chapter");
+                            stage.show();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else if (selectedRessource.getType().equals("Video") || selectedRessource.getType().equals("Image")) {
+                        System.out.println(selectedRessource.getType() + "  here type");
+                        System.out.println(selectedRessource.getUrl() + "  here url");
+                        try {
+                            FXMLLoader loaderF = new FXMLLoader(getClass().getResource("/PreviewFile.fxml"));
+                            Parent updatePageRoot = loaderF.load();
+                            PreviewFile previewFile =loaderF.getController();
+                            previewFile.fetchUrl(selectedRessource.getUrl(),selectedRessource.getType());
+                            previewFile.initialize(null, null);
+                            Stage stage = new Stage();
+                            stage.initStyle(StageStyle.UTILITY);
+                            Scene newPageScene = new Scene(updatePageRoot, 850, 612);
+                            stage.setScene(newPageScene);
+                            stage.setTitle("Preview Chapter");
+                            stage.show();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        });
     }
 
 
 //________________________________________________________________________________________________________________________
     public void initialize (URL url, ResourceBundle resourceBundle) {
         FontAwesomeIconView refreshBtn = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
+        tabpane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+            tabName=newTab.getText();
+        });
 
         //-----------------------------------CATEGORY-----------------------------------------------------------
         refresh_btn.setGraphic(refreshBtn);
         updateCatTable();
+        if (txt_search.getText()==null||txt_search.getText().isEmpty()){
+            updateCatTable();
+        }
         showCat.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 Dtitle.setText(newSelection.getTitre());
@@ -456,7 +658,7 @@ public class GestionCours implements Initializable {
         FontAwesomeIconView refreshBtnchap = new FontAwesomeIconView(FontAwesomeIcon.REFRESH,"20");
         refreshChaop_btn.setGraphic(refreshBtnchap);
         updateChapTab();
-
+        showDetails();
     }
 
 

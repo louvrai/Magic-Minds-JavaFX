@@ -66,7 +66,7 @@ public class CoursService implements CRUDInterface<Cours> {
     }
 
     @Override
-    public ObservableList<Cours> getAll() throws SQLException {
+    public ObservableList<Cours> getAll()  {
         ObservableList<Cours> cours = FXCollections.observableArrayList();
         String sql = "SELECT * FROM cours";
         try {
@@ -90,13 +90,13 @@ public class CoursService implements CRUDInterface<Cours> {
     }
     public List<Cours> getCoursesByCat(int catId) {
         String sql = "SELECT * FROM cours WHERE categorie_id = ?";
-        Cours c = new Cours();
         List<Cours> coursesByCat = new ArrayList<>();
         try {
             PreparedStatement ste = connection.prepareStatement(sql);
             ste.setInt(1, catId);
             ResultSet resultSet = ste.executeQuery();
             while (resultSet.next()) {
+                Cours c = new Cours();
                 c.setId(resultSet.getInt("id"));
                 c.setDuree(resultSet.getInt("duree"));
                 c.setNb_chapitre(resultSet.getInt("nb_chapitre"));
@@ -106,6 +106,7 @@ public class CoursService implements CRUDInterface<Cours> {
                 c.setCategorie_id(resultSet.getInt("categorie_id"));
                 coursesByCat.add(c);
             }
+            System.out.println(coursesByCat);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

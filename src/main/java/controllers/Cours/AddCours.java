@@ -2,7 +2,7 @@ package controllers.Cours;
 
 import Entity.Categorie;
 import Entity.Cours;
-import controllers.AlertClass;
+import controllers.Outil;
 import Service.CategorieService;
 import Service.CoursService;
 import javafx.collections.FXCollections;
@@ -54,30 +54,30 @@ public class AddCours implements Initializable {
     CategorieService categorieService=new CategorieService() ;
     CoursService coursService=new CoursService();
     ObservableList<Cours> courses = FXCollections.observableArrayList();
-    AlertClass alertClass =new AlertClass();
+    Outil outil =new Outil();
 
     @FXML
     void addCours(MouseEvent event) throws SQLException {
         if (isValid()==true) {
             Cours c = new Cours();
-            Categorie cat = new Categorie();
             c.setTitre(addCTiltle.getText());
             c.setDescription(addCDescrip.getText());
             c.setDuree(addCPer.getValue());
             c.setNb_chapitre(addCChap.getValue());
             String catName=addCCat.getValue();
-            cat=categorieService.getbyId(categorieService.getCatId(catName));
+            Categorie cat=categorieService.getbyId(categorieService.getCatId(catName));
             c.setCategorie_id(cat.getId());
             c.setStatus("Valid");
             coursService.insert(c);
-            alertClass.showEAlert("Addition Success", "The course "+c.getTitre()+" was successfully added");
+            categorieService.updateCourse(cat.getId(),outil.NbCourse(cat.getId()));
+            outil.showSAlert("Addition Success", "The course "+c.getTitre()+" was successfully added");
             ECtitre.setText("");
             ECChap.setText("");
         }
 
     }
     public boolean isValid(){
-        try {
+
             Cours c = new Cours();
             Categorie cat = new Categorie();
             String title = addCTiltle.getText();
@@ -119,9 +119,7 @@ public class AddCours implements Initializable {
                 return false;
             }
             return true ;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
     @FXML
     void goBack(MouseEvent event) {

@@ -2,7 +2,8 @@ package controllers.Categorie;
 
 import Entity.Categorie;
 import Service.CategorieService;
-import controllers.AlertClass;
+import Service.CoursService;
+import controllers.Outil;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AddCategory {
 
@@ -39,7 +41,8 @@ public class AddCategory {
     private Button backCat;
 
     CategorieService categorieService = new CategorieService();
-    AlertClass alertClass=new AlertClass();
+
+    Outil outil =new Outil();
     String url="Please choose an image";
     File selectedFile = new File("C:\\");
     File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadImage");
@@ -78,13 +81,13 @@ public class AddCategory {
             cat.setDescription(addCatDescrip.getText());
             cat.setImage(url);
             categorieService.insert(cat);
-            alertClass.showSAlert("Addition Success", "The category "+cat.getTitre()+" was successfully added");
+            outil.showSAlert("Addition Success", "The category "+cat.getTitre()+" was successfully added");
             Stage stage = (Stage) upload.getScene().getWindow();
             stage.close();
         }
     }
     public boolean isValid(){
-        try {
+
             ObservableList<Categorie> categories = categorieService.getAll();
             String title = addCatTitle.getText();
             String descrip = addCatDescrip.getText();
@@ -117,15 +120,20 @@ public class AddCategory {
                 Eimage.setText(url);
                 return false;
             }
+            for (Categorie c : categories){
+                if (url.equals(c.getImage())){
+                    Eimage.setText("This image already exist");
+                    return false;
+                }
+            }
 
             return true ;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
     @FXML
     void goBack(MouseEvent event) {
         Stage closestage = (Stage) backCat.getScene().getWindow();
         closestage.close();
     }
+
 }
