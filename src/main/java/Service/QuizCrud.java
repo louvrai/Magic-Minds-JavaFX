@@ -15,6 +15,34 @@ public class QuizCrud implements CrudInterface<Quiz> {
     public QuizCrud() {
         connection = Database.getInstance().getConnection();
     }
+    public Quiz getByTitre(String email) {
+        try {
+            String query = "SELECT * FROM quiz WHERE titre like ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, "%"+email+"%");
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        Quiz resultquiz = new Quiz();
+                        resultquiz.setId(resultSet.getInt("id"));
+                        resultquiz.setTitre(resultSet.getString("titre"));
+
+
+                        resultquiz.setNb_question(resultSet.getInt("nbquestion"));
+                        resultquiz.setTemp(resultSet.getInt("temp"));
+
+
+                        // Ajoutez d'autres attributs si nécessaire
+                        return resultquiz;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public void ajouter(Quiz quiz) throws SQLException {
         try {

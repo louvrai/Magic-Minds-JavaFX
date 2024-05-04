@@ -24,7 +24,8 @@
 }
 .btn_home:hover {
     -fx-background-color: green; /* Changes the background to green on hover */
-    -fx-border-color: green; /* Optional: Changes the border color to green on hover */
+    -fx-border-color: green;
+     /* Optional: Changes the border color to green on hover */
 }
 #txt_search{
     -fx-background-color:#141313;

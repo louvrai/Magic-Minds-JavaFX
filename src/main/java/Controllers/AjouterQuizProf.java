@@ -47,7 +47,7 @@ public class AjouterQuizProf {
             Quiz q = new Quiz(titre,temp,nbquestion);
             ps.ajouter(q);
             System.out.println("ajouter avec succés");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuestionProf.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuizProf.fxml"));
             try {
                 Parent root = loader.load();
                 fxTitle.getScene().setRoot(root);
@@ -85,8 +85,8 @@ public class AjouterQuizProf {
         // Vérification si le nombre de questions est numérique et compris entre 10 et 15
         try {
             int nbQuestions = Integer.parseInt(fxNbquestion.getText());
-            if (nbQuestions < 10 || nbQuestions > 15) {
-                showAlert("Error", "Number of questions must be between 10 and 15 !");
+            if (nbQuestions < 5 || nbQuestions > 10) {
+                showAlert("Error", "Number of questions must be between 5 and 10 !");
                 return false;
             }
         } catch (NumberFormatException e) {
@@ -114,7 +114,7 @@ public class AjouterQuizProf {
     @FXML
     void afficher(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/AfficherQuestionProf.fxml"));
+                .getResource("/AfficherQuizProf.fxml"));
         try {
             Parent root = loader.load();
 

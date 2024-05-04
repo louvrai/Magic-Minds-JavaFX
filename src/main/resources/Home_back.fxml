@@ -101,7 +101,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <Pane prefHeight="630.0" prefWidth="730.0">
+      <Pane prefHeight="630.0" prefWidth="701.0">
          <children>
             <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="739.0">
                <children>

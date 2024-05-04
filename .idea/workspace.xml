@@ -5,15 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16efb27c-bbb0-4519-ac7f-78501e638bc9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestionProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestionProf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizEnfant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizEnfant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizProf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuizProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AjouterQuizProf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuestionProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuestionProf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ModifierQuizController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ModifierquizProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ModifierquizProf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/Mainfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/Mainfx.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Afficher.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Afficher.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuestionProf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuestionProf.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuizEnfant.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuizEnfant.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuizProf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuizProf.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Home_back.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Home_back.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierQuizPorf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierQuizProf.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,27 +51,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "mariem",
-    "last_opened_file_path": "C:/Users/mariem/Downloads/wetransfer_pidevproject_2024-04-21_2347/pidevproject",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mariem&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mariem/Downloads/JFoenix-master/JFoenix-master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\mariem\Desktop\projet\Magic-Minds-JavaFX\src\main\resources" />
@@ -87,11 +99,31 @@
       <workItem from="1713734121563" duration="1140000" />
       <workItem from="1713735412636" duration="9193000" />
       <workItem from="1713774792228" duration="22290000" />
-      <workItem from="1713868233913" duration="7299000" />
+      <workItem from="1713868233913" duration="35793000" />
+      <workItem from="1713941957319" duration="3524000" />
+      <workItem from="1713954999469" duration="219000" />
+      <workItem from="1713956302173" duration="7449000" />
+      <workItem from="1714066542324" duration="974000" />
+      <workItem from="1714478784421" duration="6249000" />
+      <workItem from="1714562625750" duration="1924000" />
+      <workItem from="1714636537059" duration="175000" />
+      <workItem from="1714637515777" duration="8921000" />
+      <workItem from="1714677442927" duration="4102000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizProf.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

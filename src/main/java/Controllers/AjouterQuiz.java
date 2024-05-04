@@ -89,8 +89,8 @@ public class AjouterQuiz {
         // Vérification si le nombre de questions est numérique et compris entre 10 et 15
         try {
             int nbQuestions = Integer.parseInt(tfNbbu.getText());
-            if (nbQuestions < 10 || nbQuestions > 15) {
-                showAlert("Error", "Number of questions must be between 10 and 15 !");
+            if (nbQuestions < 5 || nbQuestions > 10) {
+                showAlert("Error", "Number of questions must be between 5 and 10 !");
                 return false;
             }
         } catch (NumberFormatException e) {

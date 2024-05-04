@@ -149,7 +149,7 @@ public class AfficherQuestion {
             // Passer les données de la borne à modifier au contrôleur de l'interface de modification
             ModifierQuestionController modifierController = loader.getController();
             modifierController.initData(borneToModify);
-
+            modifierController.setAfficherQuestionController(this);
             // Afficher l'interface de modification
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -196,5 +196,17 @@ public class AfficherQuestion {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    public void updateQuestionTable() {
+        try {
+            // Effacer la liste actuelle des quiz dans la table
+            fxTable.getItems().clear();
+
+            // Recharger les données des quiz depuis la base de données
+            List<Questions> q = qc.recuperer();
+            fxTable.getItems().addAll(q);
+        } catch (SQLException e) {
+            showAlert("Erreur", "Une erreur s'est produite lors de la mise à jour de la liste des quiz.");
+        }
     }
 }
