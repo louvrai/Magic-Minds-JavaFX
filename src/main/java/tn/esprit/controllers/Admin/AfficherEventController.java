@@ -1,22 +1,22 @@
 package tn.esprit.controllers.Admin;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import tn.esprit.models.Evenement;
-import tn.esprit.services.ServiceEvenement;
-import javafx.scene.control.TableCell;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import tn.esprit.models.Evenement;
+import tn.esprit.services.ServiceEvenement;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
+import java.util.Map;
 
 
 public class AfficherEventController {
@@ -53,7 +53,11 @@ public class AfficherEventController {
 
     @FXML
     private TableColumn<Evenement, Void> editColumn;
+    @FXML
+    private VBox chartContainer; // Nouveau conteneur pour le diagramme
 
+    @FXML
+    private ChoiceBox<String> categorieChoiceBox; // Nouveau ChoiceBox pour les catégories
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private AfficherEventController afficherEvenementController;
 
@@ -86,7 +90,8 @@ public class AfficherEventController {
 
     @FXML
     void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+
         nbParticipantColumn.setCellValueFactory(new PropertyValueFactory<>("nb_participant"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -99,6 +104,40 @@ public class AfficherEventController {
         addEditButtonToTable();
 
         loadEvents();
+    }
+    @FXML
+    void generateStatistics(ActionEvent event) {
+        // Charger tous les événements
+        List<Evenement> events = serviceEvenement.getAll();
+
+        // Calculer le nombre total d'événements
+        int totalEvents = events.size();
+
+        // Calculer les statistiques pour chaque catégorie
+        Map<String, Integer> categoryCounts = new HashMap<>();
+        for (Evenement evt : events) {
+            String category = evt.getCategorie();
+            categoryCounts.put(category, categoryCounts.getOrDefault(category, 0) + 1);
+        }
+
+        // Créer une liste de données pour le diagramme
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (Map.Entry<String, Integer> entry : categoryCounts.entrySet()) {
+            String category = entry.getKey();
+            int count = entry.getValue();
+            double percentage = (double) count / totalEvents * 100; // Calculer le pourcentage
+            pieChartData.add(new PieChart.Data(category + " (" + String.format("%.2f", percentage) + "%)", count));
+        }
+
+        // Créer le diagramme à partir des données
+        createPieChart(pieChartData);
+    }
+    private void createPieChart(ObservableList<PieChart.Data> pieChartData) {
+        PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Pourcentage des événements par catégorie");
+        chartContainer.getChildren().clear();
+        chartContainer.getChildren().add(chart);
+        System.out.println("Pie Chart Data: " + pieChartData);
     }
 
     private void addDeleteButtonToTable() {

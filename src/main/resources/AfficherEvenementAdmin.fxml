@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Admin.AfficherEventController" >
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Admin.AfficherEventController">
     <children>
         <VBox prefHeight="612.0" prefWidth="226.0">
             <children>
@@ -65,7 +64,7 @@
                                 <Image url="@images/video-lesson.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btn_events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events" >
+                        <Button fx:id="btn_events" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" styleClass="btn_home" stylesheets="@style.css" text="Events">
                             <font>
                                 <Font name="Century Gothic Bold" size="18.0" />
                             </font>
@@ -108,7 +107,7 @@
         </VBox>
         <Pane prefHeight="630.0" prefWidth="730.0">
             <children>
-                <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="739.0">
+                <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="1000.0">
                     <children>
                         <TextField fx:id="txt_search" layoutX="439.0" layoutY="14.0" promptText="Seach:" stylesheets="@style.css">
                             <font>
@@ -128,27 +127,37 @@
                         </ImageView>
                     </children>
                 </Pane>
-                <AnchorPane layoutX="25.0" layoutY="87.0" prefHeight="509.0" prefWidth="691.0" stylesheets="@DashbordDesign.css">
-                    <styleClass>
-                        <String fx:value="white-bg" />
-                        <String fx:value="shadow" />
-                    </styleClass>
-                    <TableView fx:id="eventTable" layoutX="35.0" layoutY="160.0" prefHeight="350.0" prefWidth="970.0" style="-fx-table-cell-border-color: transparent;">
+                <AnchorPane layoutX="50.0" layoutY="87.0" prefHeight="509.0" prefWidth="1000.0" stylesheets="@DashbordDesign.css">
+               <children>
+                       <VBox layoutX="-35.0" layoutY="-23.0" prefHeight="532.0" prefWidth="686.0" spacing="20">
+                       <Button onAction="#generateStatistics" text="Générer les statistiques" />
+      
+                       <VBox fx:id="chartContainer">
+                        <!-- Contenu du conteneur -->
+                    </VBox>
+                       <TableView fx:id="eventTable" layoutX="35.0" layoutY="160.0" prefHeight="448.0" prefWidth="1000.0" style="-fx-table-cell-border-color: transparent;">
+      
+      
+                           <columns>
 
-                        <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID"/>
-                            <TableColumn fx:id="nomColumn" prefWidth="100.0" text="Nom"/>
-                            <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Description"/>
-                            <TableColumn fx:id="localisationColumn" prefWidth="100.0" text="Localisation"/>
-                            <TableColumn fx:id="categorieColumn" prefWidth="100.0" text="Catégorie"/>
-                            <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" text="Date début"/>
-                            <TableColumn fx:id="dateFinColumn" prefWidth="100.0" text="Date fin"/>
-                            <TableColumn fx:id="nbParticipantColumn" prefWidth="100.0" text="Nb Participants"/>
-                            <TableColumn fx:id="deleteColumn" prefWidth="100.0" text="Supprimer"/>
-                            <TableColumn fx:id="editColumn" prefWidth="100.0" text="Modifier"/>
-
-                        </columns>
-                    </TableView>
+                               <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
+                               <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
+                               <TableColumn fx:id="localisationColumn" prefWidth="75.0" text="Localisation" />
+                               <TableColumn fx:id="categorieColumn" prefWidth="75.0" text="Catégorie" />
+                               <TableColumn fx:id="dateDebutColumn" prefWidth="75.0" text="Date début" />
+                               <TableColumn fx:id="dateFinColumn" prefWidth="75.0" text="Date fin" />
+                               <TableColumn fx:id="nbParticipantColumn" prefWidth="75.0" text="Nb Participants" />
+                               <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="Supprimer" />
+                               <TableColumn fx:id="editColumn" prefWidth="75.0" text="Modifier" />
+      
+                           </columns>
+                       </TableView>
+                       <styleClass>
+                           <String fx:value="white-bg" />
+                           <String fx:value="shadow" />
+                       </styleClass>
+                       </VBox>
+               </children>
                 </AnchorPane>
             </children>
         </Pane>

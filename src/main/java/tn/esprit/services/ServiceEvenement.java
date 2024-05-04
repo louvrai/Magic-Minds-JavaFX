@@ -166,6 +166,31 @@ public class ServiceEvenement implements IService<Evenement> {
         }
         return eventName;
     }
+    public List<Evenement> getEventsByCategory(String category) {
+        List<Evenement> events = new ArrayList<>();
+        String query = "SELECT * FROM evenement WHERE categorie = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setString(1, category);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Evenement event = new Evenement();
+                    event.setId(resultSet.getInt("id"));
+                    event.setNb_participant(resultSet.getInt("nb_participant"));
+                    event.setNom(resultSet.getString("nom"));
+                    event.setDescription(resultSet.getString("description"));
+                    event.setLocalisation(resultSet.getString("localisation"));
+                    event.setCategorie(resultSet.getString("categorie"));
+                    event.setDate_debut(resultSet.getDate("date_debut"));
+                    event.setDate_fin(resultSet.getDate("date_fin"));
+                    events.add(event);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return events;
+    }
+
     public Evenement getById(int eventId) {
         Evenement evenement = null;
         String query = "SELECT * FROM evenement WHERE id = ?";
