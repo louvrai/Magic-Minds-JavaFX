@@ -3,13 +3,19 @@ import Entities.Evaluation;
 import Service.EvaluationCrud;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import Entities.Questions;
 import Service.QuestionsCrud;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AfficherQuizEnfant {
-
+    @FXML
+    private Button fxRedirectionButton;
     @FXML
     private Label fxScoreLabel;
 
@@ -39,6 +46,7 @@ public class AfficherQuizEnfant {
 
     @FXML
     private Button fxSubmit;
+
 private final EvaluationCrud evaluationCrud=new EvaluationCrud();
     private List<Questions> questions;
     private int currentQuestionIndex = 0;
@@ -137,18 +145,37 @@ private final EvaluationCrud evaluationCrud=new EvaluationCrud();
             System.out.println("Question " + (entry.getKey() + 1) + ": " + entry.getValue());
         }
     }
+
     @FXML
     void Submit(ActionEvent event) throws SQLException{
+
 // Enregistrer la réponse sélectionnée avant de soumettre le quiz
         enregistrerReponse();
         int resultat=calculerScore();
         LocalDate date=LocalDate.now();
-        System.out.println(userId);
+
        Evaluation evaluation=new Evaluation(quizId,resultat,userId,date);
         evaluationCrud.ajouter(evaluation);
-        // Afficher les réponses sélectionnées dans la console
-        afficherReponses();
+        fxScoreLabel.setVisible(true);
+        fxRedirectionButton.setVisible(true);
+
     }
+    @FXML
+    void redirectionButtonClicked(ActionEvent event) {
+        // Code pour rediriger vers une autre interface
+        // Par exemple, charger une nouvelle interface FXML
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAllQuizzesEnfant.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private int calculerScore() {
         int score = 0;
         for (Map.Entry<Integer, String> entry : reponses.entrySet()) {

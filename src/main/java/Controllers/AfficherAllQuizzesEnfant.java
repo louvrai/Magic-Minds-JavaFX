@@ -1,5 +1,8 @@
 package Controllers;
+import Entities.Evaluation;
+import Entities.Questions;
 import Entities.Quiz;
+import Service.EvaluationCrud;
 import Service.QuizCrud;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,9 +32,15 @@ public class AfficherAllQuizzesEnfant {
     private VBox mainVbox;
     private final QuizCrud qc = new QuizCrud();
 
+    private List<Evaluation> evaluationList;
+private EvaluationCrud ec=new EvaluationCrud();
 
     public void initialize() {
+
         try {
+            evaluationList=ec.recuperer();
+            int quizzesPassed=evaluationList.size();
+
             List<Quiz> quizzes = qc.recuperer();
 
             mainVbox.setSpacing(10);
@@ -47,7 +56,29 @@ public class AfficherAllQuizzesEnfant {
                 }
                 mainVbox.getChildren().add(rowHBox);
             }
+            Button showHistoryButton = new Button("Show quiz history");
+            showHistoryButton.setStyle("-fx-background-radius: 10px");
+            showHistoryButton.setOnAction(event -> {
+                try {
+                    // Charger la vue de la nouvelle interface depuis le fichier FXML
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuizHistoryEnfant.fxml"));
+                    Parent root = loader.load();
 
+                    // Créer une nouvelle scène avec la vue chargée
+                    Scene scene = new Scene(root);
+
+                    // Obtenir la référence à la fenêtre actuelle
+                    Stage stage = (Stage) showHistoryButton.getScene().getWindow();
+
+                    // Changer la scène de la fenêtre pour afficher la nouvelle interface
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace(); // Gérer les exceptions liées au chargement de la vue
+                }
+
+            });
+            mainVbox.getChildren().addAll(showHistoryButton);
 
 
 
@@ -86,6 +117,7 @@ public class AfficherAllQuizzesEnfant {
         stackPane.getChildren().addAll(contentBox);
 
         stackPane.setOnMouseClicked(event -> {
+
             int idQuiz = quiz.getId(); // Obtenir l'ID du quiz
                int userId=1;
             // Charger la scène du quiz en passant l'ID du quiz
@@ -138,6 +170,9 @@ public class AfficherAllQuizzesEnfant {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 }

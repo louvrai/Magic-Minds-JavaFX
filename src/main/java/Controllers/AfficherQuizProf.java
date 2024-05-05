@@ -32,7 +32,7 @@ public class AfficherQuizProf {
             List<Quiz> quizzes = qc.recuperer();
 
             mainVbox.setSpacing(10);
-            int maxColumns = 5;
+            int maxColumns = 4;
             for (int i = 0; i < quizzes.size(); i += maxColumns) {
                 HBox rowHBox = new HBox();
                 rowHBox.setSpacing(20);
@@ -81,7 +81,30 @@ public class AfficherQuizProf {
                 }
 
             });
-            mainVbox.getChildren().addAll(addQuizButton,showQuestionsButton);
+
+            Button showHistoryButton = new Button("Show quiz history");
+            showHistoryButton.setStyle("-fx-background-radius: 10px");
+          showHistoryButton.setOnAction(event -> {
+                try {
+                    // Charger la vue de la nouvelle interface depuis le fichier FXML
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuizHistoryProf.fxml"));
+                    Parent root = loader.load();
+
+                    // Créer une nouvelle scène avec la vue chargée
+                    Scene scene = new Scene(root);
+
+                    // Obtenir la référence à la fenêtre actuelle
+                    Stage stage = (Stage) showHistoryButton.getScene().getWindow();
+
+                    // Changer la scène de la fenêtre pour afficher la nouvelle interface
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace(); // Gérer les exceptions liées au chargement de la vue
+                }
+
+            });
+            mainVbox.getChildren().addAll(addQuizButton,showQuestionsButton,showHistoryButton);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
