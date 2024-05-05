@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Service.ExcelService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import Entity.User;
@@ -111,7 +112,11 @@ public class UserManagementController implements Initializable {
     }
 
     @FXML
-    void print(MouseEvent event) {
+    void print(MouseEvent event) throws SQLException {
+        UserService service = new UserService();
+        List<User>users = service.getAll();
+        ExcelService excelService = new ExcelService();
+        excelService.generateExcel(users);
 
     }
 
@@ -156,12 +161,17 @@ public class UserManagementController implements Initializable {
 
                         FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
                         FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
+                        FontAwesomeIconView showIcon = new FontAwesomeIconView(FontAwesomeIcon.EYE);
 
 //                        deleteIcon.setStyle(
 //                                " -fx-cursor: hand ;"
 //                                        + "-glyph-size:28px;"
 //                                        + "-fx-fill:#ff1744;"
 //                        );
+                        showIcon.setCursor(Cursor.HAND);
+
+                        showIcon.setSize("28px");
+                        showIcon.setFill(Color.valueOf("#2e90e1"));
                         deleteIcon.setCursor(Cursor.HAND);
 
                        deleteIcon.setSize("28px");
@@ -175,7 +185,28 @@ public class UserManagementController implements Initializable {
 
                         editIcon.setSize("28px");
                         editIcon.setFill(Color.valueOf("#00E676"));
+                        showIcon.setOnMouseClicked((MouseEvent event) -> {
+                            user = tableUser.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader ();
+                            loader.setLocation(getClass().getResource("/ShowUserDetailsController.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            ShowUserDetailsController saveUserController = loader.getController();
 
+                            saveUserController.setTextField(user.getFirstName(),user.getLastName(),
+                                    user.getEmail(),user.getTel(),user.getGender(),user.getAge(),user.getRoles(),user.getPicture()
+                            );
+
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UNDECORATED);
+                            stage.show();
+
+                        });
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -244,7 +275,7 @@ public class UserManagementController implements Initializable {
 
                         });
 
-                        HBox managebtn = new HBox(editIcon, deleteIcon);
+                        HBox managebtn = new HBox(editIcon, deleteIcon,showIcon);
                         managebtn.setStyle("-fx-alignment:center");
                         HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                         HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
