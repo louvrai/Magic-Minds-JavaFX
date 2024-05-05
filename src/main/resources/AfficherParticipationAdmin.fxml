@@ -136,6 +136,9 @@
                         <columns>
                             <TableColumn text="Date" fx:id="dateColumn"/>
                             <TableColumn text="Heure" fx:id="heureColumn"/>
+                            <TableColumn text="Nom d'utilisateur" fx:id="NomuserColumn"/>
+                            <TableColumn text="Nom d'événement" fx:id="NomeventColumn"/>
+
                             <!-- Colonne pour le bouton Supprimer -->
                             <TableColumn>
                                 <graphic>

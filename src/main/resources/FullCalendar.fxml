@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-        <?import javafx.scene.layout.StackPane?>
-        <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.calendarController">
-        <Pane fx:id="calendarPane" stylesheets="@styless.css" />
+
+        <HBox alignment="CENTER_LEFT">
+                <Button text="Afficher tous les événements disponibles" onAction="#afficherEvenements" />
+                <Pane fx:id="calendarPane" stylesheets="@styless.css" />
+        </HBox>
+
 </StackPane>

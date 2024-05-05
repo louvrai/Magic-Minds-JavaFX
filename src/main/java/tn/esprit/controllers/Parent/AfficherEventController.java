@@ -14,11 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import tn.esprit.controllers.DateComparator;
 import tn.esprit.models.Evenement;
 import tn.esprit.services.ServiceEvenement;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Collections;
 import java.util.List;
 
 public class AfficherEventController {
@@ -43,8 +45,8 @@ public class AfficherEventController {
         loadLocationChoices();
 
         // Ajouter des écouteurs de changement pour les ChoiceBox
-        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenements());
-        locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenements());
+        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenementsParCategorieEtLocalisation());
+        locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filtrerEvenementsParCategorieEtLocalisation());
     }
     private Image generateQRCode(String eventDetails) {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -75,12 +77,7 @@ public class AfficherEventController {
         locationChoiceBox.getItems().addAll(locations);
     }
 
-    private void filtrerEvenements() {
-        String selectedCategory = categoryChoiceBox.getValue();
-        String selectedLocation = locationChoiceBox.getValue();
-        List<Evenement> evenementsFiltres = serviceEvenement.filtrerParCategorieEtLocalisation(evenements, selectedCategory, selectedLocation);
-        afficherEvenements(evenementsFiltres);
-    }
+
 
     private void afficherEvenements(List<Evenement> evenements) {
         eventContainer.getChildren().clear();
@@ -98,6 +95,19 @@ public class AfficherEventController {
             VBox card = createEventCard(evenement);
             eventContainer.getChildren().add(card);
         }
+        // Tri des événements selon la date de début
+        Collections.sort(evenements, new DateComparator());
+        // Affichage des événements triés
+        afficherEvenements(evenements);
+    }
+    private void filtrerEvenementsParCategorieEtLocalisation() {
+        String selectedCategory = categoryChoiceBox.getValue();
+        String selectedLocation = locationChoiceBox.getValue();
+        List<Evenement> evenementsFiltres = serviceEvenement.filtrerParCategorieEtLocalisation(evenements, selectedCategory, selectedLocation);
+        // Tri des événements filtrés selon la date de début
+        Collections.sort(evenementsFiltres, new DateComparator());
+        // Affichage des événements filtrés et triés
+        afficherEvenements(evenementsFiltres);
     }
 
     // Dans la méthode createEventCard

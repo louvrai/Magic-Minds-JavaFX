@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
-import tn.esprit.services.ServiceUser;
+import tn.esprit.services.UserService;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class AfficherParticipation {
     private final ServiceParticipation serviceParticipation = new ServiceParticipation();
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
 
-    private final ServiceUser serviceUser = new ServiceUser();
+    private final UserService serviceUser = new UserService();
 
     @FXML
     void initialize() {
@@ -41,11 +41,14 @@ public class AfficherParticipation {
     private VBox createParticipationCard(Participation participation) {
         VBox card = new VBox(10);
         card.getStyleClass().add("participation-card");
+        String eventName = serviceEvenement.getEventNameById(participation.getEvenementId());
+        String username = serviceUser.getUsernameById(participation.getId_user_id());
 
         Label dateLabel = new Label("Date: " + participation.getDate());
         Label heureLabel = new Label("Heure: " + participation.getHeure());
+        Label evenementNom = new Label("Nom d'événement :" + eventName);
 
-
+        Label usernameLabel = new Label("Nom d'utilisateur: " + username);
 
         Button deleteButton = new Button("Supprimer");
 
@@ -55,7 +58,7 @@ public class AfficherParticipation {
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(deleteButton);
 
-        card.getChildren().addAll(dateLabel, heureLabel, deleteButton);
+        card.getChildren().addAll(dateLabel, heureLabel,evenementNom,usernameLabel, deleteButton);
 
         return card;
     }

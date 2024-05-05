@@ -105,7 +105,7 @@
                 </AnchorPane>
             </children>
         </VBox>
-        <Pane prefHeight="630.0" prefWidth="730.0">
+        <Pane prefHeight="630.0" prefWidth="730.0" maxWidth="730">
             <children>
                 <Pane layoutX="-3.0" prefHeight="51.0" prefWidth="1000.0">
                     <children>
@@ -139,7 +139,6 @@
       
       
                            <columns>
-
                                <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
                                <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
                                <TableColumn fx:id="localisationColumn" prefWidth="75.0" text="Localisation" />

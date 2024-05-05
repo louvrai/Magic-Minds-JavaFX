@@ -9,15 +9,6 @@ public class Participation {
     private int id ;
     private int evenementId;
     private int id_user_id;
-    public Participation() {
-    }
-
-    public Participation(Date date, Time heure, int id) {
-        this.date = date;
-        this.heure = heure;
-        this.id = id;
-
-    }
 
     public Date getDate() {
         return date;

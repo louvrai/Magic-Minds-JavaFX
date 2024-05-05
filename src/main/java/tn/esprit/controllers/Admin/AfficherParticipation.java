@@ -1,19 +1,14 @@
 package tn.esprit.controllers.Admin;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import tn.esprit.models.Participation;
+import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
-import javafx.scene.control.TableCell;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
+import tn.esprit.services.UserService;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.List;
 
 public class AfficherParticipation {
@@ -23,17 +18,33 @@ public class AfficherParticipation {
 
     @FXML
     private TableColumn<Participation, String> dateColumn;
+    @FXML
+    private TableColumn<Participation, String> NomuserColumn;
+    @FXML
+    private TableColumn<Participation, String> NomeventColumn;
 
     @FXML
     private TableColumn<Participation, String> heureColumn;
 
     private final ServiceParticipation serviceParticipation = new ServiceParticipation();
+    private final ServiceEvenement serviceEvenement = new ServiceEvenement();
 
+    private final UserService serviceUser = new UserService();
     @FXML
     void initialize() {
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         heureColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
+        NomuserColumn.setCellValueFactory(cellData -> {
+            String username = serviceUser.getUsernameById(cellData.getValue().getId_user_id());
+            return new SimpleStringProperty(username);
+        });
+
+        // Cell factory pour le nom de l'événement
+        NomeventColumn.setCellValueFactory(cellData -> {
+            String eventName = serviceEvenement.getEventNameById(cellData.getValue().getEvenementId());
+            return new SimpleStringProperty(eventName);
+        });
 
 
         List<Participation> participations = serviceParticipation.getAll();

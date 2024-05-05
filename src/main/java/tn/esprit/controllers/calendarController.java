@@ -6,10 +6,17 @@ package tn.esprit.controllers;
  */
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.YearMonth;
 import java.util.ResourceBundle;
@@ -35,5 +42,25 @@ public class calendarController implements Initializable {
         // Obtenez la vue du calendrier et ajoutez-la à votre Pane
         calendarPane.getChildren().add(calendarView.getView());
     }
+    @FXML
+    private void afficherEvenements(ActionEvent event) {
+        System.out.println("Méthode afficherEvenements appelée !");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementEtudiant.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            // Obtenir la référence à la fenêtre principale à partir de l'objet event
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement du fichier FXML : " + e.getMessage());
+        }
+    }
+
+
 
 }

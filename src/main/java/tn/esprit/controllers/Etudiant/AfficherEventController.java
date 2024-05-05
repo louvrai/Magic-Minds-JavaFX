@@ -18,7 +18,7 @@ import tn.esprit.models.Evenement;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
-import tn.esprit.services.ServiceUser;
+import tn.esprit.services.UserService;
 import tn.esprit.utils.Mail;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 
 public class AfficherEventController {
-    private final ServiceUser serviceUser = new ServiceUser();
+    private final UserService serviceUser = new UserService();
 
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private final ServiceParticipation serviceParticipation = new ServiceParticipation();
@@ -171,11 +171,17 @@ public class AfficherEventController {
 
         // Récupérer le nom de l'événement
         String eventName = serviceEvenement.getEventNameById(participation.getEvenementId());
-
+        String username = serviceUser.getUsernameById(participation.getId_user_id());
         // Afficher les noms récupérés
         System.out.println("Nom de l'événement : " + eventName);
+        // Créer le contenu personnalisé de l'e-mail
+        String emailContent = "Bonjour Professeur,\n";
+        emailContent += username + " a participé à " + eventName + ".\n";
+        emailContent += "Cordialement,\n !! ";
+
         try {
-            Mail.sendEmail( "hadididouaa65@gmail.com", "Bonjour Professeur,\nUne nouvelle participation a été enregistrée.\nCordialement,\n !! ");
+            // Envoyer l'e-mail personnalisé
+            Mail.sendEmail("hadididouaa65@gmail.com", emailContent);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
