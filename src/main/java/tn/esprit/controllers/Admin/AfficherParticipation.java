@@ -1,18 +1,23 @@
 package tn.esprit.controllers.Admin;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
 import tn.esprit.services.UserService;
-import javafx.beans.property.SimpleStringProperty;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 public class AfficherParticipation {
-
+    @FXML
+    private PieChart participationPieChart;
     @FXML
     private TableView<Participation> participationTable;
 
@@ -52,8 +57,33 @@ public class AfficherParticipation {
 
         participationTable.getItems().addAll(participations);
 
-
+        showParticipationStatistics(participations);
         addButtonToTable();
+    }
+    private void showParticipationStatistics(List<Participation> participations) {
+        Map<String, Integer> eventCounts = new HashMap<>();
+
+        // Count the number of participations for each event
+        for (Participation participation : participations) {
+            String eventName = serviceEvenement.getEventNameById(participation.getEvenementId());
+            eventCounts.put(eventName, eventCounts.getOrDefault(eventName, 0) + 1);
+        }
+
+        // Create a list of segments for the PieChart
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        int totalParticipations = participations.size();
+        for (Map.Entry<String, Integer> entry : eventCounts.entrySet()) {
+            String eventName = entry.getKey();
+            int count = entry.getValue();
+            double percentage = ((double) count / totalParticipations) * 100;
+            pieChartData.add(new PieChart.Data(eventName + " (" + String.format("%.2f", percentage) + "%)", count));
+        }
+
+        // Display the PieChart
+        participationPieChart.setData(pieChartData);
+
+        // Set the English title
+        participationPieChart.setTitle("Participation Statistics");
     }
 
     @FXML

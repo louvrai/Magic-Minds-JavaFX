@@ -104,6 +104,7 @@ public class AfficherEventController {
         addEditButtonToTable();
 
         loadEvents();
+        generateStatistics(new ActionEvent());
     }
     @FXML
     void generateStatistics(ActionEvent event) {
