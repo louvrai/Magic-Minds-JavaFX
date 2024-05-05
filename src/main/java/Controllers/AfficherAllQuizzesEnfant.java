@@ -1,9 +1,11 @@
 package Controllers;
 import Entities.Quiz;
 import Service.QuizCrud;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -83,11 +85,59 @@ public class AfficherAllQuizzesEnfant {
         stackPane.setMinWidth(160);
         stackPane.getChildren().addAll(contentBox);
 
+        stackPane.setOnMouseClicked(event -> {
+            int idQuiz = quiz.getId(); // Obtenir l'ID du quiz
+               int userId=1;
+            // Charger la scène du quiz en passant l'ID du quiz
+            loadQuizScene(idQuiz,userId);
+        });
+
+// Méthode pour charger la scène du quiz
+
+
+
+        stackPane.setOnMouseEntered(event -> {
+            // Changer la couleur de fond lorsque le curseur est positionné dessus
+            stackPane.setStyle("-fx-background-color: #fef437; -fx-background-radius: 8px;-fx-cursor: pointer");
+        });
+
+        stackPane.setOnMouseExited(event -> {
+            // Rétablir la couleur de fond lorsque le curseur quitte le StackPane
+            stackPane.setStyle("-fx-background-color: #ed6350; -fx-background-radius: 8px;-fx-cursor: pointer");
+        });
 
 
         return stackPane;
     }
 
+    private void loadQuizScene(int idQuiz,int userId) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuizEnfant.fxml"));
+            Parent root = loader.load();
+            AfficherQuizEnfant controller = loader.getController();
+
+            // Passer l'ID du quiz au contrôleur AfficherQuizEnfant
+            controller.setQuizId(idQuiz);
+            controller.setUserId(userId);
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Récupérer la scène actuelle
+            Stage stage = (Stage) mainVbox.getScene().getWindow();
+
+            // Afficher la nouvelle scène
+            stage.setScene(scene);
+            stage.show();
+
+            // Appeler initialize() une fois que la scène est chargée
+            Platform.runLater(() -> {
+                controller.initialize();
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

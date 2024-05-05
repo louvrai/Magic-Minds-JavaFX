@@ -113,7 +113,7 @@ public class QuestionsCrud implements CrudInterface<Questions>{
                 questions.add(q);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            throw new SQLException("Erreur lors de la récupération des questions: " + ex.getMessage());
         }
         return questions;
     }

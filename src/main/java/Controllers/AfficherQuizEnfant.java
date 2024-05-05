@@ -1,4 +1,6 @@
 package Controllers;
+import Entities.Evaluation;
+import Service.EvaluationCrud;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,12 +11,14 @@ import Entities.Questions;
 import Service.QuestionsCrud;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AfficherQuizEnfant {
+
     @FXML
     private Label fxScoreLabel;
 
@@ -35,22 +39,41 @@ public class AfficherQuizEnfant {
 
     @FXML
     private Button fxSubmit;
-
+private final EvaluationCrud evaluationCrud=new EvaluationCrud();
     private List<Questions> questions;
     private int currentQuestionIndex = 0;
     private Map<Integer, String> reponses = new HashMap<>(); // Pour stocker les réponses sélectionnées
 
     private QuestionsCrud questionsCrud = new QuestionsCrud();
+    // Assurez-vous que la variable quizId est définie dans la classe
+    private int quizId;
+    private int userId;
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    // Assurez-vous que la méthode setQuizId est correctement définie
+
+
 
     public void initialize() {
-        int idQuiz = 12; // ID du quiz à afficher
+
+
         try {
-            questions = questionsCrud.recupererParQuizId(idQuiz);
-            afficherQuestionCourante();
+            questions = questionsCrud.recupererParQuizId(quizId);
+            if (!questions.isEmpty()) {
+                afficherQuestionCourante();
+            } else {
+                System.out.println("Aucune question trouvée pour ce quiz.");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
 
     @FXML
     void Next(ActionEvent event) {
@@ -115,14 +138,18 @@ public class AfficherQuizEnfant {
         }
     }
     @FXML
-    void Submit(ActionEvent event) {
+    void Submit(ActionEvent event) throws SQLException{
 // Enregistrer la réponse sélectionnée avant de soumettre le quiz
         enregistrerReponse();
-        calculerScore();
+        int resultat=calculerScore();
+        LocalDate date=LocalDate.now();
+        System.out.println(userId);
+       Evaluation evaluation=new Evaluation(quizId,resultat,userId,date);
+        evaluationCrud.ajouter(evaluation);
         // Afficher les réponses sélectionnées dans la console
         afficherReponses();
     }
-    private void calculerScore() {
+    private int calculerScore() {
         int score = 0;
         for (Map.Entry<Integer, String> entry : reponses.entrySet()) {
             int indexQuestion = entry.getKey();
@@ -135,6 +162,7 @@ public class AfficherQuizEnfant {
         }
         fxScoreLabel.setText("Score: " + score+"/"+questions.size());
         System.out.println("Score du quiz : " + score+"/"+questions.size());
+        return score;
     }
 
 }
