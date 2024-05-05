@@ -83,7 +83,11 @@
             <artifactId>mailjet-client</artifactId>
             <version>5.2.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>21-ea+24</version>
+        </dependency>
 
 
     </dependencies>
