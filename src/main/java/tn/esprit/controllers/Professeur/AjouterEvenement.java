@@ -1,5 +1,5 @@
 package tn.esprit.controllers.Professeur;
-
+import org.controlsfx.control.Notifications;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -101,8 +101,20 @@ public class AjouterEvenement {
 
 
         redirectToEventDisplay(event);
+        generateNotification(evenement);
     }
-
+    private void generateNotification(Evenement evenement) {
+        Notifications.create()
+                .title("Event Added")
+                .text("Event Name: " + evenement.getNom() + "\n" +
+                        "Description: " + evenement.getDescription() + "\n" +
+                        "Location: " + evenement.getLocalisation() + "\n" +
+                        "Category: " + evenement.getCategorie() + "\n" +
+                        "Start Date: " + evenement.getDate_debut() + "\n" +
+                        "End Date: " + evenement.getDate_fin() + "\n" +
+                        "Number of Participants: " + evenement.getNb_participant())
+                .showInformation();
+    }
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle("Notification");

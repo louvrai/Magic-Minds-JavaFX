@@ -192,6 +192,7 @@ public class AfficherEventController {
 
         // Redirection vers une autre vue
         redirectTo("AfficherParticipationEtudiant.fxml");
+
     }
 
     private void redirectTo(String AfficherParticipationEtudiant) {

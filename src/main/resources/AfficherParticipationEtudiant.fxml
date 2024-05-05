@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
+<?import javafx.scene.control.Button?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -279,6 +279,9 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
+                <VBox> <!-- Déplacez le bouton "Go Back" ici -->
+                    <Button fx:id="btnGoBack" text="Go Back" onAction="#goBack2" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
+                </VBox>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="trasparent" stylesheets="@style.css" VBox.vgrow="ALWAYS">
                     <content>
                         <GridPane fx:id="produitcontainer" prefHeight="0.0" prefWidth="2.0">

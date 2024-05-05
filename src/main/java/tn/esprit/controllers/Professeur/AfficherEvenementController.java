@@ -1,5 +1,6 @@
 package tn.esprit.controllers.Professeur;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -101,6 +102,20 @@ public class AfficherEvenementController {
     private void deleteEvent(Evenement evenement) {
         serviceEvenement.delete(evenement);
         loadEvents();
+    }
+    @FXML
+    void goBack1(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenement.fxml"));
+            Parent root = loader.load();
+
+            // Vous pouvez ajouter d'autres configurations si nécessaire
+
+            // Changer la scène pour afficher la vue AjouterEvenementAdmin
+            eventContainer.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

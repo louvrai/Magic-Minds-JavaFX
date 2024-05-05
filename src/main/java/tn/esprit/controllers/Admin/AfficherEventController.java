@@ -194,6 +194,20 @@ public class AfficherEventController {
     }
 
 
+    @FXML
+    void goBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenementAdmin.fxml"));
+            Parent root = loader.load();
+
+            // Vous pouvez ajouter d'autres configurations si nécessaire
+
+            // Changer la scène pour afficher la vue AjouterEvenementAdmin
+            eventTable.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

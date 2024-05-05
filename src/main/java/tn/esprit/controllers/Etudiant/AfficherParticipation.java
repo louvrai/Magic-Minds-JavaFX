@@ -1,7 +1,10 @@
 package tn.esprit.controllers.Etudiant;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -11,6 +14,7 @@ import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
 import tn.esprit.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AfficherParticipation {
@@ -64,4 +68,18 @@ public class AfficherParticipation {
     private void deleteParticipation(Participation participation) {
         serviceParticipation.delete(participation);
         loadParticipations();
+    }
+    @FXML
+    void goBack2(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementEtudiant.fxml"));
+            Parent root = loader.load();
+
+            // Vous pouvez ajouter d'autres configurations si nécessaire
+
+            // Changer la scène pour afficher la vue AjouterEvenementAdmin
+            participationContainer.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }}
