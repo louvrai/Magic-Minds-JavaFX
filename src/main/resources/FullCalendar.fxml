@@ -7,7 +7,7 @@
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.calendarController">
 
         <HBox alignment="CENTER_LEFT">
-                <Button text="Afficher tous les événements disponibles" onAction="#afficherEvenements" />
+                <Button text="Display DETAILS OF all available events" onAction="#afficherEvenements" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"  />
                 <Pane fx:id="calendarPane" stylesheets="@styless.css" />
         </HBox>
 

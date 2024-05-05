@@ -295,7 +295,8 @@
                                 </content>
                             </ScrollPane>
                             <!-- Bouton calendarButton -->
-                            <Button fx:id="calendarButton" text="Voir le calendrier" onAction="#voirCalendrier" style="-fx-background-color: #fe5d37;" />
+                            <Button fx:id="calendarButton" text="View Calendar"  onAction="#voirCalendrier" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"  textFill="WHITE" />
+
                         </children>
                     </AnchorPane>
 

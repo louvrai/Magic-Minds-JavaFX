@@ -1,17 +1,18 @@
 package tn.esprit.controllers.Professeur;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tn.esprit.models.Evenement;
 import tn.esprit.services.ServiceEvenement;
+
 import java.io.IOException;
 import java.util.List;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
-import javafx.geometry.Pos;
 
 public class AfficherEvenementController {
 
@@ -40,19 +41,20 @@ public class AfficherEvenementController {
         VBox card = new VBox(20);
         card.getStyleClass().add("event-card");
 
-        Label nomLabel = new Label("Nom: " + evenement.getNom());
+        Label nomLabel = new Label("Event Title : " + evenement.getNom());
         nomLabel.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold; -fx-text-fill: #FE5D37;");
-        Label descriptionLabel = new Label("Description: " + evenement.getDescription());
-        Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());
-        Label categorieLabel = new Label("Catégorie: " + evenement.getCategorie());
-        Label dateDebutLabel = new Label("Date début: " + evenement.getDate_debut());
-        Label dateFinLabel = new Label("Date fin: " + evenement.getDate_fin());
-        Label nbParticipantsLabel = new Label("Nb Participants: " + evenement.getNb_participant());
+        Label descriptionLabel = new Label("Event Description : " + evenement.getDescription());
+        Label localisationLabel = new Label("Event Location : " + evenement.getLocalisation());
+        Label categorieLabel = new Label("Event Category : " + evenement.getCategorie());
+        Label dateDebutLabel = new Label("Start Date : " + evenement.getDate_debut());
+        Label dateFinLabel = new Label("End Date : " + evenement.getDate_fin());
+        Label nbParticipantsLabel = new Label("Number of Participants : " + evenement.getNb_participant());
 
 
-        Button deleteButton = new Button("Supprimer");
-        Button editButton = new Button("Modifier");
-
+        Button deleteButton = new Button("Delete");
+        Button editButton = new Button("Update");
+        deleteButton.setStyle("-fx-background-color: #fe5d37; -fx-font-weight: bold; -fx-text-fill: white;");
+        editButton.setStyle("-fx-background-color: #fe5d37; -fx-font-weight: bold; -fx-text-fill: white;");
 
         deleteButton.setOnAction(event -> deleteEvent(evenement));
         editButton.setOnAction(event -> openEditForm(evenement));

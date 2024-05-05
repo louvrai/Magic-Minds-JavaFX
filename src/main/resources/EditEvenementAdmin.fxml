@@ -140,17 +140,18 @@
                             <Insets top="20" right="20" bottom="20" left="20"/>
                         </padding>
 
-                        <Label text="Modifier l'événement" />
+                        <Label text="Edit Event" style="-fx-font-weight: bold;" />
 
-                        <TextField fx:id="tfNom" promptText="Titre de l'événement" />
-                        <TextField fx:id="tfDescription" promptText="Description de l'événement" />
-                        <TextField fx:id="tfLocalisation" promptText="Localisation de l'événement" />
-                        <TextField fx:id="tfCategorie" promptText="Catégorie de l'événement" />
-                        <TextField fx:id="tfNbParticipant" promptText="Nombre de participants" />
-                        <TextField fx:id="tfDateDebut" promptText="Date de début (format: YYYY-MM-DD)" />
-                        <TextField fx:id="tfDateFin" promptText="Date de fin (format: YYYY-MM-DD)" />
 
-                        <Button text="Enregistrer" onAction="#modifierEvenement" />
+                        <TextField fx:id="tfNom" promptText="Event Title" />
+                        <TextField fx:id="tfDescription" promptText="Event Description" />
+                        <TextField fx:id="tfLocalisation" promptText="Event Location" />
+                        <TextField fx:id="tfCategorie" promptText="Event Category" />
+                        <TextField fx:id="tfNbParticipant" promptText="Number of Participants" />
+                        <TextField fx:id="tfDateDebut" promptText="Start Date (format: YYYY-MM-DD)" />
+                        <TextField fx:id="tfDateFin" promptText="End Date(format: YYYY-MM-DD)" />
+
+                        <Button text="Save"  style="-fx-font-weight: bold;" onAction="#modifierEvenement" styleClass="btn_home" stylesheets="@style.css" />
                     </VBox>
                 </AnchorPane>
             </children>

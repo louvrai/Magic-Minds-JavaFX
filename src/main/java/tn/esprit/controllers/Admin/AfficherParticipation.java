@@ -66,7 +66,7 @@ public class AfficherParticipation {
     }
 
     private void addButtonToTable() {
-        TableColumn<Participation, Void> deleteColumn = new TableColumn<>("Supprimer");
+        TableColumn<Participation, Void> deleteColumn = new TableColumn<>("Delete" );
         deleteColumn.setMinWidth(80);
 
         deleteColumn.setCellFactory(param -> new ButtonCell());
@@ -92,14 +92,17 @@ public class AfficherParticipation {
 
 
     private class ButtonCell extends TableCell<Participation, Void> {
-        private final Button deleteButton = new Button("Supprimer");
+        private final Button deleteButton = new Button("Delete");
 
         ButtonCell() {
             deleteButton.setOnAction(event -> {
+
                 Participation participation = getTableView().getItems().get(getIndex());
                 deleteParticipation(participation);
             });
+            deleteButton.setStyle("-fx-background-color: #f3f35b; -fx-font-weight: bold; ");
         }
+
 
         @Override
         protected void updateItem(Void item, boolean empty) {

@@ -1,5 +1,5 @@
 .gradient-background {
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, orange, white);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fe5d37, white);
 }
 
 
@@ -78,13 +78,13 @@
 }
 
 .event-title {
-    -fx-font-size: 20px; /* Taille de la police pour le titre */
+    -fx-font-size: 12px; /* Taille de la police pour le titre */
     -fx-font-weight: bold; /* Texte en gras */
     -fx-padding: 10px 0 20px 0;
 }
 
 .event-details {
-    -fx-font-size: 20px; /* Augmente la taille de la police */
+    -fx-font-size: 12px; /* Augmente la taille de la police */
     -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Ombre portée par défaut */
     -fx-transition: transform 0.8s; /* Ajuste la durée de la transition */
 }
@@ -101,7 +101,7 @@
 .event-color-1 {
 
 
-            -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, orange, white);
+            -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fe5d37, white);
         }
 
 
@@ -111,12 +111,12 @@
 
 .event-color-2 {
 
-        -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, orange, white);
+        -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #fe5d37, white);
     }
     /* Couleur de fond pour le deuxième événement */
 
 .default-color0.chart-bar {
-    -fx-bar-fill: orange; /* Change the color to green */
+    -fx-bar-fill: #fe5d37; /* Change the color to green */
 }
 
 .axis {
@@ -155,7 +155,7 @@
 }
 
 #label, #label1, #label11 {
-    -fx-background-color: #e1ad01; /* Couleur de fond */
+    -fx-background-color: #fe5d37; /* Couleur de fond */
     -fx-background-radius: 20px; /* Bord arrondi */
     -fx-padding: 8px; /* Espacement intérieur */
     -fx-min-width: 120px; /* Largeur minimale */
@@ -170,7 +170,7 @@
 }
 
 #label11 {
-    -fx-background-color: #ff6600; /* Couleur de fond */
+    -fx-background-color: #fe5d37; /* Couleur de fond */
     -fx-wrap-text: true; /* Retour à la ligne */
 
 }

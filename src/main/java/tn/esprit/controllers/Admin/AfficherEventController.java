@@ -24,8 +24,7 @@ public class AfficherEventController {
     @FXML
     private TableView<Evenement> eventTable;
 
-    @FXML
-    private TableColumn<Evenement, Integer> idColumn;
+
 
     @FXML
     private TableColumn<Evenement, String> nomColumn;
@@ -67,13 +66,14 @@ public class AfficherEventController {
     }
     private void addEditButtonToTable() {
         editColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button editButton = new Button("Modifier");
+            private final Button editButton = new Button("Update");
 
             {
                 editButton.setOnAction(event -> {
                     Evenement evenement = getTableView().getItems().get(getIndex());
                     openEditForm(evenement);
                 });
+                editButton.setStyle("-fx-background-color: #f3f35b; -fx-font-weight: bold; ");
             }
 
             @Override
@@ -134,7 +134,7 @@ public class AfficherEventController {
     }
     private void createPieChart(ObservableList<PieChart.Data> pieChartData) {
         PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Pourcentage des événements par catégorie");
+        chart.setTitle("Percentage of Events by Category");
         chartContainer.getChildren().clear();
         chartContainer.getChildren().add(chart);
         System.out.println("Pie Chart Data: " + pieChartData);
@@ -142,13 +142,14 @@ public class AfficherEventController {
 
     private void addDeleteButtonToTable() {
         deleteColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("Supprimer");
+            private final Button deleteButton = new Button("Delete");
 
             {
                 deleteButton.setOnAction(event -> {
                     Evenement evenement = getTableView().getItems().get(getIndex());
                     deleteEvent(evenement);
                 });
+                deleteButton.setStyle("-fx-background-color: #f3f35b; -fx-font-weight: bold; ");
             }
 
             @Override

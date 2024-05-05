@@ -46,9 +46,21 @@ public class FullCalendarView {
             }
         }
         // Days of the week labels
-        Text[] dayNames = new Text[]{ new Text("Sunday"), new Text("Monday"), new Text("Tuesday"),
-                new Text("Wednesday"), new Text("Thursday"), new Text("Friday"),
-                new Text("Saturday") };
+        Text[] dayNames = new Text[]{
+                new Text("Sunday"),
+                new Text("Monday"),
+                new Text("Tuesday"),
+                new Text("Wednesday"),
+                new Text("Thursday"),
+                new Text("Friday"),
+                new Text("Saturday")
+        };
+
+// Appliquer le style gras à chaque objet Text
+        for (Text dayName : dayNames) {
+            dayName.setStyle("-fx-font-weight: bold;");
+        }
+
         GridPane dayLabels = new GridPane();
         dayLabels.setPrefWidth(1095);
         Integer col = 0;
@@ -62,8 +74,11 @@ public class FullCalendarView {
         // Create calendarTitle and buttons to change current month
         calendarTitle = new Text();
         Button previousMonth = new Button("<<");
+        previousMonth.setStyle("-fx-font-weight: bold;");
+
         previousMonth.setOnAction(e -> previousMonth());
         Button nextMonth = new Button(">>");
+        nextMonth.setStyle("-fx-font-weight: bold;");
         nextMonth.setOnAction(e -> nextMonth());
         HBox titleBar = new HBox(previousMonth, calendarTitle, nextMonth);
         titleBar.setAlignment(Pos.BASELINE_CENTER);
@@ -152,7 +167,7 @@ public class FullCalendarView {
             // Vérifie si la date passée en paramètre se situe entre la date de début et de fin de l'événement
             if ((ld.isEqual(eventStartDate) || ld.isAfter(eventStartDate)) &&
                     (ld.isEqual(eventEndDate) || ld.isBefore(eventEndDate))) {
-                Text titleText = new Text("Nom : " + evenement.getNom());
+                Text titleText = new Text("Event Title : " + evenement.getNom());
                 titleText.getStyleClass().add("event-title");
 
 

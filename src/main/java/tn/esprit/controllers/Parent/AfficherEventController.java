@@ -114,22 +114,28 @@ public class AfficherEventController {
     private VBox createEventCard(Evenement evenement) {
         VBox card = new VBox(10);
         // Générer le QR code à partir des détails de l'événement
-        Image qrCodeImage = generateQRCode("Nom: " + evenement.getNom() + "\n" +
-                "Description: " + evenement.getDescription() + "\n" +
-                        "Catégorie: " + evenement.getCategorie()+ "\n" +
-                        "Localisation: " + evenement.getLocalisation()+ "\n" +
-                "Date début: " + evenement.getDate_debut() + "\n" +
-                "Date fin: " + evenement.getDate_fin() + "\n" +
-                "Nb Participants: " + evenement.getNb_participant());
+        Image qrCodeImage = generateQRCode("Event Title : " + evenement.getNom() + "\n" +
+                "Event Description : " + evenement.getDescription() + "\n" +
+                "Event Category : " + evenement.getCategorie()+ "\n" +
+                "Event Location : " + evenement.getLocalisation()+ "\n" +
+                "Start Date : " + evenement.getDate_debut() + "\n" +
+                "End Date : " + evenement.getDate_fin() + "\n" +
+                "Number of Participants :  " + evenement.getNb_participant());
 
         // Créer une ImageView pour afficher le QR code
         ImageView qrCodeImageView = new ImageView(qrCodeImage);
+
         card.getStyleClass().add("event-card");
 
-        Label nomLabel = new Label("Nom: " + evenement.getNom());
-        Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());
-        Label categorieLabel = new Label("Catégorie: " + evenement.getCategorie());
-        Button detailsButton = new Button("Afficher les détails");
+
+
+
+        Label nomLabel = new Label("Event Title : " + evenement.getNom());
+
+
+        Label localisationLabel = new Label("Event Location : " + evenement.getLocalisation());
+        Label categorieLabel = new Label("Event Category : " + evenement.getCategorie());
+        Button detailsButton = new Button("Display Details");
 
         // Ajouter un gestionnaire d'événement pour le clic sur le bouton
         detailsButton.setOnAction(event -> afficherDetails(evenement));
@@ -155,11 +161,11 @@ public class AfficherEventController {
         // Afficher les détails complets de l'événement, par exemple dans une boîte de dialogue
         // Vous pouvez utiliser une boîte de dialogue JavaFX ou toute autre méthode de votre choix
         // Par exemple :
-        showDialog("Détails de l'événement",
-                "Description: " + evenement.getDescription() + "\n" +
-                        "Date début: " + evenement.getDate_debut() + "\n" +
-                        "Date fin: " + evenement.getDate_fin() + "\n" +
-                        "Nb Participants: " + evenement.getNb_participant());
+        showDialog("Event Details",
+                "Event Description : " + evenement.getDescription() + "\n" +
+                        "Start Date : " + evenement.getDate_debut() + "\n" +
+                        "End Date : " + evenement.getDate_fin() + "\n" +
+                        "Number of Participants : " + evenement.getNb_participant());
     }
 
     // Méthode pour afficher une boîte de dialogue

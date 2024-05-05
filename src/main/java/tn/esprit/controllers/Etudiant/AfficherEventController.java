@@ -109,14 +109,18 @@ public class AfficherEventController {
         imageView.setFitWidth(150);
         imageView.setFitHeight(150);
 
-        Label nomLabel = new Label("Nom: " + evenement.getNom());
-        Label descriptionLabel = new Label("Description: " + evenement.getDescription());
-        Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());
-        Label categorieLabel = new Label("Catégorie: " + evenement.getCategorie());
-        Label dateDebutLabel = new Label("Date début: " + evenement.getDate_debut());
-        Label dateFinLabel = new Label("Date fin: " + evenement.getDate_fin());
-        Label nbParticipantsLabel = new Label("Nb Participants: " + evenement.getNb_participant());
-        Button participationButton = new Button("Participer");
+
+        Label nomLabel = new Label("Event Title : " + evenement.getNom());
+        nomLabel.setStyle("-fx-font-size: 14pt; -fx-font-weight: bold; -fx-text-fill: #FE5D37;");
+        Label descriptionLabel = new Label("Event Description : " + evenement.getDescription());
+        Label localisationLabel = new Label("Event Location : " + evenement.getLocalisation());
+        Label categorieLabel = new Label("Event Category : " + evenement.getCategorie());
+        Label dateDebutLabel = new Label("Start Date : " + evenement.getDate_debut());
+        Label dateFinLabel = new Label("End Date : " + evenement.getDate_fin());
+        Label nbParticipantsLabel = new Label("Number of Participants : " + evenement.getNb_participant());
+
+        Button participationButton = new Button("Participate");
+        participationButton.setStyle("-fx-background-color: #fe5d37; -fx-font-weight: bold; -fx-text-fill: white;");
 
         participationButton.setOnAction(event -> participer(evenement, 1));
 

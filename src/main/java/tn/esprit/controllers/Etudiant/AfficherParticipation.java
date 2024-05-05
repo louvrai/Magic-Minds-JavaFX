@@ -45,20 +45,19 @@ public class AfficherParticipation {
         String username = serviceUser.getUsernameById(participation.getId_user_id());
 
         Label dateLabel = new Label("Date: " + participation.getDate());
-        Label heureLabel = new Label("Heure: " + participation.getHeure());
-        Label evenementNom = new Label("Nom d'événement :" + eventName);
+        Label timeLabel = new Label("Time: " + participation.getHeure());
+        Label eventNameLabel = new Label("Event Name: " + eventName);
+        Label usernameLabel = new Label("User Name: " + username);
+        Button deleteButton = new Button("Delete");
 
-        Label usernameLabel = new Label("Nom d'utilisateur: " + username);
-
-        Button deleteButton = new Button("Supprimer");
-
+        deleteButton.setStyle("-fx-background-color: #fe5d37; -fx-font-weight: bold; -fx-text-fill: white;");
 
         deleteButton.setOnAction(event -> deleteParticipation(participation));
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(deleteButton);
 
-        card.getChildren().addAll(dateLabel, heureLabel,evenementNom,usernameLabel, deleteButton);
+        card.getChildren().addAll(dateLabel, timeLabel,eventNameLabel,usernameLabel, deleteButton);
 
         return card;
     }

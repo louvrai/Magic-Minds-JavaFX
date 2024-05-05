@@ -75,7 +75,7 @@ public class EditEvenementController {
         if (evenementToEdit != null) {
 
             if (!isValidString(tfNom.getText()) || !isValidString(tfDescription.getText()) || !isValidString(tfLocalisation.getText()) || !isValidString(tfCategorie.getText())) {
-                showAlert("Les champs nom, description, localisation et catégorie doivent contenir uniquement des caractères alphabétiques et des espaces.", Alert.AlertType.ERROR);
+                showAlert("Name, description, location, and category fields must contain only alphabetical characters and spaces.", Alert.AlertType.ERROR);
                 return;
             }
 
@@ -84,46 +84,43 @@ public class EditEvenementController {
             evenementToEdit.setLocalisation(tfLocalisation.getText());
             evenementToEdit.setCategorie(tfCategorie.getText());
 
-
             try {
                 int nbParticipants = Integer.parseInt(tfNbParticipant.getText());
                 if (nbParticipants <= 20) {
-                    showAlert("Le nombre de participants doit être supérieur à 20.", Alert.AlertType.ERROR);
+                    showAlert("Number of participants must be greater than 20.", Alert.AlertType.ERROR);
                     return;
                 }
             } catch (NumberFormatException e) {
-                showAlert("Nombre de participants invalide", Alert.AlertType.ERROR);
+                showAlert("Invalid number of participants", Alert.AlertType.ERROR);
                 return;
             }
-
-
 
             try {
                 LocalDate dateDebut = parseDate(tfDateDebut.getText());
                 LocalDate dateFin = parseDate(tfDateFin.getText());
 
-
                 if (!dateDebut.isAfter(LocalDate.now())) {
-                    showAlert("La date de début doit être postérieure à la date actuelle.", Alert.AlertType.ERROR);
+                    showAlert("Start date must be after the current date.", Alert.AlertType.ERROR);
                     return;
                 }
-
 
                 if (!dateFin.isAfter(dateDebut)) {
-                    showAlert("La date de fin doit être postérieure à la date de début.", Alert.AlertType.ERROR);
+                    showAlert("End date must be after the start date.", Alert.AlertType.ERROR);
                     return;
                 }
-
 
                 evenementToEdit.setDate_debut(Date.valueOf(dateDebut));
                 evenementToEdit.setDate_fin(Date.valueOf(dateFin));
             } catch (ParseException e) {
-                showAlert("Format de date invalide", Alert.AlertType.ERROR);
+                showAlert("Invalid date format", Alert.AlertType.ERROR);
                 return;
             }
+
             System.out.println(evenementToEdit.getId());
             serviceEvenement.update(evenementToEdit.getId(), evenementToEdit);
-            System.out.println("Événement modifié avec succès !");
+            System.out.println("Event modified successfully!");
+
+
 
             afficherEvenementController.loadEvents();
 
