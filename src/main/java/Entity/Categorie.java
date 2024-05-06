@@ -4,6 +4,7 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Categorie {
     private int id , nbr_chapitre ,nbr_cours;
@@ -89,5 +90,14 @@ public class Categorie {
                 ", image='" + image + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Categorie categorie = (Categorie) o;
+        return id == categorie.id && Objects.equals(titre, categorie.titre);
+    }
+
 }
 

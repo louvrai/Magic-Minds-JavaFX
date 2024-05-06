@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -322,6 +323,61 @@ public class Cards {
 
         return place;
     }
+    public Pane progressHolder(){
+        Pane pH=new Pane();
+        pH.setPrefSize(260,2);
+        pH.setMaxHeight(16);
+        pH.getStylesheets().add("HStyle.css");
+        pH.getStyleClass().add("ph");
+        return pH;
+    }
+    public Pane progressPane(int width,String x){
+        Pane p=new Pane();
+        p.setPrefHeight(16);
+        p.setPrefWidth(width);
+        p.setStyle("-fx-background-color:"+x);
+        p.getStylesheets().add("HStyle.css");
+        p.getStyleClass().add("prog");
+        return p;
+    }
+    public Label mess(String mm ,String color){
+        Label msg=new Label(mm);
+        msg.setStyle("-fx-text-fill:"+color);
+        msg.getStylesheets().add("HStyle.css");
+        msg.getStyleClass().add("msg");
+        return  msg ;
+    }
+    public Pane progressCard(Pane progressPane,String catName,Label msg){
+        Pane card=new Pane();
+        card.getStylesheets().add("HStyle.css");
+        card.getStyleClass().add("cardPro");
+        HBox hBox=new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(8,10,5,20));
+        Label title=new Label();
+        title.getStylesheets().add("HStyle.css");
+        title.getStyleClass().add("titleC");
+        title.setText(catName);
+        hBox.getChildren().addAll(title,progressPane,msg);
+        card.getChildren().add(hBox);
+        return card;
+    }
+    public VBox colomns(){
+        VBox vBox=new VBox();
+        vBox.setPrefWidth(635);
+        vBox.setPrefHeight(430);
+        vBox.setSpacing(0);
+        return vBox;
+    }
+    public HBox tabLine(){
+        HBox hBox=new HBox();
+        hBox.setPrefWidth(500);
+        hBox.setPrefHeight(70);
+        hBox.setPadding(new Insets(8,8,8,8));
+        hBox.setSpacing(10);
+        return hBox;
+    }
+
 
 
 

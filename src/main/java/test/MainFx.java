@@ -1,5 +1,6 @@
 package test;
 
+import controllers.Progress;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

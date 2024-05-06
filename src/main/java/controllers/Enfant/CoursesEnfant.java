@@ -62,6 +62,29 @@ public class CoursesEnfant implements Initializable {
     Categorie catDetail=new Categorie();
     Cours coursDetail=new Cours();
     Ressource ressourceDetail=new Ressource();
+    List<Categorie> Catego = new ArrayList<>();
+    List<Cours> COPL=new ArrayList<>();
+    @FXML
+    private Button progress;
+
+    @FXML
+    void seeProgress(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Progress.fxml"));
+            Parent updatePageRoot = loader.load();
+            Progress progress=loader.getController();
+            progress.fetchPData(Catego,COPL);
+            progress.initialize(null,null);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            Scene newPageScene = new Scene(updatePageRoot,650,500);
+            stage.setScene(newPageScene);
+            stage.setTitle("Progress");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
 
@@ -120,6 +143,7 @@ public class CoursesEnfant implements Initializable {
         Pane carte = (Pane) mouseEvent.getSource();
         catDetail = (Categorie) carte.getUserData();
         getCourses();
+        Catego.add(catDetail);
 
     }
     public void getCourses(){
@@ -171,8 +195,11 @@ public class CoursesEnfant implements Initializable {
         pageContainer.getChildren().clear();
         bar.getChildren().clear();
         HBox bar1=card.HEbar();
+        Button progressBtn=card.add("See progress");
+        bar1.getChildren().add(progressBtn);
         bar=bar1;
         Content.getChildren().add(bar);
+        progressBtn.setOnMouseClicked(this::seeProgress);
         pagination();
     }
     private void goBack(MouseEvent mouseEvent) {
@@ -190,6 +217,7 @@ public class CoursesEnfant implements Initializable {
         back.setOnMouseClicked(this::goBackToCours);
         VBox DandChap=this.showChapter(coursDetail);
         pageContainer.getChildren().add(DandChap);
+        COPL.add(coursDetail);
 
     }
 
@@ -254,7 +282,6 @@ public class CoursesEnfant implements Initializable {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PreviewPDF.fxml"));
                         Parent updatePageRoot = loader.load();
                         PreviewPDF previewPDF = loader.getController();
-                        System.out.println(ressourceDetail.getUrl());
                         previewPDF.fetchPDF(ressourceDetail.getUrl());
                         Stage stage = new Stage();
                         stage.initStyle(StageStyle.UTILITY);

@@ -162,4 +162,5 @@ public class CategorieService implements CRUDInterface <Categorie> {
         return c;
     }
 
+
 }

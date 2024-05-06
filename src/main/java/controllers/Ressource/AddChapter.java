@@ -96,7 +96,6 @@ public class AddChapter implements Initializable {
             stage.close();
         }
     }
-
     @FXML
     void goBack(MouseEvent event) {
         Stage closestage = (Stage) uploadFile.getScene().getWindow();
@@ -141,33 +140,38 @@ public class AddChapter implements Initializable {
 
     }
     public boolean isValid(){
-            ObservableList<Ressource> ressources = ressourceService.getAll();
-            String title = addChapTiltle.getText();
-            ECtitre.setText("");
+        ObservableList<Ressource> ressources = ressourceService.getAll();
+        cours=coursService.getbyId(coursService.getCourstId(addChapCour.getValue()));
+        String title = addChapTiltle.getText();
+        ECtitre.setText("");
 
-            if (title == null || title.isEmpty()) {
-                ECtitre.setText("The title can't be empty");
+        if (title == null || title.isEmpty()) {
+            ECtitre.setText("The title can't be empty");
+            return false;
+        }
+        if (title.length() < 3 || title.length() > 20) {
+            ECtitre.setText("The title is either too long or too short");
+            return false;
+        }
+        for (Ressource r : ressources) {
+            if (title.equals(r.getTitre())) {
+                ECtitre.setText("This title already exist");
                 return false;
             }
-            if (title.length() < 3 || title.length() > 20) {
-                ECtitre.setText("The title is either too long or too short");
+            if (url.equals(r.getUrl())){
+                displayUrl.setStyle("-fx-font-fill:red");
+                displayUrl.setText("this chapter already exist");
                 return false;
             }
-            for (Ressource r : ressources) {
-                if (title.equals(r.getTitre())) {
-                    ECtitre.setText("This title already exist");
-                    return false;
-                }
-                if (url.equals(r.getUrl())){
-                    displayUrl.setStyle("-fx-font-fill:red");
-                    displayUrl.setText("this chapter already exist");
-                    return false;
-                }
-            }
-            if (url.equals("Please choose a file")) {
-                displayUrl.setText(url);
-                return false;
-            }
-            return true ;
+        }
+        if (cours.getNb_chapitre()<=ressources.size()){
+            outil.showEAlert("Error","you reached the maximum number of chapter\n for "+addChapCour.getValue());
+            return false ;
+        }
+        if (url.equals("Please choose a file")) {
+            displayUrl.setText(url);
+            return false;
+        }
+        return true ;
     }
 }

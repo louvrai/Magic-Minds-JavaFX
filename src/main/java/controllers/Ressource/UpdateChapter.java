@@ -97,7 +97,6 @@ public class UpdateChapter implements Initializable {
             String coursName = upChapCour.getValue();
             co= coursService.getbyId(coursService.getCourstId(coursName));
             chap.setId_cours_id(co.getId());
-            System.out.println("always not null");
             chap.setId_cours_id(ressource.getId_cours_id());
             System.out.println(url);
             chap.setUrl(url);
@@ -145,32 +144,41 @@ public class UpdateChapter implements Initializable {
         }
     }
     public boolean isValid(){
-            ObservableList<Ressource> ressources = ressourceService.getAll();
-            String title = upChapTiltle.getText();
-            ECtitre.setText("");
+        ObservableList<Ressource> ressources = ressourceService.getAll();
+        Cours co= coursService.getbyId(coursService.getCourstId(upChapCour.getValue()));
+        Cours coursEncien=coursService.getbyId(ressource.getId_cours_id());
 
-            if (title == null || title.isEmpty()) {
-                ECtitre.setText("The title can't be empty");
+        String title = upChapTiltle.getText();
+        ECtitre.setText("");
+
+        if (title == null || title.isEmpty()) {
+            ECtitre.setText("The title can't be empty");
+            return false;
+        }
+        if (title.length() < 3 || title.length() > 20) {
+            ECtitre.setText("The title is either too long or too short");
+            return false;
+        }
+        for (Ressource r : ressources) {
+            if (title.equals(r.getTitre()) && !title.equals(ressource.getTitre())) {
+                ECtitre.setText("This title already exist");
                 return false;
             }
-            if (title.length() < 3 || title.length() > 20) {
-                ECtitre.setText("The title is either too long or too short");
+        }
+        for (Ressource r : ressources) {
+            if (url.equals(r.getUrl()) && !url.equals(ressource.getUrl())) {
+                updisplayUrl.setText("this chapter already exist");
+                updisplayUrl.setStyle("-fx-font-fill:red");
                 return false;
             }
-            for (Ressource r : ressources) {
-                if (title.equals(r.getTitre()) && !title.equals(ressource.getTitre())) {
-                    ECtitre.setText("This title already exist");
-                    return false;
-                }
+        }
+        if (!co.getTitre().equals(coursEncien.getTitre())) {
+            if (co.getNb_chapitre() <= ressources.size()) {
+                outil.showEAlert("Error", "you reached the maximum number of chapter\n for " + upChapCour.getValue());
+                return false;
             }
-            for (Ressource r : ressources) {
-                if (url.equals(r.getUrl()) && !url.equals(ressource.getUrl())) {
-                    updisplayUrl.setText("this chapter already exist");
-                    updisplayUrl.setStyle("-fx-font-fill:red");
-                    return false;
-                }
-            }
-            return true ;
+        }
+        return true ;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

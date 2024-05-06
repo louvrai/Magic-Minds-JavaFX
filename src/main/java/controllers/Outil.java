@@ -15,6 +15,13 @@ import java.util.Optional;
 public class Outil {
     CoursService coursService = new CoursService();
     RessourceService ressourceService= new RessourceService();
+    public void showEAlert(String title, String contentText) {
+        Alert alertType = new Alert(Alert.AlertType.ERROR);
+        alertType.setTitle(title);
+        alertType.setHeaderText(contentText);
+        alertType.getDialogPane().setGraphic(null);
+        alertType.show();
+    }
 
     public void showSAlert(String title, String contentText) {
         Alert alertType = new Alert(Alert.AlertType.INFORMATION);

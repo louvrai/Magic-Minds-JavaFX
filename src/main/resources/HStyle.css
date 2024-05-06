@@ -116,7 +116,13 @@
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-text-fill: #FE5D37;
 }
-
+.msg {
+    -fx-pref-width:90px;
+    -fx-pref-height: 20px;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size:18px;
+    -fx-start-margin: 20px;
+}
 
 .pane {
     -fx-background-color: rgba(36, 76, 91, 0.5);
@@ -131,6 +137,15 @@
 .pane:hover {
     -fx-background-color: #f1aa85;
 }
+.prog{
+    -fx-background-radius: 8px;
+}
+.ph{
+    -fx-border-color:#FE5D37;
+    -fx-border-radius: 8px;
+}
+
+
 .pane_det{
     -fx-background-color: rgba(36, 76, 91, 0.5);
     -fx-background-radius: 20px;
@@ -171,5 +186,11 @@
 }
 .text-field{
     -fx-font-fill:white;
+}
+.cardPro{
+    -fx-pref-width:550px;
+    -fx-pref-height: 80px;
+    -fx-background-color: #e6e6fa;
+    -fx-effect: dropshadow(gaussian, rgb(128, 128, 128), 5, 0.3, 3, 3);
 }
 
