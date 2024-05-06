@@ -223,7 +223,7 @@ public class SaveUserController implements Initializable {
 
         stage.setTitle("Dashboard");
 
-        stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
 
         stage.show();

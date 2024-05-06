@@ -8,6 +8,7 @@ import com.mailjet.client.errors.MailjetException;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class test {
     public static void main(String[] args) throws SQLException, MailjetException {
@@ -22,7 +23,17 @@ public class test {
 //        service.insert(user);
 
         //System.out.println(service.getAll());
-        MailjetService envoie = new MailjetService();
-        envoie.sendMailjet("benslimenlouay29@gmail.com","verifier "," <h1> Bonjour louay voici votre code </h1>   <hr>  52114 ");
+//        MailjetService envoie = new MailjetService();
+//        envoie.sendMailjet("benslimenlouay29@gmail.com","verifier "," <h1> Bonjour louay voici votre code </h1>   <hr>  52114 ");
+        UserService service = new UserService();
+
+        try {
+         List<User> user =   service.search("t");
+            System.out.println(user);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
     }
 }

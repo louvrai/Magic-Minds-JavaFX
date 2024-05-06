@@ -46,7 +46,7 @@
       </Button>
       <Hyperlink layoutX="492.0" layoutY="449.0" onMouseClicked="#forgetPasswordPage" text="Forgot Password?" />
       <Hyperlink layoutX="455.0" layoutY="488.0" onMouseClicked="#loginPage" text="Already have an account? Login!" />
-      <FontAwesomeIconView fill="#fe5d37" glyphName="CLOSE" layoutX="724.0" layoutY="35.0" size="25" />
+      <FontAwesomeIconView fill="#fe5d37" glyphName="CLOSE" layoutX="724.0" layoutY="35.0" onMouseClicked="#close" size="25" />
       <CheckBox fx:id="agreeId" layoutX="370.0" layoutY="377.0" mnemonicParsing="false" text="Agree Items" />
       <Text fx:id="firstnameControl" layoutX="380.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
       <Text fx:id="lastnameControl" layoutX="575.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
@@ -56,5 +56,6 @@
       <Text fx:id="ageControl" layoutX="575.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="110.13671875" />
       <Text fx:id="emailControl" layoutX="378.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="329.13671875" />
       <Text fx:id="agreeControl" layoutX="466.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="234.0" />
+      <Button layoutX="318.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#clear" styleClass="btn_home" stylesheets="@btnSave.css" text="clean" />
    </children>
 </AnchorPane>

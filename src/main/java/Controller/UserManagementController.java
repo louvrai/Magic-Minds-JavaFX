@@ -88,13 +88,36 @@ public class UserManagementController implements Initializable {
 
     @FXML
     private TextField txt_search;
+    @FXML
+    private Pagination pagination;
+    @FXML
+    private ComboBox<String> comboOrder;
 
     User user = null ;
+    int itemsPerPage = 10; // Nombre d'éléments par page
+    int totalItems;
 
     ObservableList<User> UserList = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<String> list = FXCollections.observableArrayList("firstname","lastname","age");
+        comboOrder.setItems(list);
+        txt_search.setStyle("-fx-text-fill: white;");
    loadData();
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            // Charger les données de la nouvelle page
+            UserService userService = new UserService();
+            int pageIndex = newValue.intValue();
+            int startIndex = pageIndex * itemsPerPage; // Utilisez itemsPerPage ici
+            int endIndex = startIndex + itemsPerPage; // La fin est calculée en ajoutant itemsPerPage à startIndex
+            try {
+                List<User> users = userService.getUsersInRange(startIndex, itemsPerPage); // Utilisez itemsPerPage ici
+                UserList.clear();
+                UserList.addAll(users);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
@@ -162,12 +185,26 @@ public class UserManagementController implements Initializable {
                         FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
                         FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
                         FontAwesomeIconView showIcon = new FontAwesomeIconView(FontAwesomeIcon.EYE);
+                        FontAwesomeIconView banUser = new FontAwesomeIconView(FontAwesomeIcon.BAN);
+                        user = tableUser.getItems().get(getIndex());
+                     if(user.isActive()) {
+                         banUser.setCursor(Cursor.HAND);
 
+                         banUser.setSize("28px");
+                         banUser.setFill(Color.valueOf("RED"));
+                       }else {
+                         banUser.setCursor(Cursor.HAND);
+
+                         banUser.setSize("28px");
+                         banUser.setFill(Color.valueOf("GREEN"));
+                        }
+//                        banUser.setText("desactiver");
 //                        deleteIcon.setStyle(
 //                                " -fx-cursor: hand ;"
 //                                        + "-glyph-size:28px;"
 //                                        + "-fx-fill:#ff1744;"
 //                        );
+
                         showIcon.setCursor(Cursor.HAND);
 
                         showIcon.setSize("28px");
@@ -274,8 +311,45 @@ public class UserManagementController implements Initializable {
                             stage.show();
 
                         });
+                        banUser.setOnMouseClicked((MouseEvent event) -> {
+                            UserService userService = new UserService();
+                            user = tableUser.getSelectionModel().getSelectedItem();
+                            System.out.println(user);
+                            if(user != null) {
+                                try {
+                                    User user1 = userService.getUserByEmail(user.getEmail());
+                                    boolean active;
+                                    if (user1.isActive()) {
+                                        active = false;
+                                        banUser.setCursor(Cursor.HAND);
 
-                        HBox managebtn = new HBox(editIcon, deleteIcon,showIcon);
+                                        banUser.setSize("28px");
+                                        banUser.setFill(Color.valueOf("GREEN"));
+                                    } else {
+                                        active = true;
+                                        banUser.setCursor(Cursor.HAND);
+
+                                        banUser.setSize("28px");
+                                        banUser.setFill(Color.valueOf("GREEN"));
+                                    }
+                                    try {
+                                        userService.setActive(user.getId(), active);
+                                    } catch (SQLException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                } catch (SQLException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                            }else{
+                                System.out.println("user is null");
+                            }
+
+
+
+
+                        });
+
+                        HBox managebtn = new HBox(editIcon, deleteIcon,showIcon,banUser);
                         managebtn.setStyle("-fx-alignment:center");
                         HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                         HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
@@ -297,10 +371,61 @@ public class UserManagementController implements Initializable {
 
     @FXML
     void search(MouseEvent event) {
+        String searchKeyword = txt_search.getText().toLowerCase();
 
+
+        List<User> filteredUsers = new ArrayList<>();
+
+        for (User user : UserList) {
+
+            if (user.getFirstName().toLowerCase().contains(searchKeyword) ||
+                    user.getLastName().toLowerCase().contains(searchKeyword) ||
+                    user.getEmail().toLowerCase().contains(searchKeyword)) {
+
+                filteredUsers.add(user);
+            }
+        }
+
+
+        ObservableList<User> filteredObservableList = FXCollections.observableArrayList(filteredUsers);
+
+
+        tableUser.setItems(filteredObservableList);
+    }
+    @FXML
+    void btnOrderBy(MouseEvent event) {
+        Object selectedItem = comboOrder.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null && selectedItem instanceof String) {
+            String selectedSortOption = (String) selectedItem;
+
+            switch (selectedSortOption) {
+                case "firstname":
+                    firstNameCol.setSortType(TableColumn.SortType.ASCENDING);
+                    tableUser.getSortOrder().setAll(firstNameCol);
+                    break;
+                case "age":
+                    ageCol.setSortType(TableColumn.SortType.ASCENDING);
+                    tableUser.getSortOrder().setAll(ageCol);
+                    break;
+                case "lastname":
+                    LastNameCol.setSortType(TableColumn.SortType.ASCENDING);
+                    tableUser.getSortOrder().setAll(LastNameCol);
+                    break;
+                default:
+                    refresh();
+                    break;
+            }
+        } else {
+
+           refresh();
+        }
     }
 
- 
+    @FXML
+    void statBtn(MouseEvent event) {
+
+    }
 
 
 }
