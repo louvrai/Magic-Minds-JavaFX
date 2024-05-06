@@ -6,12 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="16efb27c-bbb0-4519-ac7f-78501e638bc9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherAllQuizzesEnfant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherAllQuizzesEnfant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizEnfant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizEnfant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuizProf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/Mainfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/Mainfx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuizEnfant.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuizEnfant.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestionProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherQuestionProf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ShowQuizHistoryEnfant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ShowQuizHistoryEnfant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ShowQuizHistoryProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ShowQuizHistoryProf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/StatisticController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/StatisticController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Questions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Questions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/ExcelExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/ExcelExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuestionsCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/QuizCrud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherQuestion.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,8 @@
       <workItem from="1714636537059" duration="175000" />
       <workItem from="1714637515777" duration="8921000" />
       <workItem from="1714677442927" duration="4102000" />
-      <workItem from="1714818696542" duration="52346000" />
+      <workItem from="1714818696542" duration="52467000" />
+      <workItem from="1714988079931" duration="17844000" />
     </task>
     <servers />
   </component>

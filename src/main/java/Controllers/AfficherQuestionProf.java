@@ -1,6 +1,7 @@
 package Controllers;
 import Entities.Quiz;
 import Entities.Questions;
+import Service.QuizCrud;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -48,6 +49,7 @@ public class AfficherQuestionProf {
                 }
                 mainVbox.getChildren().add(rowHBox);
             }
+
             Button BackToQuizzesButton = new Button("Back to quizzes");
             BackToQuizzesButton.setStyle("-fx-background-radius: 10px");
             BackToQuizzesButton.setOnAction(event -> {
@@ -92,8 +94,6 @@ public class AfficherQuestionProf {
             });
 
             mainVbox.getChildren().addAll(new HBox(BackToQuizzesButton, AddQuestionButton));
-
-
             mainVbox.setAlignment(Pos.CENTER); // Aligner les éléments au centre de la VBox
 
         } catch (SQLException e) {
@@ -105,6 +105,9 @@ public class AfficherQuestionProf {
     }
 
     private StackPane createQuestionCard(Questions question) {
+        int idQuiz= question.getIdQuiz();
+        QuizCrud d=new QuizCrud();
+        Quiz q=d.getByQuizId(idQuiz);
         StackPane stackPane = new StackPane();
 
 
@@ -115,13 +118,15 @@ public class AfficherQuestionProf {
         Text nameChoice2 = new Text("Choice 2: "+question.getChoix2());
         Text nameChoice3 = new Text("Choice 3: "+question.getChoix3());
         Text nameAnswer = new Text("Correct Answer: "+question.getReponse());
-       int idQuiz= question.getIdQuiz();
-        Text nameIdquiz = new Text("idQuiz:  " + Integer.toString(idQuiz));
+        Text nameQuiz = new Text("Quiz name: "+q.getTitre());
+
+
+        //Text nameIdquiz = new Text("idQuiz:  " + Integer.toString(idQuiz));
 
 
 
 
-        nameIdquiz.setTranslateY(0);
+        nameQuiz.setTranslateY(0);
         nameQuestion.setTranslateY(12);
         nameChoice1.setTranslateY(24);
         nameChoice2.setTranslateY(36);
@@ -139,7 +144,7 @@ public class AfficherQuestionProf {
         button.setTranslateY(20);
         button.setSpacing(10);
 
-        VBox contentBox = new VBox(nameIdquiz,nameQuestion,nameChoice1,nameChoice2,nameChoice3,nameAnswer,button);
+        VBox contentBox = new VBox(nameQuiz,nameQuestion,nameChoice1,nameChoice2,nameChoice3,nameAnswer,button);
 
         contentBox.setAlignment(Pos.TOP_CENTER);
         // Positioning buttons

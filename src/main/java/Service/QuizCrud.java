@@ -42,6 +42,30 @@ public class QuizCrud implements CrudInterface<Quiz> {
         }
         return null;
     }
+    public Quiz getByQuizId(int quizId) {
+        try {
+            String query = "SELECT * FROM quiz WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, quizId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        Quiz resultquiz = new Quiz();
+                        resultquiz.setId(resultSet.getInt("id"));
+                        resultquiz.setTitre(resultSet.getString("titre"));
+                        resultquiz.setNb_question(resultSet.getInt("nbquestion"));
+                        resultquiz.setTemp(resultSet.getInt("temp"));
+
+                        // Ajoutez d'autres attributs si nécessaire
+                        return resultquiz;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public void ajouter(Quiz quiz) throws SQLException {

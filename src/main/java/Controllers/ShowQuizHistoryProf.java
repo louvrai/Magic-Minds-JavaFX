@@ -80,7 +80,13 @@ public class ShowQuizHistoryProf {
             ExportEXCELButton.setOnAction(event -> {
 
                     ExcelExporter d = new ExcelExporter();
-                   d.generateExcel(evaluations);
+                try {
+                    d.generateExcel(evaluations);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
             });
             mainVbox.getChildren().addAll(new HBox(BackToQuizzesButton,ExportEXCELButton));
@@ -98,12 +104,14 @@ public class ShowQuizHistoryProf {
     private StackPane createEvaluationCard(Evaluation evaluation) throws SQLException {
         StackPane stackPane = new StackPane();
         int quizId=evaluation.getId_quiz_id();
+        QuizCrud d=new QuizCrud();
+        Quiz q=d.getByQuizId(quizId);
         questions = questionsCrud.recupererParQuizId(quizId);
 
         int userId = evaluation.getId_user_id();
         Text nameTextuser = new Text("User Id:  " + Integer.toString(userId));
 
-        Text nameTextQuiz = new Text("Quiz Id:  " + Integer.toString(quizId));
+        Text nameTextQuiz = new Text("Quiz Name:  " +q.getTitre() );
         String resultat = evaluation.getResultat()+"/"+questions.size();
         Text nameTextResult = new Text("Result:  " + resultat);
         LocalDate date = evaluation.getDate();

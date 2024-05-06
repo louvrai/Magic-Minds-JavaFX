@@ -1,9 +1,7 @@
 package Controllers;
 
 import Entities.Questions;
-import Entities.Quiz;
 import Service.QuestionsCrud;
-import Service.QuizCrud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +44,7 @@ public class AfficherQuestion {
     private TableColumn<Questions,String > fxQuestion;
 
     @FXML
-    private TableColumn<Questions,Integer> fxQuizId;
+    private TableColumn<Questions, String> fxQuizId;
     @FXML
     private TableColumn<Questions,Void> fxDeleteQuestion;
     @FXML
@@ -60,7 +58,7 @@ public class AfficherQuestion {
     @FXML
     public void initialize() throws SQLException {
         // Initialize TableView columns
-        fxQuizId.setCellValueFactory(new PropertyValueFactory<>("idQuiz"));
+        fxQuizId.setCellValueFactory(new PropertyValueFactory<Questions, String>("nomQuiz"));
         fxQuestion.setCellValueFactory(new PropertyValueFactory<>("question"));
         fxChoice1.setCellValueFactory(new PropertyValueFactory<>("choix1"));
         fxChoice2.setCellValueFactory(new PropertyValueFactory<>("choix2"));
@@ -74,7 +72,7 @@ public class AfficherQuestion {
     }
 
     private void loadQuestionData()throws SQLException {
-        List<Questions> q =qc.recuperer();
+        List<Questions> q =qc.recupererAvecNomQuiz();
         fxTable.getItems().addAll(q);
 
     }
@@ -84,16 +82,17 @@ public class AfficherQuestion {
         QuestionsCrud qc=new QuestionsCrud();
         List<Questions> q=new ArrayList<>();
 
-        q=qc.recuperer();
+        q=qc.recupererAvecNomQuiz();
         ObservableList<Questions> list = FXCollections.observableList(q);
-
+       // QuizCrud d=new QuizCrud();
+        //Quiz qq=d.getByQuizId(quizId);
         fxTable.setItems(list);
         fxQuestion.setCellValueFactory(new PropertyValueFactory<Questions,String>("question"));
         fxChoice1.setCellValueFactory(new PropertyValueFactory<Questions,String>("choix1"));
         fxChoice2.setCellValueFactory(new PropertyValueFactory<Questions,String>("choix2"));
         fxChoice3.setCellValueFactory(new PropertyValueFactory<Questions,String>("choix3"));
         fxCorrectAnswer.setCellValueFactory(new PropertyValueFactory<Questions,String>("reponse"));
-        fxQuizId.setCellValueFactory(new PropertyValueFactory<Questions,Integer>("idQuiz"));
+        fxQuizId.setCellValueFactory(new PropertyValueFactory<Questions,String>("nomQuiz"));
 
 
 

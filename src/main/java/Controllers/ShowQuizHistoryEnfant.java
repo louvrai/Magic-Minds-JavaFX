@@ -110,7 +110,6 @@ public class ShowQuizHistoryEnfant {
                     e.printStackTrace();
                 }
             });
-
             mainVbox.getChildren().addAll(BackToQuizzesButton,StatisticsButton);
 
 
@@ -126,12 +125,14 @@ public class ShowQuizHistoryEnfant {
     private StackPane createEvaluationCard(Evaluation evaluation) throws SQLException {
         StackPane stackPane = new StackPane();
         int quizId=evaluation.getId_quiz_id();
+        QuizCrud d=new QuizCrud();
+        Quiz q=d.getByQuizId(quizId);
         questions = questionsCrud.recupererParQuizId(quizId);
 
         int userId = evaluation.getId_user_id();
         Text nameTextuser = new Text("User Id:  " + Integer.toString(userId));
 
-        Text nameTextQuiz = new Text("Quiz Id:  " + Integer.toString(quizId));
+        Text nameTextQuiz = new Text("Quiz name:  " + q.getTitre());
         String resultat = evaluation.getResultat()+"/"+questions.size();
         Text nameTextResult = new Text("Result:  " + resultat);
         LocalDate date = evaluation.getDate();

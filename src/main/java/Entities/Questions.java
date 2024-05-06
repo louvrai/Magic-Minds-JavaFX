@@ -10,6 +10,10 @@ public class Questions {
     private String reponse;
     private int id;
     private int idQuiz;
+    private String nomQuiz; // Nouvelle propriété pour stocker le nom du quiz
+
+    // Getters et setters pour la nouvelle propriété
+
     public Questions(){};
 
     public Questions(String question, String choix1, String choix2, String choix3, String reponse, int id, int idQuiz) {
@@ -41,7 +45,13 @@ public class Questions {
     public int hashCode() {
         return Objects.hash(question, choix1, choix2, choix3, reponse, id, idQuiz);
     }
+    public String getNomQuiz() {
+        return nomQuiz;
+    }
 
+    public void setNomQuiz(String nomQuiz) {
+        this.nomQuiz = nomQuiz;
+    }
     public String getQuestion() {
         return question;
     }

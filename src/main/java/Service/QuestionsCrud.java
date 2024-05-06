@@ -92,6 +92,34 @@ public class QuestionsCrud implements CrudInterface<Questions>{
         return q;
     }
 
+    public List<Questions> recupererAvecNomQuiz() throws SQLException {
+        List<Questions> questions = new ArrayList<>();
+        try {
+            String req = "SELECT q.*, quiz.titre AS nomQuiz " +
+                    "FROM question q " +
+                    "INNER JOIN quiz ON q.quiz_id = quiz.id";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(req);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int idQuiz = resultSet.getInt("quiz_id");
+                String question = resultSet.getString("question");
+                String choix1 = resultSet.getString("choix1");
+                String choix2 = resultSet.getString("choix2");
+                String choix3 = resultSet.getString("choix3");
+                String reponse = resultSet.getString("reponse");
+                String nomQuiz = resultSet.getString("nomQuiz");
+
+                Questions questionObj = new Questions(question, choix1, choix2, choix3, reponse, id, idQuiz);
+                questionObj.setNomQuiz(nomQuiz); // Setter pour le nom du quiz
+                questions.add(questionObj);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return questions;
+    }
 
     public List<Questions> recupererParQuizId(int idQuiz) throws SQLException {
         List<Questions> questions = new ArrayList<>();
