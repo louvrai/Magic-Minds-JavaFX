@@ -53,6 +53,7 @@ public class UpdateCours implements Initializable {
     CategorieService categorieService=new CategorieService();
     ObservableList<Cours> courses = FXCollections.observableArrayList();
     Outil outil =new Outil();
+    String user="";
     @FXML
     void updateCours(MouseEvent event) {
         if (isValid()==true) {
@@ -62,7 +63,11 @@ public class UpdateCours implements Initializable {
             c.setDescription(upCDescrip.getText());
             c.setDuree(upCPer.getValue());
             c.setNb_chapitre(upCChap.getValue());
-            c.setStatus("Valid");
+            if (user.equals("Prof")){
+                c.setStatus("Invalid");
+            }else{
+                c.setStatus("Valid");
+            }
             String catName = upCCat.getValue();
             cat = categorieService.getbyId(categorieService.getCatId(catName));
             c.setCategorie_id(cat.getId());
@@ -136,6 +141,10 @@ public class UpdateCours implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         upCCat.setItems(categorieService.getCatNames());
+    }
+
+    public void fetwho(String who) {
+        user=who;
     }
 }
 

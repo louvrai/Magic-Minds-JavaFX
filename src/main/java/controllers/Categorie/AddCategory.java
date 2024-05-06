@@ -47,6 +47,8 @@ public class AddCategory {
     File selectedFile = new File("C:\\");
     File UploadDirectory = new File("C:/Users/HBY/IdeaProjects/test2/src/main/resources/UploadImage");
     File destinationFile = new File("C:\\");
+
+
     @FXML
     public void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -135,5 +137,6 @@ public class AddCategory {
         Stage closestage = (Stage) backCat.getScene().getWindow();
         closestage.close();
     }
+
 
 }

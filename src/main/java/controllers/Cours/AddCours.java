@@ -55,6 +55,11 @@ public class AddCours implements Initializable {
     CoursService coursService=new CoursService();
     ObservableList<Cours> courses = FXCollections.observableArrayList();
     Outil outil =new Outil();
+    String who="";
+    public void fetch(String user){
+        who=user ;
+        System.out.println(who);
+    }
 
     @FXML
     void addCours(MouseEvent event) throws SQLException {
