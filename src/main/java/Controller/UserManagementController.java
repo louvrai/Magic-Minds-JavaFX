@@ -424,7 +424,16 @@ public class UserManagementController implements Initializable {
 
     @FXML
     void statBtn(MouseEvent event) {
-
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/statsPageUserController.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
