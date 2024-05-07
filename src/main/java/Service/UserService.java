@@ -99,7 +99,24 @@ public class UserService implements ServiceUserInterface<User> {
         }
         return users;
     }
-    public boolean checkUserUnique(String email){
+    public boolean checkUserUnique(String email) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+
+
+            String sql = "SELECT COUNT(*) AS count FROM `user` WHERE `email` = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
+            resultSet = stmt.executeQuery();
+
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return count == 0;
+            }
+
+
+
         return false;
     }
     public void registerUser(User user) throws SQLException {
@@ -168,7 +185,7 @@ public class UserService implements ServiceUserInterface<User> {
 
         String sql = "SELECT * FROM `user` WHERE `email` = ?";
         stmt = connection.prepareStatement(sql);
-        stmt.setString(1, email); // Remplacer le premier paramètre par l'email fourni
+        stmt.setString(1, email);
 
         resultSet = stmt.executeQuery();
         while(resultSet.next()){
@@ -219,18 +236,17 @@ public class UserService implements ServiceUserInterface<User> {
         List<User> users = new ArrayList<>();
 
 
-            // Requête SQL avec un espace après et avant le mot-clé de recherche pour s'assurer que le mot-clé est entouré de caractères d'espace
+
             String sql = "SELECT * FROM `user` WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ?";
             pstmt = connection.prepareStatement(sql);
 
-            // Ajout des caractères génériques '%' autour du mot-clé de recherche
+
             pstmt.setString(1, "%" + searchKey + "%");
             pstmt.setString(2, "%" + searchKey + "%");
             pstmt.setString(3, "%" + searchKey + "%");
 
             resultSet = pstmt.executeQuery();
 
-            // Parcourir les résultats de la requête
             while (resultSet.next()) {
                 User p = new User();
                 p.setId(resultSet.getInt("id"));
@@ -273,7 +289,7 @@ public class UserService implements ServiceUserInterface<User> {
                 user.setActive(resultSet.getBoolean("active"));
                 users.add(user);
             }
-        } // La ressource stmt sera automatiquement fermée après le bloc try
+        }
         return users;
     }
     public Map<String, Integer> getGenderStats() throws SQLException {
@@ -290,4 +306,29 @@ public class UserService implements ServiceUserInterface<User> {
         return genderStats;
     }
 
+
+public boolean authenticateUser(String email, String password) throws SQLException {
+    PreparedStatement stmt = null;
+    ResultSet resultSet = null;
+
+
+
+        String sql = "SELECT `password` FROM `user` WHERE `email` = ?";
+        stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
+        resultSet = stmt.executeQuery();
+
+
+        if (resultSet.next()) {
+
+            String storedPassword = resultSet.getString("password");
+
+
+            return BCrypt.checkpw(password, storedPassword);
+        } else {
+
+            return false;
+        }
+
+}
 }

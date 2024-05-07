@@ -121,11 +121,12 @@
                      </image>
                   </ImageView>
                   <Button alignment="CENTER" contentDisplay="TOP" layoutX="652.0" layoutY="5.0" mnemonicParsing="false" opacity="0.3" prefHeight="49.0" prefWidth="61.0" />
-                  <ImageView fitHeight="51.0" fitWidth="49.0" layoutX="657.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageView" fitHeight="51.0" fitWidth="49.0" layoutX="657.0" layoutY="5.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/man.png" />
                      </image>
                   </ImageView>
+                  <FontAwesomeIconView fill="#2e90e1" glyphName="SIGN_OUT" layoutX="49.0" layoutY="30.0" onMouseClicked="#logout" size="30" />
                </children>
             </Pane>
             <AnchorPane layoutX="25.0" layoutY="87.0" prefHeight="509.0" prefWidth="691.0" stylesheets="@DashbordDesign.css">

@@ -28,7 +28,7 @@ public class test {
         UserService service = new UserService();
 
         try {
-         List<User> user =   service.search("t");
+         Boolean user =   service.authenticateUser("benslimenlouay29@gmail.com", "123Loua");
             System.out.println(user);
         }catch (SQLException e){
             e.printStackTrace();

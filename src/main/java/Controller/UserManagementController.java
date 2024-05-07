@@ -2,6 +2,7 @@ package Controller;
 
 
 import Service.ExcelService;
+import Service.SessionManager;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import Entity.User;
@@ -13,10 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -92,6 +96,8 @@ public class UserManagementController implements Initializable {
     private Pagination pagination;
     @FXML
     private ComboBox<String> comboOrder;
+    @FXML
+    private ImageView imageView;
 
     User user = null ;
     int itemsPerPage = 10; // Nombre d'éléments par page
@@ -100,6 +106,9 @@ public class UserManagementController implements Initializable {
     ObservableList<User> UserList = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        User user = SessionManager.getCurrentUser();
+//        Image image = new Image("file:/" + user.getPicture());
+//        imageView.setImage(image);
         ObservableList<String> list = FXCollections.observableArrayList("firstname","lastname","age");
         comboOrder.setItems(list);
         txt_search.setStyle("-fx-text-fill: white;");
@@ -436,5 +445,40 @@ public class UserManagementController implements Initializable {
         }
     }
 
+    @FXML
+    void profile(MouseEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/showUserProfileController.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void Login1() throws IOException {
 
+        Parent parent = FXMLLoader.load(getClass().getResource("/loginController.fxml"));
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+
+    }
+    @FXML
+    void logout(MouseEvent event) {
+        SessionManager sessionManager= SessionManager.getInstance();
+        sessionManager.endSession();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+
+        try {
+            Login1();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

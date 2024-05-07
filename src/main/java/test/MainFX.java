@@ -16,7 +16,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent parent   = FXMLLoader.load(getClass().getResource("/UserManagementController.fxml"));
+        Parent parent   = FXMLLoader.load(getClass().getResource("/loginController.fxml"));
        // statsPageUserController.fxml
        ///UserManagementController.fxml
         Scene scene = new Scene(parent);
