@@ -146,7 +146,7 @@ public class EditEvenementController {
         }
     }
     @FXML
-    void goBackaffichage1(ActionEvent event) {
+    void goBackEDITP(ActionEvent event) {
         redirectToEventDisplay(event);
     }
     private boolean isValidString(String input) {

@@ -280,7 +280,7 @@
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <VBox> <!-- Déplacez le bouton "Go Back" ici -->
-                    <Button fx:id="btnGoBack" text="View Events" onAction="#goBackaffichage" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
+                    <Button fx:id="btnGoBack" text="View Events" onAction="#goBackEPR" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
                 </VBox>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="trasparent" stylesheets="@style.css" VBox.vgrow="ALWAYS">
                     <content>

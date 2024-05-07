@@ -311,7 +311,7 @@
 
     <Button text="Save" onAction="#ajouterEvenement"  textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;" />
 
-    <Button text="Back" onAction="#goBackaffichage"  textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;" />
+    <Button text="Back" onAction="#goBackPROFE"  textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;" />
 
 
 </VBox>

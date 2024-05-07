@@ -184,7 +184,7 @@ public class AfficherEventController {
         alert.showAndWait();
     }
     @FXML
-    void goBackpar(ActionEvent event) {
+    void goBackPP(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipationParent.fxml"));
             Parent root = loader.load();

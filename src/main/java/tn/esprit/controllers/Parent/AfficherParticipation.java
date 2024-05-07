@@ -74,7 +74,7 @@ public class AfficherParticipation {
         loadParticipations(); // Rafraîchir la liste des participations après suppression
     }
     @FXML
-    void goBackeven(ActionEvent event) {
+    void goBackEP(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementParent.fxml"));
             Parent root = loader.load();

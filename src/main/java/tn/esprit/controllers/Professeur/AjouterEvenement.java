@@ -156,7 +156,7 @@ public class AjouterEvenement {
         }
     }
     @FXML
-    void goBackaffichage(ActionEvent event) {
+    void goBackPROFE(ActionEvent event) {
         redirectToEventDisplay(event);
     }
 

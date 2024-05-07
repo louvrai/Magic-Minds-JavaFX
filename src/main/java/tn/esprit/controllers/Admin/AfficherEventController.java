@@ -195,7 +195,7 @@ public class AfficherEventController {
 
 
     @FXML
-    void goBack(ActionEvent event) {
+    void goBackEA(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenementAdmin.fxml"));
             Parent root = loader.load();
@@ -209,7 +209,7 @@ public class AfficherEventController {
         }
     }
     @FXML
-    void goBackp(ActionEvent event) {
+    void goBackPA(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipationAdmin.fxml"));
             Parent root = loader.load();

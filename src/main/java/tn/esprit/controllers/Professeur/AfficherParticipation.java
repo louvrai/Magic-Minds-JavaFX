@@ -75,7 +75,7 @@ public class AfficherParticipation {
         loadParticipations();
     }
     @FXML
-    void goBackaffichage(ActionEvent event) {
+    void goBackEPR(ActionEvent event) {
         redirectToEventDisplay(event);
     }
 

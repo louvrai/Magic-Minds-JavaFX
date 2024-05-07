@@ -315,7 +315,7 @@
                                 <Region HBox.hgrow="ALWAYS" />
                                 <VBox spacing="14.0">
                                     <!-- Bouton "View Participants" -->
-                                    <Button fx:id="btnGoBack" text="View Participants" onAction="#goBackpar" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;" />
+                                    <Button fx:id="btnGoBack" text="View Participants" onAction="#goBackPP" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;" />
                                 </VBox>
                                 <!-- Vos autres éléments de filtrage -->
                                 <!-- ... -->
