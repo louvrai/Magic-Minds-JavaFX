@@ -40,7 +40,7 @@ public class Mail {
             Message message=new MimeMessage(session);
             message.setFrom(new InternetAddress (myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress (recepient));
-            message.setSubject("New Reservation ♥");
+            message.setSubject("New Participation ♥");
             message.setText(msg);
             message.reply(false);
             return message;
