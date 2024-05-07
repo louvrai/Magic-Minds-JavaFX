@@ -1,5 +1,6 @@
 package controllers;
 import Entities.Comment;
+import Entities.CurrentUser;
 import Entities.Produit;
 import Services.CartFileManager;
 import Services.CommentCRUD;
@@ -126,7 +127,7 @@ public class ProductDetailsController implements Initializable {
             Comment newComment = new Comment();
             newComment.setId_prod(curentproductid); // Assuming you have set currentProductId when loading the product details
             newComment.setDescription(commentText);
-            newComment.setId_user(3); // Assuming a user ID, modify as necessary to suit your authentication context
+            newComment.setId_user(CurrentUser.user_id); // Assuming a user ID, modify as necessary to suit your authentication context
             newComment.setDate(LocalDate.now()); // Current date
 
             CommentCRUD commentService = new CommentCRUD();

@@ -5,6 +5,7 @@ import Utils.MyDB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CommandCRUD implements PService<Command> {
     private Connection connection;
@@ -69,6 +70,89 @@ public class CommandCRUD implements PService<Command> {
 
     @Override
     public ArrayList<Command> afficherAll() throws SQLException {
-        return null;
+        ArrayList<Command> commands = new ArrayList<>();
+        String query = "SELECT c.id, c.iduser_id, c.totalprice, cp.produit_id " +
+                "FROM commande c " +
+                "LEFT JOIN commande_produit cp ON c.id = cp.commande_id";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            HashMap<Integer, Command> commandMap = new HashMap<>();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                if (!commandMap.containsKey(id)) {
+                    int idUser = resultSet.getInt("iduser_id");
+                    double totalPrice = resultSet.getDouble("totalprice");
+                    ArrayList<Integer> produitIds = new ArrayList<>();
+                    commandMap.put(id, new Command(id, idUser, produitIds, totalPrice));
+                }
+                Command command = commandMap.get(id);
+                int produitId = resultSet.getInt("produit_id");
+                if (!resultSet.wasNull()) {
+                    command.getId_produit().add(produitId);
+                }
+            }
+
+            commands.addAll(commandMap.values());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error when fetching commands from database", e);
+        }
+
+        return commands;
     }
+
+    public ArrayList<Command> afficherAll(int userId) throws SQLException {
+        ArrayList<Command> commands = new ArrayList<>();
+        String query = "SELECT c.id, c.iduser_id, c.totalprice, cp.produit_id " +
+                "FROM commande c " +
+                "LEFT JOIN commande_produit cp ON c.id = cp.commande_id " +
+                "WHERE c.iduser_id = ?"; // Filter by user ID
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                HashMap<Integer, Command> commandMap = new HashMap<>();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    if (!commandMap.containsKey(id)) {
+                        double totalPrice = resultSet.getDouble("totalprice");
+                        ArrayList<Integer> produitIds = new ArrayList<>();
+                        commandMap.put(id, new Command(id, userId, produitIds, totalPrice));
+                    }
+                    Command command = commandMap.get(id);
+                    int produitId = resultSet.getInt("produit_id");
+                    if (!resultSet.wasNull()) {
+                        command.getId_produit().add(produitId);
+                    }
+                }
+
+                commands.addAll(commandMap.values());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error when fetching commands from database", e);
+        }
+
+        return commands;
+    }
+    public  String getUsername(int userId) throws SQLException {
+        String username = null;
+        String query = "SELECT first_name, last_name FROM user WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    username = firstName + " " + lastName;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error when fetching username from database", e);
+        }
+        return username;
+    }
+
 }

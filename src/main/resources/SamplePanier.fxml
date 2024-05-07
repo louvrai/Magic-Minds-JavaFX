@@ -44,7 +44,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="92.0" spacing="5.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: #fef437; -fx-background-radius: 50;">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete_item" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: #fef437; -fx-background-radius: 50;">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,18 +52,6 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button layoutX="33.0" layoutY="18.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: #fef437; -fx-background-radius: 50;">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/updated.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets right="4.0" />
-               </HBox.margin>
             </Button>
          </children>
       </HBox>

@@ -29,11 +29,13 @@ public class Main {
        // CommentCRUD go=new CommentCRUD();
          // go.ajouter(c);
         // Test adding products
-        CartFileManager.addProduct(101, 2);  // Add 2 units of product 101
-        CartFileManager.addProduct(102, 5);  // Add 5 units of product 102
+       // CartFileManager.addProduct(101, 2);  // Add 2 units of product 101
+       // CartFileManager.addProduct(102, 5);  // Add 5 units of product 102
 
         // Display cart after adding products
-        System.out.println("Cart after additions:");
+       // System.out.println("Cart after additions:");
+        CommandCRUD cr=new CommandCRUD();
+        System.out.println(cr.afficherAll());
 
     }
 }

@@ -46,9 +46,14 @@
             </HBox>
             <Pane prefHeight="65.0" prefWidth="272.0" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                <children>
-                  <ImageView fitHeight="49.0" fitWidth="86.0" layoutX="231.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="86.0" layoutX="231.0" layoutY="8.0" onMouseClicked="#gotopanier" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/empty-cart.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="49.0" fitWidth="86.0" layoutX="122.0" layoutY="8.0" onMouseClicked="#gotochat" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/robot.png" />
                      </image>
                   </ImageView>
                </children></Pane>
@@ -144,7 +149,7 @@
                               <Image url="@images/shopping-bag.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="34.0" prefWidth="152.0" text="commands" textFill="WHITE">
+                        <Label onMouseClicked="#gotocommand" prefHeight="34.0" prefWidth="152.0" text="commands" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="17.0" />
                            </font>

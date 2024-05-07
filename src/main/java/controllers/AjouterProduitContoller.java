@@ -451,4 +451,61 @@ public class AjouterProduitContoller {
     void clearspace(ActionEvent event) {
         clearFields();
     }
+    @FXML
+    void gotocommand(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CommandBack.fxml"));
+            Parent storeRoot = loader.load();
+
+            Stage stage = null;
+            // Attempt to get the stage from the event source if it's a Node
+            if (event.getSource() instanceof Node) {
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            }
+            // If the stage could not be retrieved from the event, try the current scene's window
+            if (stage == null && event.getPickResult().getIntersectedNode() != null) {
+                stage = (Stage) event.getPickResult().getIntersectedNode().getScene().getWindow();
+            }
+            // Ensure that we have a valid stage to use
+            if (stage != null) {
+                Scene scene = new Scene(storeRoot);
+                stage.setScene(scene);
+                stage.show();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exceptions possibly thrown by the FXML loading
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the store view.");
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    void gotostat(MouseEvent event) {
+        try {
+            // Load the FXML file for the statistics view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProductStac.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the statistics view
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Product Statistics");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exceptions possibly thrown by the FXML loading
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the statistics view.");
+            alert.showAndWait();
+        }
+
+
+    }
+
 }

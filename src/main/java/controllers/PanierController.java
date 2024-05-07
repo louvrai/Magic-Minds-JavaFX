@@ -1,9 +1,11 @@
 package controllers;
 
 import Entities.Command;
+import Entities.CurrentUser;
 import Entities.Produit;
 import Services.CartFileManager;
 import Services.CommandCRUD;
+import Services.PaymentService;
 import Services.ProduitCRUD;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,14 +22,69 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import javafx.event.ActionEvent;
-
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.param.ChargeCreateParams;
 public class PanierController {
 
     @FXML
     private Label total;
     @FXML
     private VBox commantcontaint;
+
     @FXML
+    void toorder(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/checkout.fxml"));
+            Parent root = loader.load();
+            CheckoutController controller = loader.getController();
+
+            double totalPrice = CartFileManager.calculateTotalPrice();
+            controller.initialize(totalPrice, () -> {
+                completeOrder();
+            });
+
+            Stage checkoutStage = new Stage();
+            checkoutStage.setScene(new Scene(root));
+            checkoutStage.setTitle("Checkout");
+            checkoutStage.showAndWait();
+
+            checkoutStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Failed to open the checkout window.");
+        }
+    }
+
+    private void completeOrder() {
+        // Process order completion after payment
+        CommandCRUD commandCRUD = new CommandCRUD();
+        Map<Integer, Integer> cart = CartFileManager.loadCart();
+        try {
+            double totalPrice = CartFileManager.calculateTotalPrice();
+
+            Command newCommand = new Command(0, CurrentUser.user_id, new ArrayList<>(cart.keySet()), totalPrice);
+            commandCRUD.ajouter(newCommand);
+            CartFileManager.clearCart();
+            commantcontaint.getChildren().clear();
+            total.setText("0.0");
+            showAlert("Order placed successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Error placing order: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    /* @FXML
     void toorder(ActionEvent event) {
         CommandCRUD commandCRUD = new CommandCRUD();
         ProduitCRUD produitCrud = new ProduitCRUD();
@@ -39,6 +96,13 @@ public class PanierController {
             for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
                 Produit produit = produitCrud.getById(entry.getKey());
                 totalPrice += produit.getPrix() * entry.getValue();
+            }
+
+            // Process payment
+            boolean paymentSuccessful = PaymentService.processPayment(totalPrice);
+            if (!paymentSuccessful) {
+                showAlert("Payment failed. Please try again.");
+                return;
             }
 
             // Create a new command
@@ -63,7 +127,7 @@ public class PanierController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
+    }*/
     @FXML
     void initialize() {
         loadCartProducts();
@@ -110,7 +174,6 @@ public class PanierController {
 
 
     private void loadCartProducts() {
-
         Map<Integer, Integer> cart = CartFileManager.loadCart();
         ProduitCRUD produitCrud = new ProduitCRUD();
 
@@ -123,14 +186,41 @@ public class PanierController {
                     SamplePanierController controller = loader.getController();
                     produit.setQuantity(entry.getValue());
                     controller.setProduct(produit);
+                    controller.setOnDelete(this::refreshCart);  // Set the delete callback
                     commantcontaint.getChildren().add(productNode);
                 }
             }
             total.setText(String.format("%.2f", CartFileManager.calculateTotalPrice()));
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshCart() {
+        commantcontaint.getChildren().clear();  // Clear the existing UI elements for cart items
+        loadCartProducts();  // Reload the cart products and add them to the UI
+        total.setText(String.format("%.2f", CartFileManager.calculateTotalPrice()));  // Update the total price display
+    }
+    @FXML
+    void gotocommand(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Command.fxml"));
+            Parent cartRoot = loader.load();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the scene of the current stage to the cart view
+            Scene scene = new Scene(cartRoot);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Navigation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to load the cart view.");
+            alert.showAndWait();
         }
     }
 

@@ -46,4 +46,14 @@ public class Command {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "id=" + id +
+                ", id_user=" + id_user +
+                ", id_produit=" + id_produit +
+                ", total=" + total +
+                '}';
+    }
 }
