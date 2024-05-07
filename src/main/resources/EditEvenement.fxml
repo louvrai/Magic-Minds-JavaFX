@@ -316,6 +316,7 @@
                         <TextField fx:id="tfDateFin" promptText="End Date(format: YYYY-MM-DD)" />
 
                         <Button text="Save"  onAction="#modifierEvenement" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"  />
+                        <Button text="Back"  onAction="#goBackaffichage1" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"  />
                     </VBox>
                 </ScrollPane>
             </children>

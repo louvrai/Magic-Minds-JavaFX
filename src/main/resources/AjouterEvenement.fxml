@@ -311,6 +311,7 @@
 
     <Button text="Save" onAction="#ajouterEvenement"  style="-fx-font-weight: bold;" styleClass="btn_home" stylesheets="@style.css" />
 
+    <Button text="Back" onAction="#goBackaffichage"  style="-fx-font-weight: bold;" styleClass="btn_home" stylesheets="@style.css" />
 
 
 </VBox>

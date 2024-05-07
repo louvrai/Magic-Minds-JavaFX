@@ -5,8 +5,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -20,6 +23,7 @@ import tn.esprit.services.ServiceEvenement;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -179,4 +183,19 @@ public class AfficherEventController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    @FXML
+    void goBackpar(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipationParent.fxml"));
+            Parent root = loader.load();
+
+            // Vous pouvez ajouter d'autres configurations si nécessaire
+
+            // Changer la scène pour afficher la vue AjouterEvenementAdmin
+            eventContainer.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

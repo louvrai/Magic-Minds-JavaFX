@@ -148,4 +148,10 @@ public class AjouterEvenement {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goBackaffichage(ActionEvent event) {
+        redirectToEventDisplay(event);
+    }
+
 }

@@ -208,6 +208,20 @@ public class AfficherEventController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void goBackp(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipationAdmin.fxml"));
+            Parent root = loader.load();
+
+            // Vous pouvez ajouter d'autres configurations si nécessaire
+
+            // Changer la scène pour afficher la vue AjouterEvenementAdmin
+            eventTable.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

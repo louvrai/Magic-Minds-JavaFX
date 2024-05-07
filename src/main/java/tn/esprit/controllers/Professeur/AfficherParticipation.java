@@ -1,16 +1,22 @@
 package tn.esprit.controllers.Professeur;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
 import tn.esprit.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AfficherParticipation {
@@ -67,5 +73,24 @@ public class AfficherParticipation {
     private void deleteParticipation(Participation participation) {
         serviceParticipation.delete(participation);
         loadParticipations();
+    }
+    @FXML
+    void goBackaffichage(ActionEvent event) {
+        redirectToEventDisplay(event);
+    }
+
+    private void redirectToEventDisplay(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenement.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Close the current window
+            ((Stage) participationContainer.getScene().getWindow()).close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

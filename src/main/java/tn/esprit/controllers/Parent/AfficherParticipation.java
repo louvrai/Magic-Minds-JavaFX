@@ -1,7 +1,10 @@
 package tn.esprit.controllers.Parent;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -11,6 +14,7 @@ import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
 import tn.esprit.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AfficherParticipation {
@@ -69,4 +73,15 @@ public class AfficherParticipation {
         serviceParticipation.delete(participation);
         loadParticipations(); // Rafraîchir la liste des participations après suppression
     }
+    @FXML
+    void goBackeven(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementParent.fxml"));
+            Parent root = loader.load();
+            participationContainer.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

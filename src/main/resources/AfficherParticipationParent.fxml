@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.control.Button?>
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
@@ -229,7 +229,7 @@
                                         <Image url="@images/calendar.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="34.0" prefWidth="152.0" text="Events" textFill="WHITE">
+                                <Label prefHeight="34.0" prefWidth="152.0" text="Events"   textFill="WHITE">
                                     <font>
                                         <Font name="Berlin Sans FB" size="17.0" />
                                     </font>
@@ -279,6 +279,9 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
+                <VBox> <!-- Déplacez le bouton "Go Back" ici -->
+                    <Button fx:id="btnGoBack" text="View Events" onAction="#goBackeven" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
+                </VBox>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="trasparent" stylesheets="@style.css" VBox.vgrow="ALWAYS">
                     <content>
                         <GridPane fx:id="produitcontainer" prefHeight="0.0" prefWidth="2.0">

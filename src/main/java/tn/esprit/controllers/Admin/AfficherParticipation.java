@@ -3,15 +3,21 @@ package tn.esprit.controllers.Admin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import tn.esprit.models.Participation;
 import tn.esprit.services.ServiceEvenement;
 import tn.esprit.services.ServiceParticipation;
 import tn.esprit.services.UserService;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,6 +148,25 @@ public class AfficherParticipation {
             } else {
                 setGraphic(deleteButton);
             }
+        }
+    }
+    @FXML
+    void goBackaffichage(ActionEvent event) {
+        redirectToEventDisplay(event);
+    }
+
+    private void redirectToEventDisplay(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementAdmin.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Close the current window
+            ((Stage) participationTable.getScene().getWindow()).close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

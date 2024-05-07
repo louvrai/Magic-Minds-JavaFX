@@ -276,7 +276,10 @@
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <VBox> <!-- Déplacez le bouton "Go Back" ici -->
-                    <Button fx:id="btnGoBack" text="Go Back" onAction="#goBack1" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
+                    <Button fx:id="btnGoBack2" text="View Particpations" onAction="#goBackaffichage" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
+                </VBox>
+                <VBox> <!-- Déplacez le bouton "Go Back" ici -->
+                    <Button fx:id="btnGoBack" text="Add Event" onAction="#goBack1" textFill="WHITE" style="-fx-background-color: #fe5d37; -fx-font-weight: bold;"   />
                 </VBox>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="transparent" stylesheets="@style.css" VBox.vgrow="ALWAYS">
                     <content>

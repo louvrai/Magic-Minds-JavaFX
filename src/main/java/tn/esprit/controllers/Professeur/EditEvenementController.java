@@ -145,6 +145,10 @@ public class EditEvenementController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void goBackaffichage1(ActionEvent event) {
+        redirectToEventDisplay(event);
+    }
     private boolean isValidString(String input) {
         return input.matches("[a-zA-Z\\s]+");
     }

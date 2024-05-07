@@ -151,7 +151,9 @@
                         <TextField fx:id="tfDateDebut" promptText="Start Date (format: YYYY-MM-DD)" />
                         <TextField fx:id="tfDateFin" promptText="End Date(format: YYYY-MM-DD)" />
 
+
                         <Button text="Save" onAction="#modifierEvenement"  style="-fx-font-weight: bold;" styleClass="btn_home" stylesheets="@style.css" />
+                        <Button text="Back" onAction="#goBackaffichage1"  style="-fx-font-weight: bold;" styleClass="btn_home" stylesheets="@style.css" />
                     </VBox>
                 </AnchorPane>
             </children>

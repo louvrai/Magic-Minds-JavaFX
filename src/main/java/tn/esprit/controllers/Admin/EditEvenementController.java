@@ -167,4 +167,8 @@ public class EditEvenementController {
 
         throw new ParseException("Format de date invalide", 0);
     }
+    @FXML
+    void goBackaffichage1(ActionEvent event) {
+        redirectToEventDisplay(event);
+    }
 }
