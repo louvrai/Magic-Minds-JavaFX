@@ -1,39 +1,36 @@
 package Controller;
 
 import Entity.User;
+import Service.SessionManager;
 import Service.UserService;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.io.File;
-import java.net.URL;
-import java.sql.SQLException;
-import java.sql.SQLOutput;
-import java.util.ResourceBundle;
-
-
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.mindrot.jbcrypt.BCrypt;
 
-
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class SaveUserController implements Initializable {
+public class UpdateUserProfileController implements Initializable {
 
     @FXML
     private Text ageControl;
@@ -60,16 +57,13 @@ public class SaveUserController implements Initializable {
     private ComboBox<String> genderInput;
 
     @FXML
+    private ImageView imageView;
+
+    @FXML
     private Text lastNameControl;
 
     @FXML
     private TextField lastNameInput;
-
-    @FXML
-    private Text passwordControl;
-
-    @FXML
-    private PasswordField passwordInput;
 
     @FXML
     private Text pictureControle;
@@ -78,51 +72,26 @@ public class SaveUserController implements Initializable {
     private Button pictureInput;
 
     @FXML
+    private Text roleControl;
+
+    @FXML
+    private ComboBox<String> roleInput;
+
+    @FXML
     private Text telControl;
 
     @FXML
     private TextField telInput;
 
     @FXML
-    private ImageView imageView;
-
-    @FXML
     private Text urlText;
-
-    @FXML
-    private Text roleControl;
-
-
-    @FXML
-    private ComboBox<String> roleInput;
-
-    private int userId;
-
-    private boolean update;
+    String url ;
     File selectedFile = new File("C:\\");
     File UploadDirectory = new File("C:/Users/hp/Desktop/Magic-Minds-JavaFX/src/main/resources/uploderUser");
     File destinationFile = new File("C:\\");
-    String url ;
     private String emailRegex = "^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$";
-    private String passwordRegex ="^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
 
 
-    @FXML
-    void Clear(MouseEvent event) {
-        ageInput.setText(null);
-        firstnameInput.setText(null);
-        lastNameInput.setText(null);
-        passwordInput.setText(null);
-        emailInput.setText(null);
-        telInput.setText(null);
-        genderInput.setValue(null);
-        urlText.setText(null);
-        imageView.setImage(null);
-        url = null;
-
-        deleteError();
-
-    }
 
     void deleteError() {
         firstNameControl.setText(null);
@@ -133,9 +102,7 @@ public class SaveUserController implements Initializable {
         lastNameControl.setStyle("-fx-fill: red;");
         lastNameInput.setStyle("-fx-border-color: #353A56 ;");
 
-        passwordControl.setText(null);
-        passwordControl.setStyle("-fx-fill: red;");
-        passwordInput.setStyle("-fx-border-color: #353A56;");
+
 
         emailControl.setText(null);
         emailControl.setStyle("-fx-fill: red;");
@@ -171,9 +138,7 @@ public class SaveUserController implements Initializable {
         lastNameControl.setStyle("-fx-fill: red;");
         lastNameInput.setStyle("-fx-border-color: red ;");
 
-        passwordControl.setText("Please fill in this field.");
-        passwordControl.setStyle("-fx-fill: red;");
-        passwordInput.setStyle("-fx-border-color: red;");
+
 
         emailControl.setText("Please fill in this field.");
         emailControl.setStyle("-fx-fill: red;");
@@ -199,21 +164,27 @@ public class SaveUserController implements Initializable {
         roleControl.setStyle("-fx-fill: red;");
         roleInput.setStyle("-fx-border-color: red ;");
     }
+    @FXML
+    void Clear(MouseEvent event) {
+        ageInput.setText(null);
+        firstnameInput.setText(null);
+        lastNameInput.setText(null);
+
+        emailInput.setText(null);
+        telInput.setText(null);
+        genderInput.setValue(null);
+        urlText.setText(null);
+        imageView.setImage(null);
+        url = null;
+
+        deleteError();
+    }
 
     @FXML
     void Close(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-
-        try {
-            affichage();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-
     }
-
     void affichage() throws IOException {
         Stage stage = new Stage();
         Parent parent = FXMLLoader.load(getClass().getResource("/UserManagementController.fxml"));
@@ -228,55 +199,23 @@ public class SaveUserController implements Initializable {
 
         stage.show();
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        genderInput.setItems(FXCollections.observableArrayList("male", "female"));
-        roleInput.setItems(FXCollections.observableArrayList("admin", "child", "professor", "parent"));
-    }
-
-    @FXML
-    void UploadImage(MouseEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image File");
-        fileChooser.setInitialDirectory(new File("C:\\"));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPEG Image", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG Image", "*.png"),
-                new FileChooser.ExtensionFilter("All image files", "*.jpg", "*.png")
-        );
-        selectedFile = fileChooser.showOpenDialog(pictureInput.getScene().getWindow());
-        if (selectedFile != null) {
-            String pathName = selectedFile.getAbsolutePath().replace("\\", "/");
-            System.out.println(pathName);
-            Image image = new Image("file:/" + pathName);
-            imageView.setImage(image);
-            destinationFile = new File(UploadDirectory, selectedFile.getName());
-            url = UploadDirectory.getAbsolutePath().replace("\\", "/");
-            url += "/" + selectedFile.getName();
-            System.out.println(url);
-            urlText.setText(url);
-
-        }
-    }
-
     @FXML
     void Save(MouseEvent event) {
         UserService service = new UserService();
 
         String FIRSTNAME = firstnameInput.getText();
         String lastNAME = lastNameInput.getText();
-        String PASSWORD = passwordInput.getText();
+
         String EMAIL = emailInput.getText();
         String TEL = telInput.getText();
         String GENDER = genderInput.getValue();
         String age = ageInput.getText();
         String ROLE = roleInput.getValue();
-        if ((FIRSTNAME == null) || (lastNAME == null) || (PASSWORD == null)
+        if ((FIRSTNAME == null) || (lastNAME == null)
                 || (EMAIL == null) || (TEL == null) || (age == null)) {
             emtyError();
 
-        } else if ((FIRSTNAME.isBlank()) || (lastNAME.isBlank()) || (PASSWORD.isEmpty())
+        } else if ((FIRSTNAME.isBlank()) || (lastNAME.isBlank())
                 || (EMAIL.isEmpty()) || (TEL.isEmpty()) || (age.isEmpty())) {
 //          Alert alertType = new Alert(Alert.AlertType.ERROR);
 //          alertType.setTitle("Error");
@@ -293,11 +232,7 @@ public class SaveUserController implements Initializable {
             lastNameControl.setText(" last name must be string not number !");
             lastNameControl.setStyle("-fx-fill: red;");
             lastNameInput.setStyle("-fx-border-color: red ;");
-        } else if (PASSWORD.toString().length() < 8) {
-            passwordControl.setText(" Your password must be at least 8 characters long!");
-            passwordControl.setStyle("-fx-fill: red;");
-            passwordInput.setStyle("-fx-border-color: red ;");
-        } else if (!EMAIL.toString().matches(emailRegex)) {
+        }  else if (!EMAIL.toString().matches(emailRegex)) {
             emailControl.setText("The email address is invalid. Please enter a valid email address (e.g., username@example.com)!");
             emailControl.setStyle("-fx-fill: red;");
             emailInput.setStyle("-fx-border-color: red ;");
@@ -326,12 +261,12 @@ public class SaveUserController implements Initializable {
             roleInput.setStyle("-fx-border-color: red ;");
 
         } else {
-            if (update == true) {
-                String newhashedPassword = BCrypt.hashpw(PASSWORD, BCrypt.gensalt());
-                User user = new User(userId, Integer.parseInt(age), FIRSTNAME, lastNAME, EMAIL, TEL, GENDER, newhashedPassword, url, ROLE);
-                System.out.println(userId);
+
+               User user = SessionManager.getCurrentUser();
+                User user1 = new User(user.getId(), Integer.parseInt(age), FIRSTNAME, lastNAME, EMAIL, TEL, GENDER, user.getPassword(), url, ROLE);
+                System.out.println(user.getId());
                 try {
-                    service.update(user, userId);
+                    service.update(user1, user.getId());
                     try {
                         Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
@@ -349,52 +284,51 @@ public class SaveUserController implements Initializable {
                     System.out.println(ex.getMessage());
                 }
 
-            } else {
-                String newhashedPassword = BCrypt.hashpw(PASSWORD, BCrypt.gensalt());
-                User user = new User(Integer.parseInt(age), FIRSTNAME, lastNAME, EMAIL, TEL, GENDER, newhashedPassword, url, ROLE);
-                try {
-                    service.insert(user);
-                    try {
-                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Alert alertType = new Alert(Alert.AlertType.INFORMATION);
-                    alertType.setTitle("Sucess");
-                    alertType.setHeaderText("add success ");
-                    alertType.show();
-                } catch (SQLException e) {
-                    Alert alertType = new Alert(Alert.AlertType.ERROR);
-                    alertType.setTitle("Error");
-                    alertType.setHeaderText("echec");
-                    alertType.show();
-                    System.out.println(e.getMessage());
-                }
             }
         }
 
+
+
+
+    @FXML
+    void UploadImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.setInitialDirectory(new File("C:\\"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPEG Image", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG Image", "*.png"),
+                new FileChooser.ExtensionFilter("All image files", "*.jpg", "*.png")
+        );
+        selectedFile = fileChooser.showOpenDialog(pictureInput.getScene().getWindow());
+        if (selectedFile != null) {
+            String pathName = selectedFile.getAbsolutePath().replace("\\", "/");
+            System.out.println(pathName);
+            Image image = new Image("file:/" + pathName);
+            imageView.setImage(image);
+            destinationFile = new File(UploadDirectory, selectedFile.getName());
+            url = UploadDirectory.getAbsolutePath().replace("\\", "/");
+            url += "/" + selectedFile.getName();
+            System.out.println(url);
+            urlText.setText(url);
+
+        }
     }
 
-    public void setUpdate(boolean update) {
-        this.update = update;
-    }
-
-    void setTextField(int userId, String firstname, String lastname, String email, String tel, String gender, int age, String role, String url) {
-        this.userId = userId;
-        firstnameInput.setText(firstname);
-        lastNameInput.setText(lastname);
-        emailInput.setText(email);
-        telInput.setText(tel);
-        ageInput.setText(String.valueOf(age));
-        String roleName = role.replaceAll("\\[\"ROLE_(.*?)\"\\]", "$1").toLowerCase();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+         User user = SessionManager.getCurrentUser();
+        firstnameInput.setText(user.getFirstName());
+        lastNameInput.setText(user.getLastName());
+        emailInput.setText(user.getEmail());
+        telInput.setText(user.getTel());
+        ageInput.setText(String.valueOf(user.getAge()));
+        String roleName = user.getRoles().replaceAll("\\[\"ROLE_(.*?)\"\\]", "$1").toLowerCase();
         roleInput.setValue(roleName);
-        genderInput.setValue(gender);
-        urlText.setText(url);
-        this.url = url;
+        genderInput.setValue(user.getGender());
+        urlText.setText(user.getPicture());
+        this.url = user.getPicture();
         Image image = new Image("file:/" + url);
         imageView.setImage(image);
-
-
     }
 }
-
